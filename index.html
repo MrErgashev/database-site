@@ -4,6 +4,9 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ma'lumotlar bazasini boshqarish — 15 ta amaliy mashg'ulot</title>
+<!-- Word eksport kutubxonalari -->
+<script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -50,6 +53,17 @@ body.dark-mode{
     --sidebar-text:#b0b0c8;
     --border-color:#333350;
 }
+
+/* ===== 3D FLUENT EMOJI ICONS ===== */
+.icon-3d{display:inline-block;width:28px;height:28px;vertical-align:middle;margin-right:4px;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.16));transition:transform 0.2s ease}
+.icon-3d:hover{transform:scale(1.15)}
+.icon-3d.sm{width:20px;height:20px}
+.icon-3d.lg{width:36px;height:36px}
+.icon-3d.xl{width:48px;height:48px}
+h1 .icon-3d{width:36px;height:36px}
+h2 .icon-3d{width:30px;height:30px}
+.sidebar .icon-3d{width:18px;height:18px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2))}
+@media print{.icon-3d{filter:none!important;width:20px;height:20px}}
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -389,6 +403,14 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     .sql-comment{color:#666!important}
     .sql-function{color:#0066cc!important}
 
+    /* Cover rasm — 1-sahifa */
+    #cover .cover img{max-width:100%!important;width:100%!important;border-radius:0!important;box-shadow:none!important}
+    #cover .cover{padding:0!important;margin:0!important;border:none!important}
+
+    /* Back page — oxirgi sahifa */
+    #backpage{page-break-before:always;display:block!important}
+    #backpage img{max-width:100%!important;width:100%!important;box-shadow:none!important;border-radius:0!important}
+
     /* Animatsiyalarni o'chirish */
     *{animation:none!important;transition:none!important;transform:none!important}
 }
@@ -453,8 +475,12 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 
 <!-- ===== COVER ===== -->
 <div class="section-block active" id="cover">
-<div class="cover">
-    <h1 style="font-size:2.5em;border:none">📘 Ma'lumotlar bazasini boshqarish</h1>
+<div class="cover" style="padding:40px 20px">
+    <!-- Kitob muqovasi rasmi -->
+    <div style="text-align:center;margin-bottom:30px">
+        <img src="cover.png" alt="Ma'lumotlar bazasini boshqarish — M.U.Ergashev" style="max-width:420px;width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.15),0 8px 20px rgba(0,0,0,0.1);transition:transform 0.3s ease" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+    </div>
+    <h1 style="font-size:2.2em;border:none;margin-bottom:5px">Ma'lumotlar bazasini boshqarish</h1>
     <p class="sub">Amaliy mashg'ulotlar to'plami — 15 ta dars</p>
     <div class="gold-line"></div>
     <div class="stats">
@@ -463,8 +489,9 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
         <div class="stat"><div class="num2">120+</div><div class="label">SQL misollar</div></div>
         <div class="stat"><div class="num2">100+</div><div class="label">Topshiriqlar</div></div>
     </div>
-    <div class="print-btn-wrap" style="text-align:center;margin-top:30px">
+    <div class="print-btn-wrap" style="text-align:center;margin-top:30px;display:flex;justify-content:center;gap:15px;flex-wrap:wrap">
         <button onclick="window.print()" style="background:linear-gradient(135deg,#d4af37,#e8cc6a);color:#fff;border:none;padding:15px 40px;font-size:1.1em;font-weight:600;border-radius:15px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:4px 4px 10px rgba(0,0,0,0.1);transition:transform 0.2s ease" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">PDF yuklab olish</button>
+        <button onclick="exportToWord()" style="background:linear-gradient(135deg,#2b5797,#4a8bc2);color:#fff;border:none;padding:15px 40px;font-size:1.1em;font-weight:600;border-radius:15px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:4px 4px 10px rgba(0,0,0,0.1);transition:transform 0.2s ease" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Word yuklab olish</button>
     </div>
 </div>
 <div class="container" style="margin-top:30px">
@@ -7178,6 +7205,20 @@ python app.py
 </div>
 </div>
 
+<!-- ===== BACK PAGE — Orqa muqova ===== -->
+<div class="section-block" id="backpage">
+<div style="display:flex;align-items:center;justify-content:center;min-height:80vh;padding:40px 20px">
+    <div style="text-align:center">
+        <img src="back.png" alt="Orqa muqova" style="max-width:500px;width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.12),0 8px 20px rgba(0,0,0,0.08)">
+        <div style="margin-top:30px;font-family:'Playfair Display',Georgia,serif">
+            <p style="font-size:1.3em;color:var(--text);font-weight:600;margin-bottom:5px">M.U. Ergashev</p>
+            <p style="font-size:0.95em;color:var(--text-muted)">Ma'lumotlar bazasini boshqarish — Amaliy mashg'ulotlar to'plami</p>
+            <div class="gold-line" style="margin-top:20px"></div>
+        </div>
+    </div>
+</div>
+</div>
+
 </div><!-- end main -->
 
 <script>
@@ -7378,12 +7419,188 @@ window.addEventListener('scroll', function() {
     }
 });
 
+/* ===== 3D FLUENT EMOJI REPLACEMENT ===== */
+const EMOJI_MAP = {
+    '\u{1F4D8}': 'Open%20book/3D/open_book_3d.png',
+    '\u{1F4CB}': 'Clipboard/3D/clipboard_3d.png',
+    '\u2B50': 'Star/3D/star_3d.png',
+    '\u{1F50D}': 'Magnifying%20glass%20tilted%20left/3D/magnifying_glass_tilted_left_3d.png',
+    '\u{1F4D6}': 'Open%20book/3D/open_book_3d.png',
+    '\u{1F4CA}': 'Bar%20chart/3D/bar_chart_3d.png',
+    '\u26A1': 'High%20voltage/3D/high_voltage_3d.png',
+    '\u2705': 'Check%20mark%20button/3D/check_mark_button_3d.png',
+    '\u274C': 'Cross%20mark/3D/cross_mark_3d.png',
+    '\u{1F9E9}': 'Puzzle%20piece/3D/puzzle_piece_3d.png',
+    '\u{1F517}': 'Link/3D/link_3d.png',
+    '\u{1F511}': 'Key/3D/key_3d.png',
+    '\u{1F9E0}': 'Brain/3D/brain_3d.png',
+    '\u{1F3C6}': 'Trophy/3D/trophy_3d.png',
+    '\u{1F3AF}': 'Bullseye/3D/bullseye_3d.png',
+    '\u{1F4DD}': 'Memo/3D/memo_3d.png',
+    '\u{1F504}': 'Counterclockwise%20arrows%20button/3D/counterclockwise_arrows_button_3d.png',
+    '\u2696\uFE0F': 'Balance%20scale/3D/balance_scale_3d.png',
+    '\u{1F4D0}': 'Triangular%20ruler/3D/triangular_ruler_3d.png',
+    '\u{1F4E6}': 'Package/3D/package_3d.png',
+    '\u{1FA9F}': 'Window/3D/window_3d.png',
+    '\u{1F4C7}': 'Card%20index/3D/card_index_3d.png',
+    '\u{1F441}\uFE0F': 'Eye/3D/eye_3d.png',
+    '\u2699\uFE0F': 'Gear/3D/gear_3d.png',
+    '\u{1F42C}': 'Dolphin/3D/dolphin_3d.png',
+    '\u{1F418}': 'Elephant/3D/elephant_3d.png',
+    '\u{1F40D}': 'Snake/3D/snake_3d.png',
+    '\u{1F336}': 'Hot%20pepper/3D/hot_pepper_3d.png',
+    '\u{1F3D7}': 'Building%20construction/3D/building_construction_3d.png',
+    '\u{1F9F0}': 'Toolbox/3D/toolbox_3d.png',
+    '\u{1F4C4}': 'Page%20facing%20up/3D/page_facing_up_3d.png',
+    '\u{1F50C}': 'Electric%20plug/3D/electric_plug_3d.png',
+    '\u{1F512}': 'Locked/3D/locked_3d.png',
+    '\u270F\uFE0F': 'Pencil/3D/pencil_3d.png',
+    '\u{1F5D1}\uFE0F': 'Wastebasket/3D/wastebasket_3d.png',
+    '\u{1F3E2}': 'Office%20building/3D/office_building_3d.png',
+    '\u{1F319}': 'Crescent%20moon/3D/crescent_moon_3d.png',
+    '\u2600\uFE0F': 'Sun/3D/sun_3d.png',
+    '\u{1F310}': 'Globe%20with%20meridians/3D/globe_with_meridians_3d.png',
+    '\u{1F6E0}\uFE0F': 'Hammer%20and%20wrench/3D/hammer_and_wrench_3d.png',
+    '\u{1F4F1}': 'Mobile%20phone/3D/mobile_phone_3d.png',
+    '\u23F1': 'Stopwatch/3D/stopwatch_3d.png',
+    '\u{1F4BE}': 'Floppy%20disk/3D/floppy_disk_3d.png',
+    '\u{1F3A8}': 'Artist%20palette/3D/artist_palette_3d.png',
+    '\u{1F536}': 'Large%20orange%20diamond/3D/large_orange_diamond_3d.png',
+    '\u{1F537}': 'Large%20blue%20diamond/3D/large_blue_diamond_3d.png'
+};
+const FLUENT_BASE = 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/';
+
+function replaceEmojisWithFluent() {
+    const walker = document.createTreeWalker(document.querySelector('.main'), NodeFilter.SHOW_TEXT, null);
+    const replacements = [];
+    while (walker.nextNode()) {
+        const node = walker.currentNode;
+        let text = node.textContent;
+        let hasEmoji = false;
+        for (const emoji in EMOJI_MAP) {
+            if (text.includes(emoji)) { hasEmoji = true; break; }
+        }
+        if (hasEmoji) replacements.push(node);
+    }
+    replacements.forEach(node => {
+        const span = document.createElement('span');
+        let html = node.textContent;
+        for (const [emoji, path] of Object.entries(EMOJI_MAP)) {
+            if (html.includes(emoji)) {
+                const imgTag = '<img class="icon-3d" src="' + FLUENT_BASE + path + '" alt="' + emoji + '" loading="lazy">';
+                html = html.split(emoji).join(imgTag);
+            }
+        }
+        span.innerHTML = html;
+        node.parentNode.replaceChild(span, node);
+    });
+    /* Sidebar emojilarini ham almashtirish */
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        const sWalker = document.createTreeWalker(sidebar, NodeFilter.SHOW_TEXT, null);
+        const sReplacements = [];
+        while (sWalker.nextNode()) {
+            const n = sWalker.currentNode;
+            let hasE = false;
+            for (const e in EMOJI_MAP) { if (n.textContent.includes(e)) { hasE = true; break; } }
+            if (hasE) sReplacements.push(n);
+        }
+        sReplacements.forEach(node => {
+            const span = document.createElement('span');
+            let html = node.textContent;
+            for (const [emoji, path] of Object.entries(EMOJI_MAP)) {
+                if (html.includes(emoji)) {
+                    const imgTag = '<img class="icon-3d" src="' + FLUENT_BASE + path + '" alt="' + emoji + '" loading="lazy">';
+                    html = html.split(emoji).join(imgTag);
+                }
+            }
+            span.innerHTML = html;
+            node.parentNode.replaceChild(span, node);
+        });
+    }
+}
+
+/* ===== WORD EXPORT ===== */
+function exportToWord() {
+    const sections = document.querySelectorAll('.section-block');
+    let content = '';
+    sections.forEach(s => {
+        if (s.id === 'backpage') return;
+        content += s.innerHTML;
+    });
+    /* MSO-mos CSS */
+    const msoCSS = `
+        <style>
+            @page { size:A4; margin:2cm 2cm 1.5cm 3cm; }
+            body { font-family:'Segoe UI',Arial,sans-serif; font-size:11pt; line-height:1.6; color:#1a1a1a; }
+            h1 { font-family:Georgia,serif; font-size:22pt; color:#1a1a1a; text-align:center; margin-bottom:10px; }
+            h2 { font-family:Georgia,serif; font-size:16pt; color:#1a1a1a; margin-top:20px; border-bottom:2px solid #d4af37; padding-bottom:5px; }
+            h3 { font-size:13pt; color:#333; margin-top:15px; }
+            p, li { font-size:11pt; line-height:1.6; }
+            table { border-collapse:collapse; width:100%; margin:10px 0; }
+            td, th { border:1px solid #999; padding:6px 10px; font-size:10pt; }
+            th { background:#f5f5f5; font-weight:bold; }
+            pre { background:#f5f5f5; border:1px solid #ccc; padding:10px; font-family:'Courier New',monospace; font-size:9pt; line-height:1.4; white-space:pre-wrap; word-wrap:break-word; }
+            code { font-family:'Courier New',monospace; font-size:9pt; background:#f0f0f0; padding:1px 4px; }
+            pre code { background:transparent; }
+            .card, .card-flat { border:1px solid #ddd; border-left:4px solid #d4af37; padding:15px; margin:10px 0; border-radius:4px; }
+            .theory-box { background:#fffbe6; border:1px solid #d4af37; border-left:4px solid #d4af37; padding:15px; margin:10px 0; }
+            .warning-box { background:#fff5f5; border:1px solid #e74c3c; border-left:4px solid #e74c3c; padding:15px; margin:10px 0; }
+            .tip-box { background:#f0fff0; border:1px solid #27ae60; border-left:4px solid #27ae60; padding:15px; margin:10px 0; }
+            .info-box { background:#f0f5ff; border:1px solid #3498db; border-left:4px solid #3498db; padding:15px; margin:10px 0; }
+            .meta-info { text-align:center; background:#f8f8f8; padding:12px; border:1px solid #ddd; margin-bottom:20px; font-size:10pt; }
+            .gold-line { height:2px; background:#d4af37; width:100px; margin:10px auto 20px auto; }
+            .cover { text-align:center; padding:40px 20px; }
+            .stats { text-align:center; margin:20px 0; }
+            .stat { display:inline-block; margin:0 15px; text-align:center; }
+            .num2 { font-size:24pt; color:#d4af37; font-weight:bold; }
+            .label { font-size:9pt; color:#888; }
+            .subtitle { text-align:center; color:#555; margin-bottom:15px; }
+            .container { padding:10px 0; }
+            .print-btn-wrap { display:none; }
+            .copy-btn { display:none; }
+            .file-badge { display:none; }
+            .icon-3d { width:20px; height:20px; vertical-align:middle; }
+            img { max-width:100%; }
+            .sql-keyword { color:#c71585; font-weight:bold; }
+            .sql-string { color:#b8860b; }
+            .sql-comment { color:#666; }
+            .sql-function { color:#0066cc; }
+        </style>
+    `;
+    const fullHTML = '<!DOCTYPE html><html><head><meta charset="utf-8">' + msoCSS + '</head><body>' + content + '</body></html>';
+    /* CSS var() ni to'g'ridan-to'g'ri rangga almashtirish */
+    let processed = fullHTML;
+    processed = processed.replace(/var\(--gold\)/g, '#d4af37');
+    processed = processed.replace(/var\(--gold-light\)/g, '#e8cc6a');
+    processed = processed.replace(/var\(--gold-dark\)/g, '#b8960e');
+    processed = processed.replace(/var\(--text\)/g, '#1a1a1a');
+    processed = processed.replace(/var\(--text-secondary\)/g, '#555');
+    processed = processed.replace(/var\(--text-muted\)/g, '#888');
+    processed = processed.replace(/var\(--bg\)/g, '#f0f0f3');
+    processed = processed.replace(/var\(--bg-card\)/g, '#f0f0f3');
+    processed = processed.replace(/var\(--code-bg\)/g, '#f5f5f5');
+    processed = processed.replace(/var\(--code-text\)/g, '#1a1a1a');
+    processed = processed.replace(/var\(--border-color\)/g, '#e8e8e8');
+    /* box-shadow olib tashlash */
+    processed = processed.replace(/box-shadow:[^;"]+/g, '');
+    /* linear-gradient ni oddiy rangga almashtirish */
+    processed = processed.replace(/background:\s*linear-gradient\([^)]+\)/g, 'background:#f8f8f8');
+    /* animation olib tashlash */
+    processed = processed.replace(/animation:[^;"]+/g, '');
+    processed = processed.replace(/transition:[^;"]+/g, '');
+
+    const converted = htmlDocx.asBlob(processed);
+    saveAs(converted, 'Malumotlar_bazasi_15_amaliy_mashgulot.docx');
+}
+
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
     updateProgress();
     initCopyButtons();
     updateReadingProgress();
+    replaceEmojisWithFluent();
 });
 </script>
 </body>
