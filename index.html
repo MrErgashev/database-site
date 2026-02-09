@@ -440,6 +440,146 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     /* Animatsiyalarni o'chirish */
     *{animation:none!important;transition:none!important;transform:none!important}
 }
+
+/* ===== ADMIN PANEL STYLES ===== */
+.admin-toolbar{
+    position:fixed;top:0;right:-360px;width:350px;height:100vh;
+    background:var(--sidebar-bg);color:#e0e0e0;z-index:10001;
+    display:flex;flex-direction:column;overflow-y:auto;
+    box-shadow:-4px 0 20px rgba(0,0,0,0.3);
+    transition:right 0.3s ease;font-family:'Inter',sans-serif;
+}
+.admin-toolbar.open{right:0}
+.admin-toolbar-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 20px;border-bottom:2px solid var(--gold);
+    background:linear-gradient(135deg,#1a1a1a,#2a2a3e);
+    position:sticky;top:0;z-index:2;min-height:auto;
+}
+.admin-toolbar-header h3{margin:0;color:var(--gold);font-size:1.1em;font-family:'Playfair Display',serif}
+.admin-close-btn{
+    background:none;border:1px solid rgba(255,255,255,0.2);color:#fff;
+    width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:1em;
+    transition:all 0.2s ease;
+}
+.admin-close-btn:hover{background:var(--gold);color:#1a1a1a;border-color:var(--gold)}
+.admin-section{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.admin-section h4{color:var(--gold);font-size:0.85em;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px 0}
+.admin-hint{font-size:0.78em;color:#888;margin:0 0 10px 0;line-height:1.4}
+.admin-btn-primary,.admin-btn-secondary,.admin-btn-danger{
+    display:block;width:100%;padding:10px 16px;border:none;border-radius:10px;
+    cursor:pointer;font-size:0.88em;font-weight:600;margin-bottom:8px;
+    transition:all 0.2s ease;font-family:'Inter',sans-serif;
+}
+.admin-btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#1a1a1a}
+.admin-btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(212,175,55,0.4)}
+.admin-btn-secondary{background:rgba(255,255,255,0.08);color:#ccc;border:1px solid rgba(255,255,255,0.15)}
+.admin-btn-secondary:hover{background:rgba(255,255,255,0.15);color:#fff}
+.admin-btn-danger{background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3)}
+.admin-btn-danger:hover{background:rgba(231,76,60,0.3)}
+.admin-component-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.admin-component-btn{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    padding:12px 8px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.04);color:#ccc;cursor:pointer;
+    font-size:0.78em;transition:all 0.2s ease;font-family:'Inter',sans-serif;
+}
+.admin-component-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,0.08);transform:translateY(-1px)}
+.admin-component-btn .comp-icon{font-size:1.6em}
+body.admin-mode .editable-highlight{
+    outline:2px dashed rgba(212,175,55,0.4);outline-offset:2px;
+    border-radius:4px;transition:outline 0.2s ease;cursor:text;
+}
+body.admin-mode .editable-highlight:focus{
+    outline:2px solid var(--gold);background:rgba(212,175,55,0.06);
+}
+body.admin-mode .main{margin-right:360px;transition:margin-right 0.3s ease}
+.admin-insert-marker{
+    display:flex;align-items:center;justify-content:center;
+    margin:6px 0;opacity:0;transition:opacity 0.2s ease;
+    position:relative;z-index:5;height:0;overflow:visible;
+}
+body.admin-mode .admin-insert-marker{opacity:0.35;height:30px;overflow:visible}
+body.admin-mode .admin-insert-marker:hover{opacity:1}
+.admin-insert-marker button{
+    background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#1a1a1a;
+    border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;
+    font-size:1.1em;font-weight:bold;box-shadow:0 2px 8px rgba(212,175,55,0.3);
+    transition:all 0.2s ease;line-height:1;padding:0;
+}
+.admin-insert-marker button:hover{transform:scale(1.15);box-shadow:0 4px 15px rgba(212,175,55,0.5)}
+.admin-insert-marker.selected button{background:linear-gradient(135deg,#27ae60,#2ecc71);box-shadow:0 0 0 3px rgba(39,174,96,0.3)}
+.admin-insert-marker::before,.admin-insert-marker::after{
+    content:'';flex:1;height:1px;
+    background:linear-gradient(to right,transparent,rgba(212,175,55,0.3),transparent);
+}
+.admin-delete-component{
+    position:absolute;top:6px;right:6px;
+    background:rgba(231,76,60,0.9);color:#fff;border:none;
+    width:26px;height:26px;border-radius:6px;cursor:pointer;
+    font-size:0.85em;font-weight:bold;z-index:10;
+    opacity:0;transition:opacity 0.2s ease;line-height:26px;text-align:center;padding:0;
+}
+body.admin-mode .card:hover>.admin-delete-component,
+body.admin-mode .theory-box:hover>.admin-delete-component,
+body.admin-mode .warning-box:hover>.admin-delete-component,
+body.admin-mode .tip-box:hover>.admin-delete-component,
+body.admin-mode .info-box:hover>.admin-delete-component,
+body.admin-mode .mac-window:hover>.admin-delete-component,
+body.admin-mode .concept-grid:hover>.admin-delete-component,
+body.admin-mode h2:hover>.admin-delete-component{opacity:1}
+.admin-delete-component:hover{background:#c0392b;transform:scale(1.1)}
+.admin-badge{
+    position:fixed;top:8px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#1a1a1a;
+    padding:6px 18px;border-radius:20px;font-size:0.8em;font-weight:700;
+    z-index:10002;box-shadow:0 4px 15px rgba(212,175,55,0.4);
+    font-family:'Inter',sans-serif;letter-spacing:0.5px;display:none;
+}
+body.admin-mode .admin-badge{display:block}
+.admin-section-item{
+    display:flex;align-items:center;gap:8px;padding:8px 10px;
+    border-radius:8px;margin-bottom:4px;background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.06);transition:all 0.2s ease;font-size:0.82em;
+}
+.admin-section-item:hover{background:rgba(255,255,255,0.08)}
+.admin-section-item .sec-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#ccc}
+.admin-section-item .sec-actions{display:flex;gap:4px}
+.admin-section-item .sec-actions button{
+    background:none;border:1px solid rgba(255,255,255,0.15);color:#aaa;
+    width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:0.75em;
+    transition:all 0.2s ease;padding:0;line-height:24px;text-align:center;
+}
+.admin-section-item .sec-actions button:hover{color:var(--gold);border-color:var(--gold)}
+.admin-section-item .sec-actions button.del-btn:hover{color:#e74c3c;border-color:#e74c3c}
+.admin-modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:10003;
+    display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);
+}
+.admin-modal{
+    background:var(--bg-card);color:var(--text);border-radius:20px;
+    padding:30px;width:90%;max-width:480px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3),0 0 0 1px rgba(212,175,55,0.2);
+}
+.admin-modal h3{font-family:'Playfair Display',serif;color:var(--gold);margin:0 0 20px 0;font-size:1.3em}
+.admin-modal label{display:block;font-size:0.85em;color:var(--text-secondary);margin-bottom:4px;text-align:left}
+.admin-modal input,.admin-modal textarea{
+    width:100%;padding:10px 14px;border:1px solid var(--border-color);
+    border-radius:10px;background:var(--bg);color:var(--text);
+    font-size:0.95em;margin-bottom:14px;font-family:'Inter',sans-serif;box-sizing:border-box;
+}
+.admin-modal input:focus,.admin-modal textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,0.15)}
+.admin-modal textarea{resize:vertical;min-height:60px}
+.admin-modal-actions{display:flex;gap:10px;margin-top:6px}
+.admin-modal-actions button{flex:1}
+@media print{
+    .admin-toolbar,.admin-badge,.admin-insert-marker,.admin-delete-component,.admin-modal-overlay{display:none!important}
+    body.admin-mode .main{margin-right:0!important}
+}
+@media(max-width:900px){
+    .admin-toolbar{width:300px;right:-310px}
+    body.admin-mode .main{margin-right:0}
+}
 </style>
 </head>
 <body>
@@ -7776,12 +7916,62 @@ python app.py
 
 </div><!-- end main -->
 
+<!-- Admin Badge -->
+<div class="admin-badge" id="adminBadge">ADMIN REJIMI (Ctrl+Shift+A)</div>
+
+<!-- Admin Toolbar -->
+<div class="admin-toolbar" id="adminToolbar">
+    <div class="admin-toolbar-header">
+        <h3>Admin Panel</h3>
+        <button class="admin-close-btn" onclick="toggleAdmin()" title="Yopish">✕</button>
+    </div>
+
+    <!-- Sahifalar boshqaruvi -->
+    <div class="admin-section">
+        <h4>Sahifalar</h4>
+        <button class="admin-btn-primary" onclick="adminShowAddSectionModal()">+ Yangi sahifa</button>
+        <div id="adminSectionList" style="margin-top:10px"></div>
+    </div>
+
+    <!-- Komponent paletkasi -->
+    <div class="admin-section">
+        <h4>Komponentlar</h4>
+        <p class="admin-hint">Sahifadagi "+" tugmasini bosing, keyin komponentni tanlang. Yoki komponentni bosib aktiv sahifa oxiriga qo'shing.</p>
+        <div class="admin-component-grid">
+            <button class="admin-component-btn" onclick="insertComponent('card')"><span class="comp-icon">🃏</span>Karta</button>
+            <button class="admin-component-btn" onclick="insertComponent('theory-box')"><span class="comp-icon">💡</span>Nazariy box</button>
+            <button class="admin-component-btn" onclick="insertComponent('warning-box')"><span class="comp-icon">⚠️</span>Ogohlantirish</button>
+            <button class="admin-component-btn" onclick="insertComponent('tip-box')"><span class="comp-icon">✅</span>Maslahat</button>
+            <button class="admin-component-btn" onclick="insertComponent('info-box')"><span class="comp-icon">ℹ️</span>Ma'lumot box</button>
+            <button class="admin-component-btn" onclick="insertComponent('code-block')"><span class="comp-icon">💻</span>Kod blok</button>
+            <button class="admin-component-btn" onclick="insertComponent('table')"><span class="comp-icon">📊</span>Jadval</button>
+            <button class="admin-component-btn" onclick="insertComponent('concept-grid')"><span class="comp-icon">🧩</span>Tushuncha grid</button>
+            <button class="admin-component-btn" onclick="insertComponent('heading-h2')"><span class="comp-icon">H2</span>Sarlavha H2</button>
+            <button class="admin-component-btn" onclick="insertComponent('heading-h3')"><span class="comp-icon">H3</span>Sarlavha H3</button>
+            <button class="admin-component-btn" onclick="insertComponent('paragraph')"><span class="comp-icon">¶</span>Paragraf</button>
+            <button class="admin-component-btn" onclick="insertComponent('list')"><span class="comp-icon">📝</span>Ro'yxat</button>
+            <button class="admin-component-btn" onclick="insertComponent('gold-line')"><span class="comp-icon">—</span>Oltin chiziq</button>
+            <button class="admin-component-btn" onclick="insertComponent('image')"><span class="comp-icon">🖼️</span>Rasm</button>
+        </div>
+    </div>
+
+    <!-- Saqlash / Eksport -->
+    <div class="admin-section">
+        <h4>Saqlash va Eksport</h4>
+        <button class="admin-btn-primary" onclick="adminSave()">💾 Saqlash (localStorage)</button>
+        <button class="admin-btn-secondary" onclick="adminExportHTML()">📥 HTML yuklab olish</button>
+        <button class="admin-btn-danger" onclick="adminResetChanges()">🗑 O'zgarishlarni bekor qilish</button>
+    </div>
+</div>
+
 <script>
 /* ===== SECTION NAVIGATION ===== */
 function showSection(id, e) {
     if (e) e.preventDefault();
+    var el = document.getElementById(id);
+    if (!el) return;
     document.querySelectorAll('.section-block').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
     document.querySelectorAll('.sidebar a[data-section]').forEach(a => a.classList.remove('active'));
     const link = document.querySelector('.sidebar a[data-section="'+id+'"]');
     if (link) link.classList.add('active');
@@ -7789,6 +7979,8 @@ function showSection(id, e) {
     window.scrollTo({top: 0, behavior: 'smooth'});
     // Mark lesson as visited
     if (id !== 'cover') markVisited(id);
+    // Refresh admin editing if admin mode is active
+    if (typeof adminRefreshSection === 'function') adminRefreshSection();
 }
 
 /* ===== SIDEBAR TOGGLE ===== */
@@ -7940,7 +8132,7 @@ function initCopyButtons() {
 }
 
 /* ===== KEYBOARD NAVIGATION ===== */
-const sections = ['cover','t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13','t14','t15'];
+let sections = ['cover','t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13','t14','t15','backpage'];
 function getCurrentSection() {
     const active = document.querySelector('.section-block.active');
     return active ? active.id : 'cover';
@@ -7954,11 +8146,21 @@ function navigateSection(dir) {
     }
 }
 document.addEventListener('keydown', function(e) {
-    // Don't navigate if user is typing in search
+    // Admin mode toggle: Ctrl+Shift+A
+    if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        toggleAdmin();
+        return;
+    }
+    // Don't navigate if user is typing in editable area
     if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+    if (document.activeElement.getAttribute('contenteditable') === 'true') return;
     if (e.key === 'ArrowLeft') navigateSection(-1);
     if (e.key === 'ArrowRight') navigateSection(1);
-    if (e.key === 'Escape') closeSidebar();
+    if (e.key === 'Escape') {
+        if (adminMode) toggleAdmin();
+        else closeSidebar();
+    }
 });
 
 /* ===== SCROLL EVENTS ===== */
@@ -8149,9 +8351,468 @@ function exportToWord() {
     saveAs(converted, 'Malumotlar_bazasi_15_amaliy_mashgulot.docx');
 }
 
+/* ===== ADMIN PANEL ===== */
+let adminMode = false;
+let adminInsertTarget = null;
+
+/* Component Templates */
+const COMPONENT_TEMPLATES = {
+    'card': '<div class="card"><h3>Yangi karta sarlavhasi</h3><p>Karta matni shu yerda yoziladi...</p></div>',
+    'theory-box': '<div class="theory-box"><p><strong>💡 Nazariya:</strong> Matn shu yerda yoziladi...</p></div>',
+    'warning-box': '<div class="warning-box"><p><strong>⚠️ Ogohlantirish:</strong> Matn shu yerda yoziladi...</p></div>',
+    'tip-box': '<div class="tip-box"><p><strong>✅ Maslahat:</strong> Matn shu yerda yoziladi...</p></div>',
+    'info-box': '<div class="info-box"><p><strong>ℹ️ Ma\'lumot:</strong> Matn shu yerda yoziladi...</p></div>',
+    'code-block': '<div class="mac-window"><div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">Terminal</div></div><pre><code>-- Kod shu yerda yoziladi</code></pre></div>',
+    'table': '<table><thead><tr><th>Ustun 1</th><th>Ustun 2</th><th>Ustun 3</th></tr></thead><tbody><tr><td>Ma\'lumot 1</td><td>Ma\'lumot 2</td><td>Ma\'lumot 3</td></tr><tr><td>Ma\'lumot 4</td><td>Ma\'lumot 5</td><td>Ma\'lumot 6</td></tr></tbody></table>',
+    'concept-grid': '<div class="concept-grid"><div class="concept-card"><span class="big-icon">📌</span><h4>Tushuncha 1</h4><p>Tavsif shu yerda</p></div><div class="concept-card"><span class="big-icon">📌</span><h4>Tushuncha 2</h4><p>Tavsif shu yerda</p></div><div class="concept-card"><span class="big-icon">📌</span><h4>Tushuncha 3</h4><p>Tavsif shu yerda</p></div></div>',
+    'heading-h2': '<h2><span class="icon">📖</span>Yangi bo\'lim sarlavhasi</h2>',
+    'heading-h3': '<h3>Yangi sarlavha</h3>',
+    'paragraph': '<p>Yangi matn shu yerda yoziladi. Matnni bosib tahrirlang.</p>',
+    'list': '<ul><li>Birinchi band</li><li>Ikkinchi band</li><li>Uchinchi band</li></ul>',
+    'gold-line': '<div class="gold-line"></div>',
+    'image': '<div style="text-align:center;margin:20px 0"><img src="" alt="Rasm tavsifi" style="max-width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.1)"><p style="color:var(--text-muted);font-size:0.9em;margin-top:8px">Rasm tavsifi — URL ni o\'zgartiring</p></div>'
+};
+
+/* Toggle Admin Mode */
+function toggleAdmin() {
+    adminMode = !adminMode;
+    document.body.classList.toggle('admin-mode', adminMode);
+    document.getElementById('adminToolbar').classList.toggle('open', adminMode);
+    if (adminMode) {
+        enableEditing();
+        renderSectionList();
+        showInsertMarkers();
+        addDeleteButtons();
+    } else {
+        disableEditing();
+        hideInsertMarkers();
+        removeDeleteButtons();
+        adminInsertTarget = null;
+    }
+}
+
+/* Enable inline editing */
+function enableEditing() {
+    const section = document.querySelector('.section-block.active');
+    if (!section) return;
+    section.querySelectorAll('h1,h2,h3,p,li,td,th,.subtitle').forEach(function(el) {
+        if (el.closest('.admin-toolbar') || el.closest('.admin-insert-marker') || el.closest('.admin-badge')) return;
+        if (el.querySelector('span.icon,span.icon-3d,img.icon-3d')) {
+            /* For headings with icons, only make the text part editable */
+        }
+        el.setAttribute('contenteditable', 'true');
+        el.classList.add('editable-highlight');
+    });
+}
+
+function disableEditing() {
+    document.querySelectorAll('[contenteditable="true"]').forEach(function(el) {
+        el.removeAttribute('contenteditable');
+        el.classList.remove('editable-highlight');
+    });
+}
+
+/* Re-enable editing when switching sections in admin mode */
+function adminRefreshSection() {
+    if (!adminMode) return;
+    disableEditing();
+    hideInsertMarkers();
+    removeDeleteButtons();
+    adminInsertTarget = null;
+    enableEditing();
+    showInsertMarkers();
+    addDeleteButtons();
+    renderSectionList();
+}
+
+/* Insert Markers */
+function showInsertMarkers() {
+    var section = document.querySelector('.section-block.active .container');
+    if (!section) return;
+    var children = Array.from(section.children);
+    children.forEach(function(child) {
+        if (child.classList.contains('admin-insert-marker')) return;
+        var marker = document.createElement('div');
+        marker.className = 'admin-insert-marker';
+        marker.innerHTML = '<button onclick="selectInsertPoint(this)" title="Shu yerga komponent qo\'shish">+</button>';
+        child.after(marker);
+    });
+}
+
+function hideInsertMarkers() {
+    document.querySelectorAll('.admin-insert-marker').forEach(function(m) { m.remove(); });
+}
+
+function selectInsertPoint(btn) {
+    document.querySelectorAll('.admin-insert-marker.selected').forEach(function(m) { m.classList.remove('selected'); });
+    btn.parentElement.classList.add('selected');
+    adminInsertTarget = btn.parentElement;
+}
+
+/* Insert Component */
+function insertComponent(type) {
+    if (!adminMode) return;
+    var html = COMPONENT_TEMPLATES[type];
+    if (!html) return;
+
+    var temp = document.createElement('div');
+    temp.innerHTML = html;
+    var newEl = temp.firstElementChild;
+
+    if (adminInsertTarget && adminInsertTarget.parentNode) {
+        adminInsertTarget.after(newEl);
+    } else {
+        var container = document.querySelector('.section-block.active .container');
+        if (container) container.appendChild(newEl);
+    }
+
+    /* Refresh markers and editing */
+    hideInsertMarkers();
+    removeDeleteButtons();
+    adminInsertTarget = null;
+    enableEditing();
+    showInsertMarkers();
+    addDeleteButtons();
+
+    /* Scroll to new element */
+    newEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    /* Flash effect */
+    newEl.style.outline = '2px solid var(--gold)';
+    newEl.style.outlineOffset = '4px';
+    setTimeout(function() { newEl.style.outline = ''; newEl.style.outlineOffset = ''; }, 1500);
+}
+
+/* Delete Component Buttons */
+function addDeleteButtons() {
+    var section = document.querySelector('.section-block.active .container');
+    if (!section) return;
+    section.querySelectorAll('.card, .theory-box, .warning-box, .tip-box, .info-box, .mac-window, .concept-grid, h2').forEach(function(el) {
+        if (el.closest('.admin-toolbar')) return;
+        if (el.querySelector('.admin-delete-component')) return;
+        el.style.position = 'relative';
+        var delBtn = document.createElement('button');
+        delBtn.className = 'admin-delete-component';
+        delBtn.textContent = '✕';
+        delBtn.title = "O'chirish";
+        delBtn.onclick = function(ev) {
+            ev.stopPropagation();
+            if (confirm("Bu komponentni o'chirishni xohlaysizmi?")) {
+                /* Also remove the adjacent insert marker if exists */
+                var next = el.nextElementSibling;
+                if (next && next.classList.contains('admin-insert-marker')) next.remove();
+                var prev = el.previousElementSibling;
+                if (prev && prev.classList.contains('admin-insert-marker')) prev.remove();
+                el.remove();
+                hideInsertMarkers();
+                showInsertMarkers();
+            }
+        };
+        el.appendChild(delBtn);
+    });
+}
+
+function removeDeleteButtons() {
+    document.querySelectorAll('.admin-delete-component').forEach(function(btn) { btn.remove(); });
+}
+
+/* Section Management */
+function renderSectionList() {
+    var list = document.getElementById('adminSectionList');
+    if (!list) return;
+    list.innerHTML = '';
+    sections.forEach(function(id) {
+        var section = document.getElementById(id);
+        if (!section) return;
+        var name = id;
+        var h1 = section.querySelector('h1');
+        if (h1) name = h1.textContent.trim().substring(0, 40);
+        else if (id === 'cover') name = 'Bosh sahifa';
+        else if (id === 'backpage') name = 'Orqa muqova';
+
+        var item = document.createElement('div');
+        item.className = 'admin-section-item';
+        item.innerHTML = '<span class="sec-name" title="' + name + '">' + name + '</span>' +
+            '<div class="sec-actions">' +
+            '<button title="Tahrirlash" onclick="adminGoToSection(\'' + id + '\')">✎</button>' +
+            '<button title="Nom o\'zgartirish" onclick="adminRenameSection(\'' + id + '\')">A</button>' +
+            (id !== 'cover' && id !== 'backpage' ? '<button class="del-btn" title="O\'chirish" onclick="adminDeleteSection(\'' + id + '\')">✕</button>' : '') +
+            '</div>';
+        list.appendChild(item);
+    });
+}
+
+function adminGoToSection(id) {
+    showSection(id);
+}
+
+function adminRenameSection(id) {
+    var section = document.getElementById(id);
+    if (!section) return;
+    var h1 = section.querySelector('h1');
+    var currentName = h1 ? h1.textContent.trim() : id;
+    var newName = prompt("Yangi nom kiriting:", currentName);
+    if (newName && newName.trim()) {
+        if (h1) h1.textContent = newName.trim();
+        /* Update sidebar link */
+        var link = document.querySelector('.sidebar a[data-section="' + id + '"]');
+        if (link) {
+            var num = link.querySelector('.num');
+            var badge = link.querySelector('.check-badge');
+            link.textContent = '';
+            if (num) link.appendChild(num);
+            link.appendChild(document.createTextNode(newName.trim()));
+            if (badge) link.appendChild(badge);
+        }
+        renderSectionList();
+    }
+}
+
+function adminDeleteSection(id) {
+    if (id === 'cover' || id === 'backpage') return;
+    if (!confirm("'" + id + "' sahifasini o'chirishni xohlaysizmi? Bu amalni qaytarib bo'lmaydi!")) return;
+
+    /* Remove section block */
+    var section = document.getElementById(id);
+    if (section) section.remove();
+
+    /* Remove sidebar link */
+    var link = document.querySelector('.sidebar a[data-section="' + id + '"]');
+    if (link) link.remove();
+
+    /* Remove from sections array */
+    var idx = sections.indexOf(id);
+    if (idx > -1) sections.splice(idx, 1);
+
+    /* Navigate to cover */
+    showSection('cover');
+    renderSectionList();
+}
+
+/* Add Section Modal */
+function adminShowAddSectionModal() {
+    var overlay = document.createElement('div');
+    overlay.className = 'admin-modal-overlay';
+    overlay.id = 'adminModalOverlay';
+    overlay.innerHTML =
+        '<div class="admin-modal">' +
+        '<h3>Yangi sahifa qo\'shish</h3>' +
+        '<label>Sahifa nomi</label>' +
+        '<input type="text" id="adminNewSectionName" placeholder="Masalan: 16-amaliy mashg\'ulot">' +
+        '<label>Sahifa IDsi (lotin harflar, raqamlar)</label>' +
+        '<input type="text" id="adminNewSectionId" placeholder="Masalan: t16">' +
+        '<label>Qisqa tavsif</label>' +
+        '<textarea id="adminNewSectionDesc" placeholder="Sahifa haqida qisqa ma\'lumot..."></textarea>' +
+        '<div class="admin-modal-actions">' +
+        '<button class="admin-btn-secondary" onclick="adminCloseModal()">Bekor qilish</button>' +
+        '<button class="admin-btn-primary" onclick="adminCreateSection()">Yaratish</button>' +
+        '</div></div>';
+    document.body.appendChild(overlay);
+    document.getElementById('adminNewSectionName').focus();
+}
+
+function adminCloseModal() {
+    var overlay = document.getElementById('adminModalOverlay');
+    if (overlay) overlay.remove();
+}
+
+function adminCreateSection() {
+    var name = document.getElementById('adminNewSectionName').value.trim();
+    var id = document.getElementById('adminNewSectionId').value.trim().replace(/[^a-zA-Z0-9_-]/g, '');
+    var desc = document.getElementById('adminNewSectionDesc').value.trim();
+
+    if (!name) { alert('Sahifa nomini kiriting!'); return; }
+    if (!id) { alert('Sahifa IDsini kiriting!'); return; }
+    if (document.getElementById(id)) { alert("Bu ID allaqachon mavjud! Boshqa ID tanlang."); return; }
+
+    /* Create section HTML */
+    var sectionHTML =
+        '<div class="section-block" id="' + id + '">' +
+        '<div class="container">' +
+        '<h1>' + name + '</h1>' +
+        '<p class="subtitle">' + (desc || 'Sahifa tavsifi') + '</p>' +
+        '<div class="gold-line"></div>' +
+        '<div class="meta-info"><strong>📘 Fan:</strong> Ma\'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang\'ich</div>' +
+        '<h2><span class="icon">📖</span>Nazariy qism</h2>' +
+        '<div class="card"><h3>Sarlavha</h3><p>Nazariy matn shu yerda yoziladi...</p></div>' +
+        '<h2><span class="icon">⚡</span>Amaliy qism</h2>' +
+        '<div class="card"><h3><span class="step-number">1</span>Birinchi qadam</h3><p>Amaliy ko\'rsatma shu yerda...</p></div>' +
+        '<h2><span class="icon">🧠</span>Nazorat savollari</h2>' +
+        '<div class="card"><ol><li>Birinchi savol?</li><li>Ikkinchi savol?</li></ol></div>' +
+        '<h2><span class="icon">🎯</span>Amaliy topshiriqlar</h2>' +
+        '<div class="card"><ol><li>Birinchi topshiriq</li><li>Ikkinchi topshiriq</li></ol></div>' +
+        '<h2><span class="icon">🏆</span>Xulosa</h2>' +
+        '<div class="card"><p>Xulosa matni shu yerda yoziladi...</p></div>' +
+        '</div></div>';
+
+    /* Insert before backpage or at end of main */
+    var main = document.querySelector('.main');
+    var backpage = document.getElementById('backpage');
+    var temp = document.createElement('div');
+    temp.innerHTML = sectionHTML;
+    var newSection = temp.firstElementChild;
+    if (backpage) {
+        main.insertBefore(newSection, backpage);
+    } else {
+        main.appendChild(newSection);
+    }
+
+    /* Add sidebar link (before backpage link) */
+    var sidebarNav = document.querySelector('.sidebar');
+    var backLink = sidebarNav.querySelector('a[data-section="backpage"]');
+    var newLink = document.createElement('a');
+    newLink.href = '#';
+    newLink.setAttribute('data-section', id);
+    newLink.onclick = function(e) { showSection(id, e); };
+
+    var numSpan = document.createElement('span');
+    numSpan.className = 'num';
+    numSpan.textContent = id.replace(/\D/g, '') || '★';
+    newLink.appendChild(numSpan);
+    newLink.appendChild(document.createTextNode(name));
+    var checkBadge = document.createElement('span');
+    checkBadge.className = 'check-badge';
+    checkBadge.textContent = '✓';
+    newLink.appendChild(checkBadge);
+
+    if (backLink) {
+        sidebarNav.insertBefore(newLink, backLink);
+    } else {
+        sidebarNav.appendChild(newLink);
+    }
+
+    /* Add to sections array (before backpage if exists) */
+    var bpIdx = sections.indexOf('backpage');
+    if (bpIdx > -1) {
+        sections.splice(bpIdx, 0, id);
+    } else {
+        sections.push(id);
+    }
+
+    /* Close modal and go to new section */
+    adminCloseModal();
+    showSection(id);
+    renderSectionList();
+
+    /* Re-init copy buttons for the new section */
+    initCopyButtons();
+}
+
+/* Save to localStorage */
+function adminSave() {
+    var data = {};
+    document.querySelectorAll('.section-block').forEach(function(section) {
+        /* Clean up admin elements before saving */
+        var clone = section.cloneNode(true);
+        clone.querySelectorAll('.admin-insert-marker, .admin-delete-component').forEach(function(el) { el.remove(); });
+        clone.querySelectorAll('[contenteditable]').forEach(function(el) { el.removeAttribute('contenteditable'); });
+        clone.querySelectorAll('.editable-highlight').forEach(function(el) { el.classList.remove('editable-highlight'); });
+        data[section.id] = clone.innerHTML;
+    });
+    /* Save sidebar HTML */
+    var sidebarClone = document.querySelector('.sidebar').cloneNode(true);
+    data['__sidebar__'] = sidebarClone.innerHTML;
+    data['__sections_order__'] = JSON.stringify(sections);
+    localStorage.setItem('mbb_admin_data', JSON.stringify(data));
+    alert("Muvaffaqiyatli saqlandi! ✓");
+}
+
+/* Load from localStorage */
+function adminLoad() {
+    var raw = localStorage.getItem('mbb_admin_data');
+    if (!raw) return;
+    try {
+        var data = JSON.parse(raw);
+    } catch(e) { return; }
+
+    /* Restore sections order first */
+    if (data['__sections_order__']) {
+        var savedSections = JSON.parse(data['__sections_order__']);
+        sections.length = 0;
+        savedSections.forEach(function(s) { sections.push(s); });
+    }
+
+    /* Restore sidebar */
+    if (data['__sidebar__']) {
+        document.querySelector('.sidebar').innerHTML = data['__sidebar__'];
+        /* Re-attach sidebar link click handlers */
+        document.querySelectorAll('.sidebar a[data-section]').forEach(function(a) {
+            var sectionId = a.getAttribute('data-section');
+            a.onclick = function(e) { showSection(sectionId, e); };
+        });
+        /* Re-attach dark mode toggle */
+        var dmToggle = document.querySelector('.dark-mode-toggle');
+        if (dmToggle) dmToggle.onclick = function() { toggleDarkMode(); };
+        /* Re-attach sidebar search */
+        var searchInput = document.getElementById('sidebarSearch');
+        if (searchInput) searchInput.oninput = function() { filterSidebar(this.value); };
+    }
+
+    /* Create missing sections and restore content */
+    for (var id in data) {
+        if (id.startsWith('__')) continue;
+        var existing = document.getElementById(id);
+        if (existing) {
+            existing.innerHTML = data[id];
+        } else {
+            /* Section doesn't exist in DOM, create it */
+            var newDiv = document.createElement('div');
+            newDiv.className = 'section-block';
+            newDiv.id = id;
+            newDiv.innerHTML = data[id];
+            var main = document.querySelector('.main');
+            var backpage = document.getElementById('backpage');
+            if (backpage) {
+                main.insertBefore(newDiv, backpage);
+            } else {
+                main.appendChild(newDiv);
+            }
+        }
+    }
+}
+
+/* Export clean HTML */
+function adminExportHTML() {
+    /* Temporarily disable admin mode for clean export */
+    var wasAdmin = adminMode;
+    if (wasAdmin) {
+        disableEditing();
+        hideInsertMarkers();
+        removeDeleteButtons();
+    }
+
+    var clone = document.documentElement.cloneNode(true);
+
+    /* Remove admin elements */
+    clone.querySelectorAll('.admin-toolbar, .admin-badge, .admin-insert-marker, .admin-delete-component, .admin-modal-overlay').forEach(function(el) { el.remove(); });
+    clone.querySelectorAll('[contenteditable]').forEach(function(el) { el.removeAttribute('contenteditable'); });
+    clone.querySelectorAll('.editable-highlight').forEach(function(el) { el.classList.remove('editable-highlight'); });
+
+    var body = clone.querySelector('body');
+    if (body) body.classList.remove('admin-mode');
+
+    var blob = new Blob(['<!DOCTYPE html>\n' + clone.outerHTML], {type: 'text/html;charset=utf-8'});
+    saveAs(blob, 'index_updated.html');
+
+    /* Restore admin mode */
+    if (wasAdmin) {
+        enableEditing();
+        showInsertMarkers();
+        addDeleteButtons();
+    }
+}
+
+/* Reset all admin changes */
+function adminResetChanges() {
+    if (!confirm("Barcha admin o'zgarishlarni o'chirmoqchimisiz?\nBu amalni qaytarib bo'lmaydi!")) return;
+    localStorage.removeItem('mbb_admin_data');
+    location.reload();
+}
+
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
+    adminLoad();
     updateProgress();
     initCopyButtons();
     updateReadingProgress();
