@@ -225,8 +225,12 @@ thead th{background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 100%);color:var(--
 tbody td{padding:12px 16px;border-bottom:1px solid var(--border-color);font-size:0.9em;transition:all var(--transition-fast)}
 tbody tr:nth-child(even){background:rgba(0,0,0,0.02)}
 tbody tr:hover{background:rgba(212,175,55,0.08);transform:scale(1.002)}
-.toc-row{cursor:pointer;transition:all var(--transition-fast)}
-.toc-row:hover{background:rgba(212,175,55,0.15)!important;transform:scale(1.005)}
+.toc-row{cursor:pointer;transition:all var(--transition-fast);border-left:3px solid transparent}
+.toc-row td:nth-child(2){color:var(--gold-dark);font-weight:600;transition:all var(--transition-fast)}
+.toc-row:hover{background:rgba(212,175,55,0.15)!important;transform:scale(1.005);border-left:3px solid var(--gold)}
+.toc-row:hover td:nth-child(2){color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.toc-row:active{transform:scale(0.998)}
+body.dark-mode .toc-row td:nth-child(2){color:var(--gold-light)}
 tbody tr:last-child td{border-bottom:none}
 .highlight-row{background:rgba(212,175,55,0.15)!important;font-weight:600}
 body.dark-mode tbody td{border-bottom-color:rgba(255,255,255,0.06)}
