@@ -1860,6 +1860,15 @@ mysql -u root -p
     <span class="sql-keyword">FOREIGN KEY</span> (xodim_id) <span class="sql-keyword">REFERENCES</span> xodimlar(xodim_id)
 );</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE bolimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE xodimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE loyihalar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE xodim_loyiha</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE maosh_tarixi</code></span>
+</div>
 </div>
 
 <div class="card">
@@ -1922,6 +1931,26 @@ mysql -u root -p
 (<span class="sql-number">3</span>, <span class="sql-number">2</span>, <span class="sql-number">4500000</span>,  <span class="sql-number">6000000</span>,  <span class="sql-string">'2023-07-01'</span>),
 (<span class="sql-number">4</span>, <span class="sql-number">4</span>, <span class="sql-number">7500000</span>,  <span class="sql-number">9500000</span>,  <span class="sql-string">'2022-09-01'</span>),
 (<span class="sql-number">5</span>, <span class="sql-number">6</span>, <span class="sql-number">7000000</span>,  <span class="sql-number">8500000</span>,  <span class="sql-string">'2023-01-01'</span>);</code></pre>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 5 rows affected (0.01 sec) — <code>INSERT INTO bolimlar</code></span>
+<span class="rok-line">Records: 5 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 10 rows affected (0.01 sec) — <code>INSERT INTO xodimlar</code></span>
+<span class="rok-line">Records: 10 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>UPDATE bolimlar</code> (rahbar_id = 1)</span>
+<span class="rok-line">Rows matched: 1 &nbsp;Changed: 1 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>UPDATE bolimlar</code> (rahbar_id = 4)</span>
+<span class="rok-line">Rows matched: 1 &nbsp;Changed: 1 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>UPDATE bolimlar</code> (rahbar_id = 6)</span>
+<span class="rok-line">Rows matched: 1 &nbsp;Changed: 1 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>UPDATE bolimlar</code> (rahbar_id = 8)</span>
+<span class="rok-line">Rows matched: 1 &nbsp;Changed: 1 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 5 rows affected (0.01 sec) — <code>INSERT INTO loyihalar</code></span>
+<span class="rok-line">Records: 5 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 10 rows affected (0.01 sec) — <code>INSERT INTO xodim_loyiha</code></span>
+<span class="rok-line">Records: 10 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 5 rows affected (0.01 sec) — <code>INSERT INTO maosh_tarixi</code></span>
+<span class="rok-line">Records: 5 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
 </div>
 </div>
 
@@ -2073,6 +2102,23 @@ mysql -u root -p
 <span class="sql-keyword">GROUP BY</span> x.xodim_id, x.ism, x.familiya, x.maosh
 <span class="sql-keyword">ORDER BY</span> ozgarishlar_soni <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — Xodimlar va maosh o'zgarishlari</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th><th>joriy_maosh</th><th>ozgarishlar_soni</th><th>boshlangich_maosh</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>Karimov</td><td>12000000.00</td><td>2</td><td>8000000.00</td></tr>
+<tr><td>Dilnoza</td><td>Rahimova</td><td>6000000.00</td><td>1</td><td>4500000.00</td></tr>
+<tr><td>Gulnora</td><td>Azimova</td><td>9500000.00</td><td>1</td><td>7500000.00</td></tr>
+<tr><td>Nodira</td><td>Yusupova</td><td>8500000.00</td><td>1</td><td>7000000.00</td></tr>
+<tr><td>Bobur</td><td>Toshmatov</td><td>10000000.00</td><td>0</td><td>NULL</td></tr>
+<tr><td>Sanjar</td><td>Alimov</td><td>7000000.00</td><td>0</td><td>NULL</td></tr>
+<tr><td>Otabek</td><td>Nazarov</td><td>5500000.00</td><td>0</td><td>NULL</td></tr>
+<tr><td>Kamola</td><td>Umarova</td><td>8000000.00</td><td>0</td><td>NULL</td></tr>
+<tr><td>Jasur</td><td>Ergashev</td><td>2500000.00</td><td>0</td><td>NULL</td></tr>
+<tr><td>Malika</td><td>Tursunova</td><td>2000000.00</td><td>0</td><td>NULL</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -2201,6 +2247,33 @@ mysql -u root -p
 <span class="sql-keyword">ORDER BY</span> x.ism, l.loyiha_nomi;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija — CROSS JOIN (faqat faol loyihalar)</span>
+<table>
+<thead><tr><th>ism</th><th>loyiha_nomi</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>E-commerce platforma</td></tr>
+<tr><td>Alisher</td><td>Mobil ilova</td></tr>
+<tr><td>Bobur</td><td>E-commerce platforma</td></tr>
+<tr><td>Bobur</td><td>Mobil ilova</td></tr>
+<tr><td>Dilnoza</td><td>E-commerce platforma</td></tr>
+<tr><td>Dilnoza</td><td>Mobil ilova</td></tr>
+<tr><td>Gulnora</td><td>E-commerce platforma</td></tr>
+<tr><td>Gulnora</td><td>Mobil ilova</td></tr>
+<tr><td>Jasur</td><td>E-commerce platforma</td></tr>
+<tr><td>Jasur</td><td>Mobil ilova</td></tr>
+<tr><td>Kamola</td><td>E-commerce platforma</td></tr>
+<tr><td>Kamola</td><td>Mobil ilova</td></tr>
+<tr><td>Malika</td><td>E-commerce platforma</td></tr>
+<tr><td>Malika</td><td>Mobil ilova</td></tr>
+<tr><td>Nodira</td><td>E-commerce platforma</td></tr>
+<tr><td>Nodira</td><td>Mobil ilova</td></tr>
+<tr><td>Otabek</td><td>E-commerce platforma</td></tr>
+<tr><td>Otabek</td><td>Mobil ilova</td></tr>
+<tr><td>Sanjar</td><td>E-commerce platforma</td></tr>
+<tr><td>Sanjar</td><td>Mobil ilova</td></tr>
+</tbody>
+</table>
+
 <div class="warning-box">
 <p><strong>⚠️ Ehtiyot bo'ling!</strong> CROSS JOIN natijasi juda katta bo'lishi mumkin. Agar birinchi jadvalda 1000, ikkinchisida 500 qator bo'lsa, natija <strong>500,000</strong> qator bo'ladi! Faqat zarur holatlarda ishlating.</p>
 </div>
@@ -2214,6 +2287,28 @@ mysql -u root -p
 <span class="sql-keyword">FROM</span> (<span class="sql-keyword">SELECT DISTINCT</span> bolim_nomi <span class="sql-keyword">FROM</span> bolimlar) b1
 <span class="sql-join">CROSS JOIN</span> (<span class="sql-keyword">SELECT DISTINCT</span> joylashuv <span class="sql-keyword">FROM</span> bolimlar) b2;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — Barcha bo'lim-joylashuv kombinatsiyalari</span>
+<table>
+<thead><tr><th>bolim_nomi</th><th>mumkin_joylashuv</th></tr></thead>
+<tbody>
+<tr><td>IT bo'limi</td><td>Toshkent</td></tr>
+<tr><td>IT bo'limi</td><td>Samarqand</td></tr>
+<tr><td>IT bo'limi</td><td>Buxoro</td></tr>
+<tr><td>Moliya bo'limi</td><td>Toshkent</td></tr>
+<tr><td>Moliya bo'limi</td><td>Samarqand</td></tr>
+<tr><td>Moliya bo'limi</td><td>Buxoro</td></tr>
+<tr><td>Marketing bo'limi</td><td>Toshkent</td></tr>
+<tr><td>Marketing bo'limi</td><td>Samarqand</td></tr>
+<tr><td>Marketing bo'limi</td><td>Buxoro</td></tr>
+<tr><td>HR bo'limi</td><td>Toshkent</td></tr>
+<tr><td>HR bo'limi</td><td>Samarqand</td></tr>
+<tr><td>HR bo'limi</td><td>Buxoro</td></tr>
+<tr><td>Logistika bo'limi</td><td>Toshkent</td></tr>
+<tr><td>Logistika bo'limi</td><td>Samarqand</td></tr>
+<tr><td>Logistika bo'limi</td><td>Buxoro</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -2266,6 +2361,18 @@ mysql -u root -p
 <span class="sql-keyword">ORDER BY</span> b.bolim_nomi;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija — Bir xil bo'limdagi hamkasblar</span>
+<table>
+<thead><tr><th>xodim_1</th><th>xodim_2</th><th>bolim_nomi</th></tr></thead>
+<tbody>
+<tr><td>Alisher Karimov</td><td>Dilnoza Rahimova</td><td>IT bo'limi</td></tr>
+<tr><td>Alisher Karimov</td><td>Bobur Toshmatov</td><td>IT bo'limi</td></tr>
+<tr><td>Dilnoza Rahimova</td><td>Bobur Toshmatov</td><td>IT bo'limi</td></tr>
+<tr><td>Nodira Yusupova</td><td>Otabek Nazarov</td><td>Marketing bo'limi</td></tr>
+<tr><td>Gulnora Azimova</td><td>Sanjar Alimov</td><td>Moliya bo'limi</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — SELF JOIN</div></div>
 <pre><code><span class="sql-comment">-- 3. Menejerlar va ularning bo'ysinuvchilari soni</span>
@@ -2317,6 +2424,23 @@ mysql -u root -p
 <span class="sql-keyword">ORDER BY</span> loyihalar_soni <span class="sql-keyword">DESC</span>, x.maosh <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija — To'liq hisobot</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th><th>lavozim</th><th>bolim</th><th>menejer</th><th>loyihalar_soni</th><th>maosh</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>Karimov</td><td>Senior dasturchi</td><td>IT bo'limi</td><td>—</td><td>3</td><td>12,000,000</td></tr>
+<tr><td>Bobur</td><td>Toshmatov</td><td>DevOps muhandis</td><td>IT bo'limi</td><td>Alisher Karimov</td><td>2</td><td>10,000,000</td></tr>
+<tr><td>Dilnoza</td><td>Rahimova</td><td>Junior dasturchi</td><td>IT bo'limi</td><td>Alisher Karimov</td><td>2</td><td>6,000,000</td></tr>
+<tr><td>Nodira</td><td>Yusupova</td><td>Marketing menejer</td><td>Marketing bo'limi</td><td>—</td><td>1</td><td>8,500,000</td></tr>
+<tr><td>Sanjar</td><td>Alimov</td><td>Hisobchi</td><td>Moliya bo'limi</td><td>Gulnora Azimova</td><td>1</td><td>7,000,000</td></tr>
+<tr><td>Otabek</td><td>Nazarov</td><td>SMM mutaxassis</td><td>Marketing bo'limi</td><td>Nodira Yusupova</td><td>1</td><td>5,500,000</td></tr>
+<tr><td>Gulnora</td><td>Azimova</td><td>Bosh hisobchi</td><td>Moliya bo'limi</td><td>—</td><td>0</td><td>9,500,000</td></tr>
+<tr><td>Kamola</td><td>Umarova</td><td>HR menejer</td><td>HR bo'limi</td><td>—</td><td>0</td><td>8,000,000</td></tr>
+<tr><td>Jasur</td><td>Ergashev</td><td>Stajyor</td><td>Tayinlanmagan</td><td>Alisher Karimov</td><td>0</td><td>2,500,000</td></tr>
+<tr><td>Malika</td><td>Tursunova</td><td>Amaliyotchi</td><td>Tayinlanmagan</td><td>Kamola Umarova</td><td>0</td><td>2,000,000</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Murakkab JOIN</div></div>
 <pre><code><span class="sql-comment">-- 2. Bo'limlar bo'yicha batafsil statistika</span>
@@ -2335,6 +2459,18 @@ mysql -u root -p
 <span class="sql-keyword">GROUP BY</span> b.bolim_id, b.bolim_nomi, b.joylashuv, r.ism, r.familiya
 <span class="sql-keyword">ORDER BY</span> xodimlar_soni <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — Bo'limlar bo'yicha batafsil statistika</span>
+<table>
+<thead><tr><th>bolim_nomi</th><th>joylashuv</th><th>rahbar</th><th>xodimlar_soni</th><th>ort_maosh</th><th>max_maosh</th><th>min_maosh</th><th>jami_maosh</th></tr></thead>
+<tbody>
+<tr><td>IT bo'limi</td><td>Toshkent</td><td>Alisher Karimov</td><td>3</td><td>9,333,333</td><td>12,000,000</td><td>6,000,000</td><td>28,000,000</td></tr>
+<tr><td>Moliya bo'limi</td><td>Toshkent</td><td>Gulnora Azimova</td><td>2</td><td>8,250,000</td><td>9,500,000</td><td>7,000,000</td><td>16,500,000</td></tr>
+<tr><td>Marketing bo'limi</td><td>Samarqand</td><td>Nodira Yusupova</td><td>2</td><td>7,000,000</td><td>8,500,000</td><td>5,500,000</td><td>14,000,000</td></tr>
+<tr><td>HR bo'limi</td><td>Toshkent</td><td>Kamola Umarova</td><td>1</td><td>8,000,000</td><td>8,000,000</td><td>8,000,000</td><td>8,000,000</td></tr>
+<tr class="highlight-row"><td>Logistika bo'limi</td><td>Buxoro</td><td>NULL</td><td>0</td><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Murakkab JOIN</div></div>
@@ -2359,6 +2495,23 @@ mysql -u root -p
 <span class="sql-keyword">GROUP BY</span> x.xodim_id, x.ism, x.familiya, b.bolim_nomi, x.maosh
 <span class="sql-keyword">ORDER BY</span> loyihalar <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — Loyihalar soni va maosh o'sishi</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th><th>bolim_nomi</th><th>loyihalar</th><th>maosh_ozgarishlari</th><th>maosh_osishi</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>Karimov</td><td>IT bo'limi</td><td>3</td><td>2</td><td>50%</td></tr>
+<tr><td>Dilnoza</td><td>Rahimova</td><td>IT bo'limi</td><td>2</td><td>1</td><td>33%</td></tr>
+<tr><td>Bobur</td><td>Toshmatov</td><td>IT bo'limi</td><td>2</td><td>0</td><td>—</td></tr>
+<tr><td>Nodira</td><td>Yusupova</td><td>Marketing bo'limi</td><td>1</td><td>1</td><td>21%</td></tr>
+<tr><td>Sanjar</td><td>Alimov</td><td>Moliya bo'limi</td><td>1</td><td>0</td><td>—</td></tr>
+<tr><td>Otabek</td><td>Nazarov</td><td>Marketing bo'limi</td><td>1</td><td>0</td><td>—</td></tr>
+<tr><td>Gulnora</td><td>Azimova</td><td>Moliya bo'limi</td><td>0</td><td>1</td><td>27%</td></tr>
+<tr><td>Kamola</td><td>Umarova</td><td>HR bo'limi</td><td>0</td><td>0</td><td>—</td></tr>
+<tr><td>Jasur</td><td>Ergashev</td><td>NULL</td><td>0</td><td>0</td><td>—</td></tr>
+<tr><td>Malika</td><td>Tursunova</td><td>NULL</td><td>0</td><td>0</td><td>—</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Murakkab JOIN</div></div>
