@@ -2816,6 +2816,16 @@ mysql -u root -p
 (<span class="sql-number">14</span>, <span class="sql-number">2</span>, <span class="sql-string">'StartUp Hub'</span>,          <span class="sql-string">'Web sayt ishlab chiqish'</span>,  <span class="sql-number">1</span>,  <span class="sql-number">30000000</span>,  <span class="sql-number">0.00</span>,  <span class="sql-string">'2024-06-20 09:15:00'</span>, <span class="sql-keyword">NULL</span>,         <span class="sql-string">'bekor'</span>),
 (<span class="sql-number">15</span>, <span class="sql-number">3</span>, <span class="sql-string">'NexGen Technologies'</span>,  <span class="sql-string">'UPS APC 3000VA'</span>,           <span class="sql-number">4</span>,  <span class="sql-number">7500000</span>,   <span class="sql-number">5.00</span>,  <span class="sql-string">'2024-02-14 14:00:00'</span>, <span class="sql-string">'2024-02-21'</span>, <span class="sql-string">'yetkazildi'</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE xodimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE buyurtmalar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 10 rows affected (0.01 sec) — <code>INSERT INTO xodimlar</code></span>
+<span class="rok-line">Records: 10 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 15 rows affected (0.01 sec) — <code>INSERT INTO buyurtmalar</code></span>
+<span class="rok-line">Records: 15 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
 </div>
 
 <div class="luxury-divider"></div>
@@ -2857,6 +2867,15 @@ mysql -u root -p
 <span class="sql-keyword">WHERE</span> email <span class="sql-keyword">IS NOT NULL</span>;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija — Email domen ajratish (qisqartirilgan)</span>
+<table>
+<thead><tr><th>ism</th><th>email</th><th>domen</th><th>foydalanuvchi</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>alisher@kompaniya.uz</td><td>kompaniya.uz</td><td>alisher</td></tr>
+<tr><td>Sanjar</td><td>SANJAR@KOMPANIYA.UZ</td><td>KOMPANIYA.UZ</td><td>SANJAR</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Satr funksiyalari</div></div>
 <pre><code><span class="sql-comment">-- 3. Telefon raqamni formatlash va maskali ko'rsatish</span>
@@ -2871,6 +2890,15 @@ mysql -u root -p
 <span class="sql-keyword">FROM</span> xodimlar
 <span class="sql-keyword">WHERE</span> telefon <span class="sql-keyword">IS NOT NULL</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — Telefon formatlash (qisqartirilgan)</span>
+<table>
+<thead><tr><th>ism</th><th>telefon</th><th>maskali_telefon</th><th>mahalliy_format</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>+998901234567</td><td>+998 ** *** 67</td><td>8901234567</td></tr>
+<tr><td>Bobur</td><td>+998944445566</td><td>+998 ** *** 66</td><td>8944445566</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Satr funksiyalari</div></div>
@@ -3097,6 +3125,16 @@ mysql -u root -p
     <span class="sql-function">IF</span>(bolim <span class="sql-keyword">IS NULL</span>, <span class="sql-string">'❌ Tayinlanmagan'</span>, bolim) <span class="sql-keyword">AS</span> bolim
 <span class="sql-keyword">FROM</span> xodimlar;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — IF() funksiyasi (qisqartirilgan)</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th><th>maosh</th><th>daraja</th><th>bolim</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>Karimov</td><td>12,500,000</td><td>Yuqori</td><td>IT</td></tr>
+<tr><td>Dilnoza</td><td>Rahimova</td><td>6,200,000</td><td>Past</td><td>IT</td></tr>
+<tr><td>Jasur</td><td>Ergashev</td><td>2,500,000</td><td>Past</td><td>❌ Tayinlanmagan</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Boshqaruv funksiyalari</div></div>
@@ -3645,6 +3683,16 @@ mysql -u root -p
 (<span class="sql-number">1</span>,  <span class="sql-string">'Dilnoza'</span>,  <span class="sql-string">'CodeFactory'</span>,        <span class="sql-number">4</span>,  <span class="sql-number">18000000</span>, <span class="sql-number">12</span>,   <span class="sql-string">'2024-06-05'</span>, <span class="sql-string">'16:30:00'</span>, <span class="sql-string">'Toshkent'</span>,   <span class="sql-string">'karta'</span>),
 (<span class="sql-number">4</span>,  <span class="sql-string">'Sanjar'</span>,   <span class="sql-string">'TechStore'</span>,          <span class="sql-number">15</span>, <span class="sql-number">850000</span>,   <span class="sql-number">10</span>,   <span class="sql-string">'2024-06-10'</span>, <span class="sql-string">'11:20:00'</span>, <span class="sql-string">'Fargona'</span>,    <span class="sql-string">'naqd'</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE mahsulotlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE sotuvlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 12 rows affected (0.01 sec) — <code>INSERT INTO mahsulotlar</code></span>
+<span class="rok-line">Records: 12 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 30 rows affected (0.01 sec) — <code>INSERT INTO sotuvlar</code></span>
+<span class="rok-line">Records: 30 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
 </div>
 
 <div class="luxury-divider"></div>
@@ -3686,6 +3734,14 @@ mysql -u root -p
     <span class="sql-function">FORMAT</span>(<span class="sql-function">MIN</span>(miqdor * narx), <span class="sql-number">0</span>) <span class="sql-keyword">AS</span> eng_kichik_sotuv
 <span class="sql-keyword">FROM</span> sotuvlar;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>umumiy_tushum</th><th>jami_chegirmalar</th><th>sof_tushum</th><th>ort_sotuv_summasi</th><th>eng_katta_sotuv</th><th>eng_kichik_sotuv</th></tr></thead>
+<tbody>
+<tr class="highlight-row"><td>803,550,000</td><td>68,672,500</td><td>734,877,500</td><td>26,785,000</td><td>90,000,000</td><td>7,500,000</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — COUNT, SUM, AVG</div></div>
@@ -3751,6 +3807,18 @@ mysql -u root -p
 <span class="sql-keyword">ORDER BY</span> <span class="sql-function">SUM</span>(s.miqdor * s.narx) <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>kategoriya</th><th>mahsulotlar</th><th>ort_narx</th><th>jami_sotilgan</th><th>sof_tushum</th><th>yalpi_foyda</th></tr></thead>
+<tbody>
+<tr><td>Elektronika</td><td>3</td><td>22,500,000</td><td>52</td><td>456,780,000</td><td>148,600,000</td></tr>
+<tr><td>Aksesuar</td><td>4</td><td>1,762,500</td><td>170</td><td>91,970,000</td><td>58,050,000</td></tr>
+<tr><td>Tarmoq</td><td>2</td><td>6,175,000</td><td>60</td><td>74,250,000</td><td>28,500,000</td></tr>
+<tr><td>Orgtexnika</td><td>2</td><td>8,000,000</td><td>21</td><td>60,537,500</td><td>22,000,000</td></tr>
+<tr><td>Komponentlar</td><td>1</td><td>2,800,000</td><td>20</td><td>51,340,000</td><td>14,000,000</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Gurupp statistikasi</div></div>
 <pre><code><span class="sql-comment">-- 3. Shaharlar bo'yicha sotuv tahlili</span>
@@ -3799,6 +3867,16 @@ mysql -u root -p
 <span class="sql-keyword">HAVING</span> <span class="sql-function">SUM</span>(miqdor * narx * (<span class="sql-number">1</span> - chegirma_foiz/<span class="sql-number">100</span>)) > <span class="sql-number">100000000</span>
 <span class="sql-keyword">ORDER BY</span> <span class="sql-function">SUM</span>(miqdor * narx) <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>sotuvchi</th><th>sotuvlar_soni</th><th>sof_tushum</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>8</td><td>268,510,000</td></tr>
+<tr><td>Bobur</td><td>7</td><td>158,190,000</td></tr>
+<tr><td>Nodira</td><td>5</td><td>129,375,000</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — HAVING filtrlash</div></div>
@@ -3868,6 +3946,16 @@ mysql -u root -p
 <span class="sql-keyword">ORDER BY</span> mahsulotlar_soni <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija (qisqartirilgan)</span>
+<table>
+<thead><tr><th>sotuvchi</th><th>mahsulotlar_soni</th><th>sotilgan_mahsulotlar</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>6</td><td>Klaviatura Logitech MX | Monitor Samsung 27" | Noutbuk HP EliteBook | Router Cisco | SSD Samsung 1TB | Server Dell PowerEdge</td></tr>
+<tr><td>Bobur</td><td>6</td><td>Kabel Cat6 (100m) | Noutbuk HP EliteBook | Quloqchin Sony WH-1000 | Router Cisco | Server Dell PowerEdge | Sichqoncha Razer</td></tr>
+<tr><td>Dilnoza</td><td>5</td><td>Klaviatura Logitech MX | Noutbuk HP EliteBook | Quloqchin Sony WH-1000 | Sichqoncha Razer | Webcam Logitech C920</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — GROUP_CONCAT</div></div>
 <pre><code><span class="sql-comment">-- 2. Kategoriya bo'yicha mahsulotlar ro'yxati va narx diapazoni</span>
@@ -3919,6 +4007,19 @@ mysql -u root -p
 <span class="sql-keyword">GROUP BY</span> <span class="sql-function">DATE_FORMAT</span>(sotuv_sana, <span class="sql-string">'%Y-%m'</span>), <span class="sql-function">MONTHNAME</span>(sotuv_sana)
 <span class="sql-keyword">ORDER BY</span> oy;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>oy</th><th>oy_nomi</th><th>sotuvlar</th><th>jami_dona</th><th>umumiy_tushum</th><th>sof_tushum</th><th>ort_sotuv</th></tr></thead>
+<tbody>
+<tr><td>2024-01</td><td>January</td><td>3</td><td>27</td><td>99,000,000</td><td>91,560,000</td><td>33,000,000</td></tr>
+<tr><td>2024-02</td><td>February</td><td>4</td><td>34</td><td>131,900,000</td><td>122,520,000</td><td>32,975,000</td></tr>
+<tr><td>2024-03</td><td>March</td><td>7</td><td>103</td><td>175,500,000</td><td>159,225,000</td><td>25,071,429</td></tr>
+<tr><td>2024-04</td><td>April</td><td>5</td><td>57</td><td>196,400,000</td><td>177,342,500</td><td>39,280,000</td></tr>
+<tr><td>2024-05</td><td>May</td><td>7</td><td>215</td><td>134,250,000</td><td>125,380,000</td><td>19,178,571</td></tr>
+<tr><td>2024-06</td><td>June</td><td>4</td><td>24</td><td>66,500,000</td><td>58,850,000</td><td>16,625,000</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Vaqt tahlili</div></div>
@@ -4000,8 +4101,20 @@ mysql -u root -p
 <span class="sql-keyword">LIMIT</span> <span class="sql-number">5</span>;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>nomi</th><th>kategoriya</th><th>jami_sotilgan</th><th>umumiy_tushum</th><th>unikal_mijozlar</th><th>min_sotuv</th><th>max_sotuv</th></tr></thead>
+<tbody>
+<tr><td>Kabel Cat6 (100m)</td><td>Tarmoq</td><td>150</td><td>52,500,000</td><td>2</td><td>17,500,000</td><td>35,000,000</td></tr>
+<tr><td>Klaviatura Logitech MX</td><td>Aksesuar</td><td>80</td><td>96,000,000</td><td>3</td><td>18,000,000</td><td>48,000,000</td></tr>
+<tr><td>Sichqoncha Razer</td><td>Aksesuar</td><td>65</td><td>55,250,000</td><td>3</td><td>12,750,000</td><td>25,500,000</td></tr>
+<tr><td>Monitor Samsung 27"</td><td>Elektronika</td><td>31</td><td>139,500,000</td><td>3</td><td>27,000,000</td><td>67,500,000</td></tr>
+<tr><td>SSD Samsung 1TB</td><td>Komponentlar</td><td>20</td><td>56,000,000</td><td>2</td><td>22,400,000</td><td>33,600,000</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
-<div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Ichki so‘rovlar</div></div>
+<div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Ichki so'rovlar</div></div>
 <pre><code><span class="sql-comment">-- 3. Har bir sotuvchining eng yaxshi va eng yomon oyi</span>
 <span class="sql-keyword">SELECT</span> 
     sotuvchi,
@@ -4449,6 +4562,19 @@ mysql -u root -p
 (<span class="sql-number">10</span>, <span class="sql-string">'Noutbuk HP'</span>,        <span class="sql-string">'Elektronika'</span>,  <span class="sql-number">6</span>,  <span class="sql-number">18000000</span>, <span class="sql-string">'2024-06-08'</span>, <span class="sql-string">'Toshkent'</span>),
 (<span class="sql-number">11</span>, <span class="sql-string">'SSD Samsung'</span>,       <span class="sql-string">'Komponentlar'</span>, <span class="sql-number">10</span>, <span class="sql-number">2800000</span>,  <span class="sql-string">'2024-06-12'</span>, <span class="sql-string">'Samarqand'</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE bolimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE xodimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE sotuvlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 5 rows affected (0.01 sec) — <code>INSERT INTO bolimlar</code></span>
+<span class="rok-line">Records: 5 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 12 rows affected (0.01 sec) — <code>INSERT INTO xodimlar</code></span>
+<span class="rok-line">Records: 12 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 30 rows affected (0.01 sec) — <code>INSERT INTO sotuvlar</code></span>
+<span class="rok-line">Records: 30 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
 </div>
 
 <div class="luxury-divider"></div>
@@ -4468,6 +4594,18 @@ mysql -u root -p
 <span class="sql-keyword">ORDER BY</span> maosh <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th><th>lavozim</th><th>maosh</th><th>ortachadan_farq</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>Karimov</td><td>IT direktor</td><td>15,000,000</td><td>6,625,000</td></tr>
+<tr><td>Kamola</td><td>Umarova</td><td>Sotuv boshlig'i</td><td>13,000,000</td><td>4,625,000</td></tr>
+<tr><td>Dilnoza</td><td>Rahimova</td><td>Senior dasturchi</td><td>12,000,000</td><td>3,625,000</td></tr>
+<tr><td>Gulnora</td><td>Azimova</td><td>Bosh hisobchi</td><td>11,000,000</td><td>2,625,000</td></tr>
+<tr><td>Nodira</td><td>Yusupova</td><td>Marketing menejer</td><td>9,000,000</td><td>625,000</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Subqueries</div></div>
 <pre><code><span class="sql-comment">-- 2. IN subquery: sotuv qilgan xodimlar</span>
@@ -4481,6 +4619,28 @@ mysql -u root -p
 <span class="sql-join">LEFT JOIN</span> bolimlar b <span class="sql-keyword">ON</span> x.bolim_id = b.id
 <span class="sql-keyword">WHERE</span> x.id <span class="sql-keyword">NOT IN</span> (<span class="sql-keyword">SELECT DISTINCT</span> xodim_id <span class="sql-keyword">FROM</span> sotuvlar);</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — sotuv qilgan xodimlar</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th><th>lavozim</th></tr></thead>
+<tbody>
+<tr><td>Jasur</td><td>Ergashev</td><td>Sotuv menejeri</td></tr>
+<tr><td>Malika</td><td>Tursunova</td><td>Sotuv menejeri</td></tr>
+<tr><td>Farrux</td><td>Jumayev</td><td>Sotuv menejeri</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — sotuv qilMAGAN xodimlar</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th><th>lavozim</th><th>bolim</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>Karimov</td><td>IT direktor</td><td>IT bo'limi</td></tr>
+<tr><td>Dilnoza</td><td>Rahimova</td><td>Senior dasturchi</td><td>IT bo'limi</td></tr>
+<tr><td>Bobur</td><td>Toshmatov</td><td>Junior dasturchi</td><td>IT bo'limi</td></tr>
+<tr><td>Gulnora</td><td>Azimova</td><td>Bosh hisobchi</td><td>Moliya bo'limi</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Subqueries</div></div>
@@ -4518,6 +4678,15 @@ mysql -u root -p
     <span class="sql-keyword">WHERE</span> s.xodim_id = x.id <span class="sql-keyword">AND</span> s.miqdor * s.narx > <span class="sql-number">50000000</span>
 );</code></pre>
 </div>
+
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th></tr></thead>
+<tbody>
+<tr><td>Jasur</td><td>Ergashev</td></tr>
+<tr><td>Farrux</td><td>Jumayev</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -4554,6 +4723,16 @@ mysql -u root -p
 ) <span class="sql-keyword">AS</span> stat
 <span class="sql-keyword">ORDER BY</span> stat.jami_sotuv <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>xodim</th><th>bolim</th><th>sotuvlar_soni</th><th>jami_sotuv</th><th>ort_sotuv</th><th>daraja</th></tr></thead>
+<tbody>
+<tr><td>Farrux Jumayev</td><td>Sotuv bo'limi</td><td>10</td><td>266,200,000</td><td>26,620,000</td><td>🥇 Oltin</td></tr>
+<tr><td>Malika Tursunova</td><td>Sotuv bo'limi</td><td>10</td><td>243,350,000</td><td>24,335,000</td><td>🥇 Oltin</td></tr>
+<tr><td>Jasur Ergashev</td><td>Sotuv bo'limi</td><td>10</td><td>236,100,000</td><td>23,610,000</td><td>🥇 Oltin</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Derived Tables</div></div>
@@ -4613,6 +4792,16 @@ ortacha <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">CROSS JOIN</span> ortacha o
 <span class="sql-keyword">ORDER BY</span> xs.jami <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>xodim</th><th>sotuvlar</th><th>jami_sotuv</th><th>ortacha</th><th>baho</th></tr></thead>
+<tbody>
+<tr><td>Farrux Jumayev</td><td>10</td><td>266,200,000</td><td>248,550,000</td><td>✅ Yuqori</td></tr>
+<tr><td>Malika Tursunova</td><td>10</td><td>243,350,000</td><td>248,550,000</td><td>⬇️ Past</td></tr>
+<tr><td>Jasur Ergashev</td><td>10</td><td>236,100,000</td><td>248,550,000</td><td>⬇️ Past</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — CTE amaliyot</div></div>
@@ -4704,6 +4893,19 @@ ortacha <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">FROM</span> xodimlar x;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija (qisqartirilgan)</span>
+<table>
+<thead><tr><th>xodim</th><th>maosh</th><th>row_num</th><th>rank_num</th><th>dense_num</th></tr></thead>
+<tbody>
+<tr><td>Alisher Karimov</td><td>15,000,000</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>Kamola Umarova</td><td>13,000,000</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>Dilnoza Rahimova</td><td>12,000,000</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>Gulnora Azimova</td><td>11,000,000</td><td>4</td><td>4</td><td>4</td></tr>
+<tr><td>Nodira Yusupova</td><td>9,000,000</td><td>5</td><td>5</td><td>5</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Window funksiyalari</div></div>
 <pre><code><span class="sql-comment">-- 2. PARTITION BY bilan bo'lim ichida reyting</span>
@@ -4742,6 +4944,19 @@ ortacha <span class="sql-keyword">AS</span> (
     ) <span class="sql-keyword">AS</span> oylik_osish
 <span class="sql-keyword">FROM</span> oylik;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>oy</th><th>tushum</th><th>oldingi_oy</th><th>keyingi_oy</th><th>oylik_osish</th></tr></thead>
+<tbody>
+<tr><td>2024-01</td><td>153,000,000</td><td>NULL</td><td>128,500,000</td><td>NULL</td></tr>
+<tr><td>2024-02</td><td>128,500,000</td><td>153,000,000</td><td>158,200,000</td><td>-16.0%</td></tr>
+<tr><td>2024-03</td><td>158,200,000</td><td>128,500,000</td><td>170,400,000</td><td>23.1%</td></tr>
+<tr><td>2024-04</td><td>170,400,000</td><td>158,200,000</td><td>107,400,000</td><td>7.7%</td></tr>
+<tr><td>2024-05</td><td>107,400,000</td><td>170,400,000</td><td>128,000,000</td><td>-37.0%</td></tr>
+<tr><td>2024-06</td><td>128,000,000</td><td>107,400,000</td><td>NULL</td><td>19.2%</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Window funksiyalari</div></div>
@@ -4889,6 +5104,18 @@ kumulyativ <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">FROM</span> kumulyativ
 <span class="sql-keyword">ORDER BY</span> jami <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija</span>
+<table>
+<thead><tr><th>mahsulot</th><th>sotuv</th><th>kumulyativ_foiz</th><th>abc_gruppa</th></tr></thead>
+<tbody>
+<tr><td>Noutbuk HP</td><td>360,000,000</td><td>48.2%</td><td>🅰️ A — Asosiy</td></tr>
+<tr><td>Server Dell</td><td>180,000,000</td><td>72.4%</td><td>🅱️ B — O'rta</td></tr>
+<tr><td>Router Cisco</td><td>156,000,000</td><td>93.3%</td><td>©️ C — Past</td></tr>
+<tr><td>Monitor Samsung</td><td>117,000,000</td><td>97.0%</td><td>©️ C — Past</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Amaliy topshiriqlar</div></div>
@@ -7021,6 +7248,20 @@ umumiy <span class="sql-keyword">AS</span> (
 (<span class="sql-number">4</span>, <span class="sql-number">8</span>, <span class="sql-number">3</span>,  <span class="sql-number">7500000</span>,  <span class="sql-number">5</span>,  <span class="sql-string">'2024-04-05'</span>),
 (<span class="sql-number">5</span>, <span class="sql-number">2</span>, <span class="sql-number">10</span>, <span class="sql-number">4500000</span>,  <span class="sql-number">0</span>,  <span class="sql-string">'2024-04-12'</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE xodimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE mahsulotlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE sotuvlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE audit_jurnal</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 8 rows affected (0.01 sec) — <code>INSERT INTO xodimlar</code></span>
+<span class="rok-line">Records: 8 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 8 rows affected (0.01 sec) — <code>INSERT INTO mahsulotlar</code></span>
+<span class="rok-line">Records: 8 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 10 rows affected (0.01 sec) — <code>INSERT INTO sotuvlar</code></span>
+<span class="rok-line">Records: 10 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
 </div>
 
 <div class="luxury-divider"></div>
@@ -7050,6 +7291,9 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-comment">-- Chaqirish</span>
 <span class="sql-keyword">SELECT</span> <span class="sql-proc">fn_som_format</span>(<span class="sql-number">18500000</span>);
 <span class="sql-comment">-- Natija: 18,500,000 so'm</span></code></pre>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE FUNCTION fn_som_format</code></span>
 </div>
 
 <div class="mac-window">
@@ -7169,6 +7413,21 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">FROM</span> sotuvlar s
 <span class="sql-keyword">INNER JOIN</span> mahsulotlar m <span class="sql-keyword">ON</span> s.mahsulot_id = m.id;</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE FUNCTION fn_foyda_foizi</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE FUNCTION fn_soliq</code></span>
+</div>
+
+<span class="result-label">📋 Natija (qisqartirilgan)</span>
+<table>
+<thead><tr><th>mahsulot</th><th>miqdor</th><th>brutto</th><th>chegirma</th><th>sof_summa</th><th>QQS</th><th>foyda_foizi</th></tr></thead>
+<tbody>
+<tr><td>Noutbuk HP</td><td>3</td><td>54,000,000 so'm</td><td>5%</td><td>51,300,000 so'm</td><td>6,156,000 so'm</td><td>22.1%</td></tr>
+<tr><td>Monitor Samsung</td><td>8</td><td>36,000,000 so'm</td><td>0%</td><td>36,000,000 so'm</td><td>4,320,000 so'm</td><td>40.6%</td></tr>
+<tr><td>Server Dell</td><td>1</td><td>45,000,000 so'm</td><td>10%</td><td>40,500,000 so'm</td><td>4,860,000 so'm</td><td>15.7%</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -7206,6 +7465,18 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">CALL</span> <span class="sql-proc">sp_bolim_xodimlari</span>(<span class="sql-string">'IT'</span>);
 <span class="sql-keyword">CALL</span> <span class="sql-proc">sp_bolim_xodimlari</span>(<span class="sql-string">'Sotuv'</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE PROCEDURE sp_bolim_xodimlari</code></span>
+</div>
+
+<span class="result-label">📋 Natija — CALL sp_bolim_xodimlari('IT')</span>
+<table>
+<thead><tr><th>xodim</th><th>lavozim</th><th>maosh</th><th>staj</th><th>holat</th></tr></thead>
+<tbody>
+<tr><td>Alisher Karimov</td><td>Senior dasturchi</td><td>12,500,000 so'm</td><td>4 yil 10 oy</td><td>faol</td></tr>
+<tr><td>Dilnoza Rahimova</td><td>Junior dasturchi</td><td>6,200,000 so'm</td><td>2 yil 1 oy</td><td>faol</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Protseduralar</div></div>
@@ -7243,6 +7514,9 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">DELIMITER</span> ;
 
 <span class="sql-keyword">CALL</span> <span class="sql-proc">sp_xodim_hisobot</span>(<span class="sql-number">5</span>);</code></pre>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE PROCEDURE sp_xodim_hisobot</code></span>
 </div>
 </div>
 
@@ -7354,6 +7628,10 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">CALL</span> <span class="sql-proc">sp_sotuv_qoshish</span>(<span class="sql-number">5</span>, <span class="sql-number">1</span>, <span class="sql-number">2</span>, <span class="sql-number">5</span>, @natija);
 <span class="sql-keyword">SELECT</span> @natija;</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE PROCEDURE sp_maosh_oshirish</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE PROCEDURE sp_sotuv_qoshish</code></span>
+</div>
 </div>
 
 <div class="luxury-divider"></div>
@@ -7434,6 +7712,10 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-comment">-- ❌ Bu XATO beradi (50% oshirish)</span>
 <span class="sql-comment">-- UPDATE xodimlar SET maosh = maosh * 1.50 WHERE id = 2;</span>
 <span class="sql-comment">-- ERROR: Maosh 30% dan ortiq oshirib bo'lmaydi!</span></code></pre>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE TRIGGER trg_xodim_update_before</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>UPDATE</code> (10% oshirish muvaffaqiyatli)</span>
 </div>
 </div>
 
