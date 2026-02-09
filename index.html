@@ -3,9 +3,6 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Ma'lumotlar bazasi fanidan 15 ta amaliy mashg'ulot — talabalar uchun uslubiy ko'rsatma. SQL, MySQL, JOIN, INDEX, VIEW, Trigger va boshqalar."/>
-<meta name="author" content="M.U. Ergashev"/>
-<meta name="keywords" content="ma'lumotlar bazasi, SQL, MySQL, amaliy mashg'ulot, uslubiy ko'rsatma, database"/>
 <title>Ma'lumotlar bazasi — 15 ta amaliy mashg'ulot</title>
 <!-- Word eksport kutubxonalari -->
 <script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
@@ -90,7 +87,7 @@ body.dark-mode .mac-titlebar{background:linear-gradient(180deg,#2a2a3a,#1e1e2e)}
 /* ===== GLOBAL ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,sans-serif;line-height:1.8;color:var(--text);background:var(--bg);font-feature-settings:'liga' 1,'kern' 1;transition:background var(--transition-normal),color var(--transition-normal);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-family:'Inter',-apple-system,sans-serif;line-height:1.7;color:var(--text);background:var(--bg);font-feature-settings:'liga' 1,'kern' 1;transition:background var(--transition-normal),color var(--transition-normal)}
 
 /* ===== READING PROGRESS BAR ===== */
 .reading-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));z-index:9999;transition:width 0.15s linear;border-radius:0 2px 2px 0}
@@ -232,9 +229,9 @@ body.dark-mode tbody tr:nth-child(even){background:rgba(255,255,255,0.02)}
 
 .icon{font-size:1.2em;margin-right:8px}
 .luxury-divider{height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:60px 0;border:none}
-ul,ol{margin:15px 0 15px 24px}
-li{margin-bottom:10px;line-height:1.8}
-p{margin:14px 0;line-height:1.8}
+ul,ol{margin:15px 0 15px 20px}
+li{margin-bottom:10px}
+p{margin:12px 0}
 
 .step-number{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border-radius:50%;font-weight:700;font-size:0.95em;margin-right:12px;box-shadow:3px 3px 6px var(--shadow-neu-dark)}
 .result-label{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;padding:5px 16px;border-radius:20px;font-size:0.85em;font-weight:600;margin:15px 0 10px 0}
@@ -327,297 +324,131 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 
 /* ===== PRINT — KITOBCHA (A4, 3-2-2-1.5 cm) ===== */
 @media print{
-    /* ========== A4 KITOBCHA FORMATI ========== */
+    /* A4 sahifa sozlamalari */
     @page{size:A4 portrait;margin:2cm 2cm 1.5cm 3cm}
     @page:first{margin-top:0}
 
-    /* ========== UI ELEMENTLARNI YASHIRISH ========== */
+    /* UI elementlarni yashirish */
     .sidebar,.menu-toggle,.reading-progress,.back-to-top,
     .copy-btn,.sidebar-overlay,.file-badge,.dark-mode-toggle,
     .sidebar-search,.sidebar-progress,.check-badge,
-    .print-btn-wrap,.skip-to-content,
-    .lesson-nav,.breadcrumb,.lesson-toc,.keyboard-hint,
-    .self-check,.meta-grid,.lesson-badge,.gold-line{display:none!important}
+    .print-btn-wrap{display:none!important}
 
-    /* ========== LAYOUT ========== */
+    /* Layout — to'liq kenglik */
     .main{margin-left:0!important;padding:0!important}
 
-    /* ========== BARCHA SECTIONLAR ========== */
+    /* BARCHA sectionlarni ko'rsatish */
     .section-block{display:block!important;page-break-before:auto}
     .section-block+.section-block{page-break-before:always}
 
-    /* ========== ASOSIY MUAMMO YECHIMI: BO'SH JOY OLDINI OLISH ========== */
-    /* Container — ERKIN uziladi, bo'sh joy qolmaydi */
-    .container{
+    /* Kontent ichida uzilishni oldini olish */
+    .container,.card,.card-flat,.theory-box,.warning-box,
+    .tip-box,.info-box,.meta-info{
+        page-break-inside:avoid;
         box-shadow:none!important;
-        padding:0!important;
-        margin:0!important;
-        background:#fff!important;
-        border-radius:0!important;
-        border:none!important;
-        page-break-inside:auto!important
+        border:1px solid #ddd;
+        border-radius:4px;
+        padding:15px;
+        margin:10px 0
     }
-
-    /* Card va info-boxlar — kichik bo'lsa uzilmaydi, katta bo'lsa erkin uziladi */
-    .card,.card-flat{
-        box-shadow:none!important;
-        border:none!important;
-        border-left:3px solid #d4af37!important;
-        border-radius:0!important;
-        padding:8px 0 8px 12px!important;
-        margin:8px 0!important;
-        page-break-inside:auto
-    }
-    .theory-box,.warning-box,.tip-box,.info-box{
-        box-shadow:none!important;
-        border-radius:0!important;
-        padding:8px 12px!important;
-        margin:6px 0!important;
-        page-break-inside:auto
-    }
-    .meta-info{
-        box-shadow:none!important;
-        border:none!important;
-        border-radius:0!important;
-        padding:6px 0!important;
-        margin:0 0 12px 0!important;
-        font-size:9pt!important;
-        page-break-inside:auto
-    }
-
-    /* ========== JADVALLAR — erkin uziladi ========== */
-    table{width:100%;border-collapse:collapse;page-break-inside:auto}
-    thead{display:table-header-group}
-    tr{page-break-inside:avoid}
-    td,th{border:1px solid #999;padding:4px 6px;font-size:8.5pt}
-    thead th{background:#f5f5f5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-
-    /* ========== KOD BLOKLARI — erkin uziladi ========== */
     pre{
-        page-break-inside:auto;
+        page-break-inside:avoid;
         box-shadow:none!important;
-        font-size:7.5pt!important;
-        line-height:1.4!important;
-        padding:6px 8px!important;
-        margin:6px 0!important;
-        border-radius:3px!important;
-        border:1px solid #ccc
+        font-size:8pt;
+        line-height:1.5;
+        border:1px solid #ccc;
+        padding:10px;
+        border-radius:4px
     }
-
-    /* ========== H2, H3 — keyin uzilmasin ========== */
+    table{page-break-inside:avoid;width:100%;border-collapse:collapse}
+    tr{page-break-inside:avoid}
+    td,th{border:1px solid #999;padding:6px 8px;font-size:9pt}
     h2,h3{page-break-after:avoid}
     img{max-width:100%;page-break-inside:avoid}
 
-    /* ========== KITOBCHA TIPOGRAFIYASI ========== */
+    /* Kitobcha tipografiyasi */
     body{
         background:#fff!important;
         color:#1a1a1a!important;
         font-family:'Inter','Segoe UI',Arial,sans-serif;
         font-size:10pt;
-        line-height:1.5
+        line-height:1.6
     }
     h1{
         font-family:'Playfair Display',Georgia,serif;
-        font-size:18pt!important;
+        font-size:22pt;
         color:#1a1a1a!important;
         text-align:center;
-        margin:0 0 4px 0!important
+        margin-bottom:10px
     }
     h2{
         font-family:'Playfair Display',Georgia,serif;
-        font-size:14pt!important;
+        font-size:16pt;
         color:#1a1a1a!important;
-        margin:14px 0 8px 0!important;
-        border-bottom:1.5pt solid #d4af37;
-        padding-bottom:3px!important;
-        padding-left:0!important
+        margin-top:20px;
+        border-bottom:2px solid #d4af37;
+        padding-bottom:5px
     }
-    h2::before{display:none!important}
-    h3{font-size:11pt!important;color:#333!important;margin:10px 0 4px 0!important}
-    p{font-size:10pt;line-height:1.5;margin:4px 0!important;orphans:3;widows:3}
-    li{font-size:10pt;line-height:1.5;margin-bottom:2px!important;orphans:3;widows:3}
-    ul,ol{margin:4px 0 4px 18px!important}
-    .subtitle{font-size:10pt!important;margin:0 0 6px 0!important}
-    .luxury-divider{height:1px!important;margin:12px 0!important;background:#d4af37!important;border:none}
+    h2::before{background:#d4af37!important}
+    h3{font-size:12pt;color:#333!important;margin-top:15px}
+    p,li{font-size:10pt;line-height:1.6;orphans:3;widows:3}
 
-    /* ========== COVER SAHIFA ========== */
-    .cover{box-shadow:none!important;background:#fff!important;border:none!important;padding:0!important;margin:0!important}
-    #cover .cover img{max-width:100%!important;width:100%!important;border-radius:0!important;box-shadow:none!important}
-    .cover .stats{margin:10px 0!important;gap:10px!important}
-    .cover .stat{box-shadow:none!important;border:1px solid #ddd;border-radius:4px;padding:6px 12px!important}
-    .cover .stat .num2{font-size:16pt!important}
-    .cover .stat .label{font-size:8pt!important}
-    .cover h1{font-size:20pt!important;margin-bottom:2px!important}
-    .cover .sub{font-size:10pt!important;margin-bottom:8px!important}
+    /* Ranglar — CSS variablelarsiz */
+    .cover{box-shadow:none!important;background:#fff!important;border:none;padding:40px 20px}
+    .container{box-shadow:none!important;padding:10px 0;background:#fff!important;border-radius:0;border:none}
+    .gold-line{background:#d4af37!important;height:2px}
 
-    /* ========== KOD — print friendly ranglar ========== */
+    /* Code — print friendly */
     pre{background:#f8f8f8!important;color:#1a1a1a!important}
-    code{background:#f0f0f0!important;color:#333!important;font-size:8pt!important;padding:1px 3px!important}
-    pre code{background:transparent!important;font-size:7.5pt!important}
+    code{background:#f0f0f0!important;color:#333!important;font-size:8.5pt}
+    pre code{background:transparent!important}
 
-    /* ========== INFO BOXLAR — solid ranglar ========== */
-    .theory-box{background:#fffbe6!important;border-left:3px solid #d4af37!important}
-    .warning-box{background:#fff5f5!important;border-left:3px solid #e74c3c!important}
-    .tip-box{background:#f0fff0!important;border-left:3px solid #27ae60!important}
-    .info-box{background:#f0f5ff!important;border-left:3px solid #3498db!important}
+    /* Info boxlar — solid ranglar */
+    .theory-box{background:#fffbe6!important;border-left:4px solid #d4af37!important}
+    .warning-box{background:#fff5f5!important;border-left:4px solid #e74c3c!important}
+    .tip-box{background:#f0fff0!important;border-left:4px solid #27ae60!important}
+    .info-box{background:#f0f5ff!important;border-left:4px solid #3498db!important}
 
-    /* ========== SYNTAX HIGHLIGHTING ========== */
+    /* Syntax highlighting */
     .sql-keyword{color:#c71585!important;font-weight:bold}
     .sql-string{color:#b8860b!important}
     .sql-comment{color:#666!important}
     .sql-function{color:#0066cc!important}
-    .sql-number{color:#4a0080!important}
-    .sql-operator{color:#8b4513!important;font-weight:bold}
-    .sql-proc{color:#006060!important;font-weight:bold}
-    .sql-trigger{color:#cc0000!important;font-weight:bold}
 
-    /* ========== BACK PAGE ========== */
+    /* Cover rasm — 1-sahifa */
+    #cover .cover img{max-width:100%!important;width:100%!important;border-radius:0!important;box-shadow:none!important}
+    #cover .cover{padding:0!important;margin:0!important;border:none!important}
+
+    /* Back page — oxirgi sahifa */
     #backpage{page-break-before:always;display:block!important}
     #backpage img{max-width:100%!important;width:100%!important;box-shadow:none!important;border-radius:0!important}
 
-    /* ========== MAC WINDOW — printda soddalashtirilgan ========== */
-    .mac-window{border:1px solid #ccc;border-radius:4px!important;overflow:hidden;margin:6px 0!important}
-    .mac-titlebar{background:#e8e8e8!important;padding:4px 10px!important;border-bottom:1px solid #ccc}
-    .mac-dots{display:none!important}
-    .mac-title{color:#555!important;font-size:7pt!important;text-align:left!important;margin:0!important}
-    .mac-window pre{border:none!important;border-radius:0!important;margin:0!important}
+    /* MacOS window — print (saytdagidek ranglar saqlanadi) */
+    .mac-window{border:1px solid #333;border-radius:12px;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-titlebar{background:#2d2d3d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-dot.red{background:#ff5f57!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-dot.yellow{background:#febc2e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-dot.green{background:#28c840!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-title{color:#888!important}
+    .mac-window pre{background:#1e1e2e!important;color:#f8f8f2!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window code{background:transparent!important;color:#f8f8f2!important}
+    .mac-window .sql-keyword{color:#ff79c6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .sql-string{color:#f1fa8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .sql-comment{color:#6272a4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .sql-number{color:#bd93f9!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
-    /* ========== CONCEPT GRID & CARDS ========== */
-    .concept-grid{gap:6px!important;margin:8px 0!important}
-    .concept-card{box-shadow:none!important;border:1px solid #ddd;border-top:2px solid #d4af37;border-radius:3px!important;padding:8px!important}
-    .concept-card .big-icon{font-size:1.4em!important;margin-bottom:4px!important}
-    .concept-card h4{font-size:9pt!important;margin-bottom:2px!important}
-    .concept-card p{font-size:8pt!important}
-
-    /* ========== FLOW DIAGRAM ========== */
-    .flow-diagram{box-shadow:none!important;padding:8px!important;margin:8px 0!important;border:1px solid #ddd}
-    .flow-step{padding:4px 10px!important;font-size:8pt!important}
-
-    /* ========== STEP NUMBER ========== */
-    .step-number{width:24px!important;height:24px!important;font-size:9pt!important;line-height:24px!important;margin-right:6px!important}
-    .result-label{padding:2px 10px!important;font-size:8pt!important;margin:6px 0 4px 0!important}
-
-    /* ========== SCREENSHOT BOX ========== */
-    .screenshot-box{box-shadow:none!important;border:1px solid #ddd;padding:8px!important;margin:8px 0!important;border-radius:3px!important}
-
-    /* ========== ARCH DIAGRAM ========== */
-    .arch-diagram{box-shadow:none!important;border:1px solid #ddd;padding:8px!important;margin:8px 0!important}
-
-    /* ========== FOLDER TREE ========== */
-    .folder-tree{font-size:7.5pt!important;padding:6px 10px!important;margin:6px 0!important;line-height:1.4!important}
-
-    /* ========== MUNDARIJA JADVALI (cover page) ========== */
-    #cover .container{margin-top:10px!important}
-    #cover table td,#cover table th{font-size:8.5pt!important;padding:3px 6px!important}
-
-    /* ========== ANIMATSIYALARNI O'CHIRISH ========== */
+    /* Animatsiyalarni o'chirish */
     *{animation:none!important;transition:none!important;transform:none!important}
-}
-
-/* ===== SKIP TO CONTENT (Accessibility) ===== */
-.skip-to-content{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;padding:12px 24px;border-radius:0 0 12px 12px;font-weight:600;z-index:10000;transition:top 0.2s ease;text-decoration:none;font-family:'Inter',sans-serif;font-size:0.9em}
-.skip-to-content:focus{top:0}
-
-/* ===== FOCUS INDICATORS (Accessibility) ===== */
-*:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
-.sidebar a:focus-visible{outline-color:var(--gold);outline-offset:-2px}
-button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-
-/* ===== BREADCRUMB NAVIGATION ===== */
-.breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.82em;color:var(--text-muted);margin-bottom:20px;padding:12px 20px;background:var(--bg-card);border-radius:var(--radius-sm);box-shadow:2px 2px 6px var(--shadow-neu-dark),-2px -2px 6px var(--shadow-neu-light)}
-.breadcrumb a{color:var(--gold);text-decoration:none;transition:color var(--transition-fast)}
-.breadcrumb a:hover{color:var(--gold-light);text-decoration:underline}
-.breadcrumb .sep{color:var(--text-muted);font-size:0.9em}
-.breadcrumb .current{color:var(--text-secondary);font-weight:500}
-
-/* ===== LESSON TABLE OF CONTENTS ===== */
-.lesson-toc{background:var(--bg-card);border-radius:var(--radius-md);padding:24px 30px;margin:0 0 40px 0;border:1px solid var(--border-color);box-shadow:3px 3px 8px var(--shadow-neu-dark),-3px -3px 8px var(--shadow-neu-light)}
-.lesson-toc h3{font-family:'Playfair Display',serif;font-size:1.1em;color:var(--gold);margin:0 0 14px 0;padding-bottom:10px;border-bottom:1px solid var(--border-color)}
-.lesson-toc ol{margin:0;padding-left:20px;list-style:none;counter-reset:toc-counter}
-.lesson-toc li{counter-increment:toc-counter;margin-bottom:6px;font-size:0.88em}
-.lesson-toc li::before{content:counter(toc-counter) ".";color:var(--gold);font-weight:600;margin-right:8px}
-.lesson-toc a{color:var(--text-secondary);text-decoration:none;transition:color var(--transition-fast)}
-.lesson-toc a:hover{color:var(--gold)}
-
-/* ===== LESSON PREV/NEXT NAVIGATION ===== */
-.lesson-nav{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:50px;padding-top:30px;border-top:2px solid var(--border-color)}
-.lesson-nav-btn{display:flex;flex-direction:column;padding:20px 24px;background:var(--bg-card);border-radius:var(--radius-md);box-shadow:4px 4px 10px var(--shadow-neu-dark),-4px -4px 10px var(--shadow-neu-light);text-decoration:none;color:var(--text);transition:all var(--transition-fast);border:1px solid transparent;cursor:pointer}
-.lesson-nav-btn:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:6px 6px 16px var(--shadow-neu-dark),-6px -6px 16px var(--shadow-neu-light)}
-.lesson-nav-btn.prev{align-items:flex-start}
-.lesson-nav-btn.next{align-items:flex-end;text-align:right}
-.lesson-nav-btn .nav-label{font-size:0.75em;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
-.lesson-nav-btn .nav-title{font-size:0.95em;color:var(--gold);font-weight:600;font-family:'Playfair Display',serif}
-.lesson-nav-btn.disabled{opacity:0.4;pointer-events:none}
-
-/* ===== KEYBOARD SHORTCUT HINT ===== */
-.keyboard-hint{display:flex;align-items:center;justify-content:center;gap:12px;font-size:0.75em;color:var(--text-muted);padding:10px;margin-top:12px}
-.keyboard-hint kbd{display:inline-block;padding:3px 8px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:6px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.95em;box-shadow:1px 1px 2px var(--shadow-neu-dark);color:var(--text-secondary)}
-
-/* ===== INTERACTIVE CONTROL QUESTIONS ===== */
-.question-item{background:var(--bg-card);border-radius:var(--radius-sm);margin-bottom:10px;border:1px solid var(--border-color);overflow:hidden;transition:all var(--transition-fast)}
-.question-item:hover{border-color:rgba(212,175,55,0.3)}
-.question-toggle{display:flex;align-items:center;width:100%;padding:14px 18px;background:none;border:none;color:var(--text);font-size:0.92em;font-family:'Inter',sans-serif;cursor:pointer;text-align:left;gap:12px;transition:all var(--transition-fast)}
-.question-toggle:hover{background:rgba(212,175,55,0.05)}
-.question-toggle .q-num{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border-radius:50%;font-size:0.8em;font-weight:700;flex-shrink:0}
-.question-toggle .q-text{flex:1;line-height:1.5}
-.question-toggle .q-arrow{color:var(--gold);font-size:0.8em;transition:transform var(--transition-fast);flex-shrink:0}
-.question-item.open .q-arrow{transform:rotate(180deg)}
-.question-answer{max-height:0;overflow:hidden;transition:max-height 0.3s ease;padding:0 18px;background:rgba(212,175,55,0.03)}
-.question-item.open .question-answer{max-height:500px;padding:14px 18px}
-.question-answer p{font-size:0.88em;color:var(--text-secondary);line-height:1.7;margin:0}
-
-/* ===== SELF-ASSESSMENT CHECKLIST ===== */
-.self-check{background:var(--bg-card);border-radius:var(--radius-md);padding:30px;margin-top:20px;border:1px solid var(--border-color);box-shadow:4px 4px 10px var(--shadow-neu-dark),-4px -4px 10px var(--shadow-neu-light)}
-.self-check h3{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:16px;font-size:1.15em}
-.self-check-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;transition:background var(--transition-fast);cursor:pointer;margin-bottom:4px}
-.self-check-item:hover{background:rgba(212,175,55,0.05)}
-.self-check-item input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:22px;height:22px;border:2px solid var(--border-color);border-radius:6px;cursor:pointer;flex-shrink:0;position:relative;transition:all var(--transition-fast)}
-.self-check-item input[type="checkbox"]:checked{background:var(--gold);border-color:var(--gold)}
-.self-check-item input[type="checkbox"]:checked::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:0.8em;font-weight:bold}
-.self-check-item label{font-size:0.9em;color:var(--text-secondary);cursor:pointer;line-height:1.5;transition:color var(--transition-fast)}
-.self-check-item input:checked+label{color:var(--gold);text-decoration:line-through;text-decoration-color:rgba(212,175,55,0.4)}
-.self-check-progress{margin-top:14px;padding-top:14px;border-top:1px solid var(--border-color)}
-.self-check-progress-bar{height:6px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden}
-.self-check-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#50fa7b);border-radius:3px;transition:width 0.4s ease;width:0%}
-.self-check-progress-text{font-size:0.75em;color:var(--text-muted);margin-top:6px;text-align:center}
-body.dark-mode .self-check-progress-bar{background:rgba(255,255,255,0.06)}
-
-/* ===== IMPROVED META-INFO CARDS ===== */
-.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:40px}
-.meta-card{text-align:center;padding:16px 12px;background:var(--bg-card);border-radius:var(--radius-sm);box-shadow:3px 3px 8px var(--shadow-neu-dark),-3px -3px 8px var(--shadow-neu-light);border-top:3px solid var(--gold);transition:all var(--transition-fast)}
-.meta-card:hover{transform:translateY(-2px)}
-.meta-card .meta-icon{font-size:1.5em;display:block;margin-bottom:6px}
-.meta-card .meta-label{font-size:0.7em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
-.meta-card .meta-value{font-size:0.88em;color:var(--text);font-weight:600}
-
-/* ===== LESSON NUMBER BADGE ===== */
-.lesson-badge{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border-radius:50%;font-size:1.4em;font-weight:800;font-family:'Playfair Display',serif;margin:0 auto 16px auto;box-shadow:4px 4px 12px rgba(212,175,55,0.3)}
-
-/* ===== RESPONSIVE ADDITIONS ===== */
-@media(max-width:900px){
-    .lesson-nav{grid-template-columns:1fr;gap:12px}
-    .lesson-nav-btn.next{align-items:flex-start;text-align:left}
-    .breadcrumb{font-size:0.75em;padding:10px 14px}
-    .meta-grid{grid-template-columns:repeat(2,1fr);gap:8px}
-    .keyboard-hint{display:none}
-}
-@media(max-width:600px){
-    .meta-grid{grid-template-columns:1fr 1fr;gap:8px}
-    .meta-card{padding:12px 8px}
-    .lesson-toc{padding:18px 20px}
 }
 </style>
 </head>
 <body>
 
-<!-- Skip to Content (Accessibility) -->
-<a href="#mainContent" class="skip-to-content">Asosiy kontentga o'tish</a>
-
 <!-- Reading Progress Bar -->
-<div class="reading-progress" id="readingProgress" role="progressbar" aria-label="O'qish jarayoni"></div>
+<div class="reading-progress" id="readingProgress"></div>
 
 <!-- Mobile Menu Toggle -->
-<button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()" aria-label="Menyu" aria-expanded="false">☰</button>
+<button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">☰</button>
 
 <!-- Sidebar -->
 <nav class="sidebar" id="sidebar" role="navigation" aria-label="Darslar navigatsiyasi">
@@ -626,7 +457,7 @@ body.dark-mode .self-check-progress-bar{background:rgba(255,255,255,0.06)}
     <!-- Search -->
     <div class="sidebar-search">
         <span class="sidebar-search-icon">🔍</span>
-        <input type="text" id="sidebarSearch" placeholder="Darslarni qidirish..." oninput="filterSidebar(this.value)" aria-label="Darslarni qidirish">
+        <input type="text" id="sidebarSearch" placeholder="Darslarni qidirish..." oninput="filterSidebar(this.value)">
     </div>
 
     <!-- Progress -->
@@ -665,9 +496,9 @@ body.dark-mode .self-check-progress-bar{background:rgba(255,255,255,0.06)}
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
 <!-- Back to Top -->
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Yuqoriga qaytish">↑</button>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<main class="main" id="mainContent" role="main">
+<div class="main">
 
 <!-- ===== COVER ===== -->
 <div class="section-block active" id="cover">
@@ -720,33 +551,10 @@ body.dark-mode .self-check-progress-bar{background:rgba(255,255,255,0.06)}
 <div class="section-block" id="t1">
 <div class="container">
 
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">1-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">1</div></div>
 <h1>1-amaliy mashg'ulot</h1>
 <p class="subtitle">Ma'lumotlar bazasi dasturlarini o'rnatish va sozlash (MySQL server, Oracle Server, Microsoft SQL Server)</p>
 <div class="gold-line"></div>
-
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">Boshlang'ich</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">Kompyuter, Internet</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — MBBT tushunchasi</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — MySQL o'rnatish va sozlash</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
-</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -898,30 +706,6 @@ mysql -u root -p
 <div class="luxury-divider"></div>
 <div class="card"><h2><span class="icon">🏆</span>Xulosa</h2><p>Ushbu mashg'ulotda MySQL Server o'rnatish, Workbench bilan ishlash, birinchi baza yaratish, jadval yaratish, ma'lumot kiritish, SELECT, foydalanuvchi yaratish va huquqlar berish o'rganildi.</p></div>
 
-<div class="self-check" data-lesson="t1">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t1-1"><label for="sc-t1-1">MySQL Server ni muvaffaqiyatli o'rnatdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t1-2"><label for="sc-t1-2">MySQL Workbench bilan ulanishni o'rnatdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t1-3"><label for="sc-t1-3">Birinchi ma'lumotlar bazasini yaratdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t1-4"><label for="sc-t1-4">Jadval yaratish va ma'lumot kiritishni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t1-5"><label for="sc-t1-5">Foydalanuvchi yaratish va huquqlar berishni tushundim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev disabled" href="#">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">—</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t2',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">2. MB loyihalash, ER diagramma</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
@@ -929,33 +713,10 @@ mysql -u root -p
 <div class="section-block" id="t2">
 <div class="container">
 
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">2-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">2</div></div>
 <h1>2-amaliy mashg'ulot</h1>
 <p class="subtitle">Ma'lumotlar bazasini loyihalash, mohiyat–aloqa diagrammasini qurish. Relyatsion ma'lumotlar bazasini loyihalash</p>
 <div class="gold-line"></div>
-
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">Boshlang'ich-O'rta</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">MySQL Workbench</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — Mohiyat, atribut, aloqa turlari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Universitet tizimini loyihalash</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
-</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich-O'rta</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1102,31 +863,6 @@ mysql -u root -p
 
 <div class="card"><h2><span class="icon">🏆</span>Xulosa</h2><p>Ushbu mashg'ulotda MB loyihalash, ER diagramma tushunchalari, mohiyat-aloqa-atribut, aloqa turlari (1:1, 1:N, M:N), Primary/Foreign Key, va 6 jadvallik "Universitet" tizimini SQL da yaratish o'rganildi.</p></div>
 
-
-<div class="self-check" data-lesson="t2">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t2-1"><label for="sc-t2-1">Mohiyat, atribut va aloqa tushunchalarini tushundim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t2-2"><label for="sc-t2-2">1:1, 1:N, M:N aloqa turlarini farqlay olaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t2-3"><label for="sc-t2-3">Primary Key va Foreign Key farqini bilaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t2-4"><label for="sc-t2-4">ER diagramma chiza olaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t2-5"><label for="sc-t2-5">Universitet tizimi jadvallarini SQL da yaratdim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t1',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">1. MB dasturlarini o'rnatish</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t3',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">3. SQL — Jadvallar</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
@@ -1134,33 +870,10 @@ mysql -u root -p
 <div class="section-block" id="t3">
 <div class="container">
 
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">3-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">3</div></div>
 <h1>3-amaliy mashg'ulot</h1>
 <p class="subtitle">SQL tilida jadvallar yaratish, o'zgartirish va o'chirish</p>
 <div class="gold-line"></div>
-
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">Boshlang'ich-O'rta</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">MySQL Server, Workbench</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — DDL buyruqlari va ma'lumot turlari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Jadval yaratish, o'zgartirish, o'chirish</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
-</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich-O'rta</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1269,31 +982,6 @@ mysql -u root -p
 <div class="luxury-divider"></div>
 <div class="card"><h2><span class="icon">🏆</span>Xulosa</h2><p>Ushbu mashg'ulotda DDL buyruqlari (CREATE, ALTER, DROP, TRUNCATE, RENAME), ma'lumot turlari (INT, VARCHAR, DECIMAL, DATE, ENUM), cheklovlar (PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, DEFAULT, NOT NULL) va jadval tuzilmasini o'zgartirish o'rganildi.</p></div>
 
-
-<div class="self-check" data-lesson="t3">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t3-1"><label for="sc-t3-1">CREATE TABLE buyrug'ini ishlatdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t3-2"><label for="sc-t3-2">ALTER TABLE bilan jadval tuzilmasini o'zgartirdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t3-3"><label for="sc-t3-3">DROP va TRUNCATE farqini tushundim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t3-4"><label for="sc-t3-4">Ma'lumot turlarini to'g'ri tanlay olaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t3-5"><label for="sc-t3-5">PRIMARY KEY, FOREIGN KEY cheklovlarini qo'ya olaman</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t2',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">2. MB loyihalash, ER diagramma</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t4',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">4. AND, OR, NOR amallar</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
@@ -1301,33 +989,10 @@ mysql -u root -p
 <div class="section-block" id="t4">
 <div class="container">
 
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">4-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">4</div></div>
 <h1>4-amaliy mashg'ulot</h1>
 <p class="subtitle">Ma'lumotlarni tanlash va ular ustida amallar. AND, OR, NOR mantiqiy standart so'zlardan foydalanish</p>
 <div class="gold-line"></div>
-
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">O'rta</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">SQL asoslari (3-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — SELECT va mantiqiy operatorlar</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — AND, OR, NOT bilan so'rovlar</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
-</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1414,31 +1079,6 @@ mysql -u root -p
 <div class="luxury-divider"></div>
 <div class="card"><h2><span class="icon">🏆</span>Xulosa</h2><p>Ushbu mashg'ulotda SELECT operatori, WHERE sharti, AND/OR/NOT mantiqiy operatorlari, qavslar bilan ustuvorlik, BETWEEN, IN, LIKE, IS NULL operatorlari, ORDER BY va LIMIT o'rganildi.</p></div>
 
-
-<div class="self-check" data-lesson="t4">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t4-1"><label for="sc-t4-1">SELECT operatorini tushunarli yoza olaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t4-2"><label for="sc-t4-2">WHERE bilan filtrlashni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t4-3"><label for="sc-t4-3">AND, OR, NOT operatorlarini qo'lladim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t4-4"><label for="sc-t4-4">BETWEEN, IN, LIKE operatorlarini ishlatdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t4-5"><label for="sc-t4-5">ORDER BY va LIMIT bilan saralash va chegaralash</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t3',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">3. SQL — Jadvallar</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t5',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">5. WHERE, saralash</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
@@ -1446,33 +1086,10 @@ mysql -u root -p
 <div class="section-block" id="t5">
 <div class="container">
 
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">5-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">5</div></div>
 <h1>5-amaliy mashg'ulot</h1>
 <p class="subtitle">Ma'lumotlarni saralash. WHERE standart so'zidan foydalanish</p>
 <div class="gold-line"></div>
-
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">O'rta</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">SELECT asoslari (4-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — WHERE va saralash</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Filtrlash va saralash amaliyoti</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
-</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1541,31 +1158,6 @@ mysql -u root -p
 <div class="luxury-divider"></div>
 <div class="card"><h2><span class="icon">🏆</span>Xulosa</h2><p>Ushbu mashg'ulotda SQL bajarilish tartibi, WHERE bilan filtrlash, ORDER BY (ASC/DESC), LIMIT/OFFSET, GROUP BY, HAVING, agregat funksiyalar (COUNT, AVG, SUM, MIN, MAX), va CASE ifodasi o'rganildi.</p></div>
 
-
-<div class="self-check" data-lesson="t5">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t5-1"><label for="sc-t5-1">SQL bajarilish tartibini tushundim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t5-2"><label for="sc-t5-2">WHERE bilan turli filtrlashlarni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t5-3"><label for="sc-t5-3">ORDER BY (ASC/DESC) bilan saralayman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t5-4"><label for="sc-t5-4">LIMIT/OFFSET bilan sahifalashni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t5-5"><label for="sc-t5-5">CASE ifodasi bilan shartli mantiq yozdim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t4',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">4. AND, OR, NOR amallar</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t6',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">6. GROUP BY, ORDER BY, HAVING</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
@@ -1573,33 +1165,10 @@ mysql -u root -p
 <div class="section-block" id="t6">
 <div class="container">
 
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">6-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">6</div></div>
 <h1>6-amaliy mashg'ulot</h1>
 <p class="subtitle">GROUP BY, ORDER BY va HAVING standart so'zlardan foydalanib so'rovlar yaratish</p>
 <div class="gold-line"></div>
-
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">O'rta-Yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">WHERE, SELECT (4-5-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — Guruhlash va saralash</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — GROUP BY, HAVING amaliyoti</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
-</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta-Yuqori</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1659,31 +1228,6 @@ mysql -u root -p
 <div class="luxury-divider"></div>
 <div class="card"><h2><span class="icon">🏆</span>Xulosa</h2><p>Ushbu mashg'ulotda GROUP BY guruhlash, bir nechta ustun bo'yicha GROUP BY, ORDER BY saralash, HAVING guruhlarni filtrlash, WHERE + GROUP BY + HAVING + ORDER BY kombinatsiyasi, WITH ROLLUP, GROUP_CONCAT va murakkab hisobotlar o'rganildi.</p></div>
 
-
-<div class="self-check" data-lesson="t6">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t6-1"><label for="sc-t6-1">GROUP BY bilan guruhlashni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t6-2"><label for="sc-t6-2">HAVING bilan guruhlarni filtrladim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t6-3"><label for="sc-t6-3">WHERE va HAVING farqini tushundim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t6-4"><label for="sc-t6-4">WITH ROLLUP ishlatishni o'rgandim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t6-5"><label for="sc-t6-5">GROUP_CONCAT funksiyasini qo'lladim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t5',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">5. WHERE, saralash</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t7',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">7. UNION, INTERSECT, MINUS</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
@@ -1691,33 +1235,10 @@ mysql -u root -p
 <div class="section-block" id="t7">
 <div class="container">
 
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">7-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">7</div></div>
 <h1>7-amaliy mashg'ulot</h1>
 <p class="subtitle">UNION, INTERSECT va MINUS standart buyruqlardan foydalanish</p>
 <div class="gold-line"></div>
-
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">O'rta-Yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">SELECT, GROUP BY (6-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — To'plam operatsiyalari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — UNION, INTERSECT, MINUS amaliyoti</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
-</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta-Yuqori</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1799,62 +1320,19 @@ mysql -u root -p
 <div class="luxury-divider"></div>
 <div class="card"><h2><span class="icon">🏆</span>Xulosa</h2><p>Ushbu mashg'ulotda UNION va UNION ALL (birlashtirish), INTERSECT (kesishma), EXCEPT/MINUS (ayirma), eski MySQL versiyalari uchun alternativalar (JOIN, IN, EXISTS), CTE va UNION kombinatsiyasi o'rganildi.</p></div>
 
-
-<div class="self-check" data-lesson="t7">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t7-1"><label for="sc-t7-1">UNION va UNION ALL farqini tushundim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t7-2"><label for="sc-t7-2">INTERSECT operatsiyasini bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t7-3"><label for="sc-t7-3">EXCEPT/MINUS ni qo'lladim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t7-4"><label for="sc-t7-4">Eski MySQL uchun alternativalarni bilaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t7-5"><label for="sc-t7-5">CTE va UNION kombinatsiyasini yozdim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t6',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">6. GROUP BY, ORDER BY, HAVING</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t8',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">8. JOIN bilan ishlash</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 <!-- ===== TUTORIAL 8 ===== -->
 <div class="section-block" id="t8">
 <div class="container">
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">8-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">8</div></div>
 <h1>8-amaliy mashg'ulot</h1>
 <p class="subtitle">Bir nechta jadvallarni birlashtirish, «JOIN»lar bilan ishlash</p>
 <div class="gold-line"></div>
 
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">O'rta</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">SELECT, WHERE (4-5-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — JOIN turlari va diagrammalar</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Jadvallarni birlashtirish</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
+<div class="meta-info">
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
+    <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp;
+    <strong>🎯 Daraja:</strong> O'rta
 </div>
 
 <!-- ===== NAZARIY QISM ===== -->
@@ -2630,64 +2108,20 @@ mysql -u root -p
 <li>JOIN so'rovlari natijalarida <code>GROUP BY</code>, <code>ORDER BY</code>, <code>HAVING</code> ishlatish</li>
 </ul>
 </div>
-
-<div class="self-check" data-lesson="t8">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t8-1"><label for="sc-t8-1">INNER JOIN bilan jadvallarni birlashtirdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t8-2"><label for="sc-t8-2">LEFT va RIGHT JOIN farqini tushundim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t8-3"><label for="sc-t8-3">FULL OUTER JOIN simulyatsiyasini bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t8-4"><label for="sc-t8-4">CROSS JOIN bilan Dekart ko'paytmasini yaratdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t8-5"><label for="sc-t8-5">SELF JOIN bilan ierarxik so'rov yozdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t8-6"><label for="sc-t8-6">3+ jadvallik murakkab JOIN so'rovini tuzdim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 6 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t7',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">7. UNION, INTERSECT, MINUS</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t9',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">9. Standart funksiyalar</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
 <!-- ===== TUTORIAL 9 ===== -->
 <div class="section-block" id="t9">
 <div class="container">
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">9-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">9</div></div>
 <h1>9-amaliy mashg'ulot</h1>
 <p class="subtitle">Standart funksiyalardan foydalanib so'rovlar yaratish</p>
 <div class="gold-line"></div>
 
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">O'rta-yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">SELECT, JOIN (8-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — Standart funksiyalar turlari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Satr, son, sana funksiyalari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
+<div class="meta-info">
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
+    <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp;
+    <strong>🎯 Daraja:</strong> O'rta-yuqori
 </div>
 
 <!-- ===== NAZARIY QISM ===== -->
@@ -3476,63 +2910,20 @@ mysql -u root -p
 <li><code>NULL</code> qiymatlarni to'g'ri boshqarish va <strong>xavfsiz so'rovlar</strong> yozish</li>
 </ul>
 </div>
-
-<div class="self-check" data-lesson="t9">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t9-1"><label for="sc-t9-1">Satr funksiyalarini qo'lladim (CONCAT, UPPER, SUBSTRING)</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t9-2"><label for="sc-t9-2">Son funksiyalarini ishlatdim (ROUND, FORMAT)</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t9-3"><label for="sc-t9-3">Sana funksiyalarini bajardim (NOW, DATEDIFF)</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t9-4"><label for="sc-t9-4">IF, CASE WHEN bilan shartli mantiq yozdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t9-5"><label for="sc-t9-5">IFNULL, COALESCE bilan NULL boshqardim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t8',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">8. JOIN bilan ishlash</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t10',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">10. Agregat funksiyalar</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
 <!-- ===== TUTORIAL 10 ===== -->
 <div class="section-block" id="t10">
 <div class="container">
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">10-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">10</div></div>
 <h1>10-amaliy mashg'ulot</h1>
 <p class="subtitle">Agregat funksiyalardan foydalanish</p>
 <div class="gold-line"></div>
 
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">O'rta-yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">GROUP BY, HAVING (6-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — Agregat funksiyalar</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Hisob-kitob va hisobotlar</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
+<div class="meta-info">
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
+    <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp;
+    <strong>🎯 Daraja:</strong> O'rta-yuqori
 </div>
 
 <!-- ===== NAZARIY QISM ===== -->
@@ -4320,63 +3711,20 @@ mysql -u root -p
 <li>Foyda tahlili, ombor holati, yetkazuvchi samaradorligi kabi <strong>real biznes hisobotlar</strong> yaratish</li>
 </ul>
 </div>
-
-<div class="self-check" data-lesson="t10">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t10-1"><label for="sc-t10-1">COUNT, SUM, AVG, MIN, MAX ni mustaqil qo'lladim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t10-2"><label for="sc-t10-2">COUNT(*) va COUNT(DISTINCT) farqini bilaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t10-3"><label for="sc-t10-3">GROUP BY + agregat funksiya kombinatsiyasini tuzdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t10-4"><label for="sc-t10-4">HAVING bilan agregat natijani filtrladim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t10-5"><label for="sc-t10-5">Biznes hisobot (sotuv tahlili) yaratdim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 5 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t9',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">9. Standart funksiyalar</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t11',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">11. Murakkab so'rovlar</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
 <!-- ===== TUTORIAL 11 ===== -->
 <div class="section-block" id="t11">
 <div class="container">
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">11-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">11</div></div>
 <h1>11-amaliy mashg'ulot</h1>
 <p class="subtitle">Murakkab so'rovlar yaratish</p>
 <div class="gold-line"></div>
 
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">Yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">Barcha oldingi mavzular</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — Subquery, CTE, Window funksiyalar</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Murakkab so'rovlar amaliyoti</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
+<div class="meta-info">
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
+    <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp;
+    <strong>🎯 Daraja:</strong> Yuqori
 </div>
 
 <!-- ===== NAZARIY QISM ===== -->
@@ -5191,64 +4539,20 @@ umumiy <span class="sql-keyword">AS</span> (
 <li>Barcha texnikalarni birgalikda ishlatib <strong>murakkab biznes dashboardlar</strong> yaratish</li>
 </ul>
 </div>
-
-<div class="self-check" data-lesson="t11">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t11-1"><label for="sc-t11-1">Ichki so'rov (subquery) yoza olaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t11-2"><label for="sc-t11-2">EXISTS / NOT EXISTS ni qo'lladim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t11-3"><label for="sc-t11-3">CTE (WITH) yordamida murakkab so'rov tuzdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t11-4"><label for="sc-t11-4">Rekursiv CTE bilan ierarxik so'rov yozdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t11-5"><label for="sc-t11-5">ROW_NUMBER, RANK oyna funksiyalarini ishlatdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t11-6"><label for="sc-t11-6">LAG/LEAD bilan qatorlararo taqqoslash bajardim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 6 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t10',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">10. Agregat funksiyalar</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t12',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">12. INDEX yaratish</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
 <!-- ===== TUTORIAL 12 ===== -->
 <div class="section-block" id="t12">
 <div class="container">
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">12-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">12</div></div>
 <h1>12-amaliy mashg'ulot</h1>
 <p class="subtitle">SQL tilida INDEX yaratish</p>
 <div class="gold-line"></div>
 
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">Yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">SELECT, JOIN (8-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — INDEX tuzilmasi va turlari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — INDEX yaratish va optimallashtirish</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
+<div class="meta-info">
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
+    <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp;
+    <strong>🎯 Daraja:</strong> Yuqori
 </div>
 
 <!-- ===== NAZARIY QISM ===== -->
@@ -5986,64 +5290,20 @@ umumiy <span class="sql-keyword">AS</span> (
 <li>Sekin so'rovlarni aniqlash va <strong>INDEX yordamida tezlashtirish</strong></li>
 </ul>
 </div>
-
-<div class="self-check" data-lesson="t12">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t12-1"><label for="sc-t12-1">B-Tree tuzilmasini tushundim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t12-2"><label for="sc-t12-2">Turli INDEX turlari yaratdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t12-3"><label for="sc-t12-3">EXPLAIN bilan so'rov rejasini tahlil qildim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t12-4"><label for="sc-t12-4">Composite INDEX va chap prefiks qoidasini bilaman</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t12-5"><label for="sc-t12-5">FULLTEXT qidiruvni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t12-6"><label for="sc-t12-6">INDEX samaradorligini baholay olaman</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 6 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t11',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">11. Murakkab so'rovlar</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t13',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">13. VIEW yaratish</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
 <!-- ===== TUTORIAL 13 ===== -->
 <div class="section-block" id="t13">
 <div class="container">
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">13-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">13</div></div>
 <h1>13-amaliy mashg'ulot</h1>
 <p class="subtitle">Tasavvur, VIEW yaratish va undan foydalanish</p>
 <div class="gold-line"></div>
 
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">O'rta-yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">SELECT, JOIN (8-dars)</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — VIEW tushunchasi va turlari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — VIEW yaratish va boshqarish</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
+<div class="meta-info">
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
+    <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp;
+    <strong>🎯 Daraja:</strong> O'rta-yuqori
 </div>
 
 <!-- ===== NAZARIY QISM ===== -->
@@ -6789,64 +6049,20 @@ umumiy <span class="sql-keyword">AS</span> (
 <li><strong>Qiyoslash:</strong> VIEW vs TABLE vs CTE farqlari va to'g'ri tanlash</li>
 </ul>
 </div>
-
-<div class="self-check" data-lesson="t13">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t13-1"><label for="sc-t13-1">VIEW tushunchasini tushundim (virtual jadval)</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t13-2"><label for="sc-t13-2">Oddiy va JOIN asosidagi VIEW yaratdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t13-3"><label for="sc-t13-3">Agregat VIEW (hisobot) yaratdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t13-4"><label for="sc-t13-4">Yangilanuvchi VIEW ni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t13-5"><label for="sc-t13-5">WITH CHECK OPTION ni qo'lladim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t13-6"><label for="sc-t13-6">VIEW vs TABLE vs CTE farqini bilaman</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 6 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t12',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">12. INDEX yaratish</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t14',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">14. Funksiya, protsedura, trigger</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
 <!-- ===== TUTORIAL 14 ===== -->
 <div class="section-block" id="t14">
 <div class="container">
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">14-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">14</div></div>
 <h1>14-amaliy mashg'ulot</h1>
 <p class="subtitle">SQLda funksiyalar, protseduralar va triggerlar yaratish</p>
 <div class="gold-line"></div>
 
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">Yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">Barcha SQL asoslari</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — Funksiya, protsedura, trigger</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Yaratish va sinash</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
+<div class="meta-info">
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
+    <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp;
+    <strong>🎯 Daraja:</strong> Yuqori
 </div>
 
 <!-- ===== NAZARIY QISM ===== -->
@@ -7643,64 +6859,21 @@ umumiy <span class="sql-keyword">AS</span> (
 <li><strong>Boshqarish:</strong> SHOW, information_schema, DROP bilan ob'ektlarni ko'rish va o'chirish</li>
 </ul>
 </div>
-
-<div class="self-check" data-lesson="t14">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t14-1"><label for="sc-t14-1">FUNCTION yaratish va chaqirishni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t14-2"><label for="sc-t14-2">PROCEDURE (IN/OUT parametrli) yaratdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t14-3"><label for="sc-t14-3">BEFORE TRIGGER bilan validatsiya yozdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t14-4"><label for="sc-t14-4">AFTER TRIGGER bilan audit jurnalini yaratdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t14-5"><label for="sc-t14-5">SIGNAL SQLSTATE bilan xato xabar berdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t14-6"><label for="sc-t14-6">NEW/OLD qiymatlarni trigger ichida ishlatdim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 6 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t13',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">13. VIEW yaratish</span>
-    </a>
-    <a class="lesson-nav-btn next" href="#" onclick="showSection('t15',event)">
-        <span class="nav-label">Keyingi dars →</span>
-        <span class="nav-title">15. Oddiy interfeys yaratish</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
 <!-- ===== TUTORIAL 15 ===== -->
 <div class="section-block" id="t15">
 <div class="container">
-<div class="breadcrumb" aria-label="Navigatsiya yo'li">
-    <a href="#" onclick="showSection('cover',event)">Bosh sahifa</a>
-    <span class="sep">›</span>
-    <span class="current">15-amaliy mashg'ulot</span>
-</div>
-
-<div style="text-align:center"><div class="lesson-badge">15</div></div>
 <h1>15-amaliy mashg'ulot</h1>
 <p class="subtitle">Dasturlash tillari va ma'lumotlar bazasi yordamida oddiy interfeys yaratish</p>
 <div class="gold-line"></div>
 
-<div class="meta-grid">
-    <div class="meta-card"><span class="meta-icon">📘</span><div class="meta-label">Fan</div><div class="meta-value">Ma'lumotlar bazasi</div></div>
-    <div class="meta-card"><span class="meta-icon">⏱</span><div class="meta-label">Davomiyligi</div><div class="meta-value">80 daqiqa</div></div>
-    <div class="meta-card"><span class="meta-icon">🎯</span><div class="meta-label">Daraja</div><div class="meta-value">Yuqori</div></div>
-    <div class="meta-card"><span class="meta-icon">📋</span><div class="meta-label">Talab</div><div class="meta-value">Python, SQL, HTML/CSS</div></div>
-</div>
-
-<div class="lesson-toc">
-    <h3>📑 Dars rejasi</h3>
-    <ol>
-        <li><a href="#" onclick="event.preventDefault()">Nazariy qism — Web-ilova arxitekturasi</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy qism — Flask + MySQL + CRUD</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Nazorat savollari</a></li>
-        <li><a href="#" onclick="event.preventDefault()">Amaliy topshiriqlar</a></li>
-    </ol>
+<div class="meta-info">
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
+    <strong>⏱ Davomiyligi:</strong> 80 min &nbsp;|&nbsp;
+    <strong>🎯 Daraja:</strong> Yuqori &nbsp;|&nbsp;
+    <strong>🛠 Texnologiyalar:</strong> Python · Flask · MySQL · HTML/CSS
 </div>
 
 <!-- ===== NAZARIY QISM ===== -->
@@ -8584,32 +7757,6 @@ python app.py
 <li><strong>UX elementlar:</strong> Qidiruv, flash xabarlar, o'chirishdan oldin tasdiqlash (confirm)</li>
 </ul>
 </div>
-
-<div class="self-check" data-lesson="t15">
-    <h3>✅ O'z-o'zini baholash</h3>
-    <div class="self-check-item"><input type="checkbox" id="sc-t15-1"><label for="sc-t15-1">3 darajali arxitekturani tushundim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t15-2"><label for="sc-t15-2">Flask ilovasi yaratish va ishga tushirishni bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t15-3"><label for="sc-t15-3">Python dan MySQL ga ulanishni o'rnatdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t15-4"><label for="sc-t15-4">CRUD operatsiyalarini web-interfeys orqali bajardim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t15-5"><label for="sc-t15-5">Jinja2 shablonlar bilan dinamik HTML yaratdim</label></div>
-    <div class="self-check-item"><input type="checkbox" id="sc-t15-6"><label for="sc-t15-6">SQL Injection dan himoyani qo'lladim</label></div>
-    <div class="self-check-progress"><div class="self-check-progress-bar"><div class="self-check-progress-fill"></div></div><div class="self-check-progress-text">0 / 6 bajarildi</div></div>
-</div>
-
-<div class="lesson-nav">
-    <a class="lesson-nav-btn prev" href="#" onclick="showSection('t14',event)">
-        <span class="nav-label">← Oldingi dars</span>
-        <span class="nav-title">14. Funksiya, protsedura, trigger</span>
-    </a>
-    <a class="lesson-nav-btn next disabled" href="#">
-        <span class="nav-label">Yakunlandi!</span>
-        <span class="nav-title">Barcha darslar o'tildi 🎉</span>
-    </a>
-</div>
-<div class="keyboard-hint">
-    <span>Klaviatura: </span><kbd>←</kbd> oldingi dars <kbd>→</kbd> keyingi dars <kbd>Esc</kbd> menyu
-</div>
-
 </div>
 </div>
 
@@ -8627,7 +7774,7 @@ python app.py
 </div>
 </div>
 
-</main><!-- end main -->
+</div><!-- end main -->
 
 <script>
 /* ===== SECTION NAVIGATION ===== */
@@ -8657,7 +7804,6 @@ function toggleSidebar() {
     } else {
         toggle.textContent = '☰';
     }
-    updateMenuAriaState();
 }
 function closeSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -9003,43 +8149,6 @@ function exportToWord() {
     saveAs(converted, 'Malumotlar_bazasi_15_amaliy_mashgulot.docx');
 }
 
-/* ===== SELF-CHECK INTERACTIVITY ===== */
-function initSelfCheck() {
-    document.querySelectorAll('.self-check').forEach(container => {
-        const lesson = container.getAttribute('data-lesson');
-        const checkboxes = container.querySelectorAll('input[type="checkbox"]');
-        const progressFill = container.querySelector('.self-check-progress-fill');
-        const progressText = container.querySelector('.self-check-progress-text');
-        const total = checkboxes.length;
-
-        // Load saved state
-        const saved = JSON.parse(localStorage.getItem('mbb_sc_' + lesson) || '[]');
-        checkboxes.forEach(cb => {
-            if (saved.includes(cb.id)) cb.checked = true;
-        });
-
-        function updateSelfCheckProgress() {
-            const checked = container.querySelectorAll('input:checked').length;
-            if (progressFill) progressFill.style.width = (checked / total * 100) + '%';
-            if (progressText) progressText.textContent = checked + ' / ' + total + ' bajarildi';
-            // Save state
-            const ids = [];
-            container.querySelectorAll('input:checked').forEach(cb => ids.push(cb.id));
-            localStorage.setItem('mbb_sc_' + lesson, JSON.stringify(ids));
-        }
-
-        checkboxes.forEach(cb => cb.addEventListener('change', updateSelfCheckProgress));
-        updateSelfCheckProgress();
-    });
-}
-
-/* ===== ARIA TOGGLE FOR SIDEBAR ===== */
-function updateMenuAriaState() {
-    const toggle = document.getElementById('menuToggle');
-    const isOpen = toggle.classList.contains('is-open');
-    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-}
-
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
@@ -9047,7 +8156,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initCopyButtons();
     updateReadingProgress();
     replaceEmojisWithFluent();
-    initSelfCheck();
 });
 </script>
 </body>
