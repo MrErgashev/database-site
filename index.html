@@ -245,7 +245,8 @@ p{margin:12px 0}
 .result-ok .rok-line .rok-icon{margin-right:6px}
 body.dark-mode .result-ok{background:linear-gradient(135deg,rgba(40,200,64,0.1),rgba(40,200,64,0.04));border-color:rgba(40,200,64,0.25)}
 
-.concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:25px 0}
+.concept-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin:25px 0}
+.concept-grid>.concept-card{flex:0 1 calc(25% - 18px);min-width:200px}
 .concept-card{background:var(--bg-card);border-radius:18px;padding:22px;text-align:center;box-shadow:5px 5px 10px var(--shadow-neu-dark),-5px -5px 10px var(--shadow-neu-light);border-top:4px solid var(--gold);transition:all var(--transition-fast)}
 .concept-card:hover{transform:translateY(-3px);box-shadow:8px 8px 16px var(--shadow-neu-dark),-8px -8px 16px var(--shadow-neu-light)}
 .concept-card h4{font-family:'Playfair Display',serif;font-size:1em;color:var(--gold);margin-bottom:8px}
@@ -319,7 +320,8 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     .card,.card-flat{padding:20px;border-radius:20px;margin:20px 0}
     .cover .stats{gap:15px}
     .cover .stat{padding:14px 18px}
-    .concept-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .concept-grid>.concept-card{flex:0 1 calc(50% - 12px);min-width:0}
+    .concept-grid{gap:12px}
     table{font-size:0.85em}
     thead th{padding:10px 12px;font-size:0.8em}
     tbody td{padding:8px 12px}
@@ -327,7 +329,7 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 @media(max-width:380px){
     h1{font-size:1.4em}
     pre{font-size:0.72em;padding:10px 12px}
-    .concept-grid{grid-template-columns:1fr}
+    .concept-grid>.concept-card{flex:0 1 100%}
     .container{padding:16px 12px}
 }
 
