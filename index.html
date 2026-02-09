@@ -9076,8 +9076,11 @@ function toggleSidebar() {
     toggle.classList.toggle('is-open');
     if (toggle.classList.contains('is-open')) {
         toggle.textContent = '✕';
+        document.body.style.overflow = 'hidden';
     } else {
         toggle.textContent = '☰';
+        document.body.style.overflow = '';
+        clearSidebarSearch();
     }
 }
 function closeSidebar() {
@@ -9088,6 +9091,15 @@ function closeSidebar() {
     overlay.classList.remove('visible');
     toggle.classList.remove('is-open');
     toggle.textContent = '☰';
+    document.body.style.overflow = '';
+    clearSidebarSearch();
+}
+function clearSidebarSearch() {
+    const searchInput = document.getElementById('sidebarSearch');
+    if (searchInput && searchInput.value) {
+        searchInput.value = '';
+        filterSidebar('');
+    }
 }
 
 /* ===== SIDEBAR SEARCH ===== */
@@ -9244,6 +9256,30 @@ document.addEventListener('keydown', function(e) {
         if (adminMode) toggleAdmin();
         else closeSidebar();
     }
+});
+
+/* ===== MOBILE SWIPE TO CLOSE SIDEBAR ===== */
+(function() {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const sidebar = document.getElementById('sidebar');
+    sidebar.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, {passive: true});
+    sidebar.addEventListener('touchend', function(e) {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (dx < -60 && Math.abs(dy) < Math.abs(dx)) {
+            closeSidebar();
+        }
+    }, {passive: true});
+})();
+
+/* ===== OVERLAY TOUCH FIX (iOS) ===== */
+document.getElementById('sidebarOverlay').addEventListener('touchend', function(e) {
+    e.preventDefault();
+    toggleSidebar();
 });
 
 /* ===== SCROLL EVENTS ===== */
