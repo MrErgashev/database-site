@@ -5309,6 +5309,35 @@ umumiy <span class="sql-keyword">AS</span> (
 (<span class="sql-string">'Bulut texnologiyalari va DevOps'</span>, <span class="sql-string">'Bulut texnologiyalari IT infratuzilmasini boshqarishda inqilob yasadi. AWS, Azure va Google Cloud xizmatlari kompaniyalarga moslashuvchan va tejamkor yechimlar taqdim etadi. Docker konteynerlar va Kubernetes orkestratsiyasi zamonaviy dasturiy ta\'minotni joylashtirish standartiga aylandi.'</span>, <span class="sql-string">'Bobur Toshmatov'</span>, <span class="sql-string">'Texnologiya'</span>),
 (<span class="sql-string">'Moliyaviy hisobot tayyorlash'</span>, <span class="sql-string">'Kompaniya moliyaviy hisoboti biznes qarorlar qabul qilishda asosiy ma\'lumot manbai hisoblanadi. Balans hisoboti, foyda va zarar hisoboti hamda pul oqimi hisoboti eng muhim moliyaviy hujjatlardir. ACCA va IFRS standartlari xalqaro miqyosda tan olingan hisobot standartlaridir.'</span>, <span class="sql-string">'Gulnora Azimova'</span>, <span class="sql-string">'Moliya'</span>);</code></pre>
 </div>
+
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE index_db</code></span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE xodimlar</code></span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE buyurtmalar</code></span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE maqolalar</code></span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 10 rows affected (0.01 sec) — <code>INSERT INTO xodimlar</code></span>
+<span class="rok-line">Records: 10 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 20 rows affected (0.01 sec) — <code>INSERT INTO buyurtmalar</code></span>
+<span class="rok-line">Records: 20 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 5 rows affected (0.01 sec) — <code>INSERT INTO maqolalar</code></span>
+<span class="rok-line">Records: 5 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+
 </div>
 
 <div class="luxury-divider"></div>
@@ -5356,6 +5385,44 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-comment">-- Xodimlar izohiga ham FULLTEXT</span>
 <span class="sql-keyword">ALTER TABLE</span> xodimlar <span class="sql-keyword">ADD FULLTEXT INDEX</span> <span class="sql-index">idx_xodimlar_izoh</span> (izoh);</code></pre>
 </div>
+
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE INDEX idx_xodimlar_bolim</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>ALTER TABLE ADD INDEX idx_xodimlar_shahar</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE UNIQUE INDEX idx_xodimlar_email</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE UNIQUE INDEX idx_xodimlar_telefon</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE INDEX idx_xodimlar_bolim_maosh</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE INDEX idx_buyurt_sana_holat</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>CREATE INDEX idx_buyurt_xodim_kat</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE FULLTEXT INDEX idx_maqola_matn</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>ALTER TABLE ADD FULLTEXT INDEX idx_xodimlar_izoh</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+
 </div>
 
 <div class="luxury-divider"></div>
@@ -5407,6 +5474,40 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-comment">-- DROP INDEX idx_nomi ON jadval_nomi;</span>
 <span class="sql-comment">-- ALTER TABLE jadval_nomi DROP INDEX idx_nomi;</span></code></pre>
 </div>
+
+<span class="result-label">📋 Natija — SHOW INDEX FROM buyurtmalar</span>
+<table>
+<thead><tr><th>Key_name</th><th>Column_name</th><th>Non_unique</th><th>Index_type</th></tr></thead>
+<tbody>
+<tr><td>PRIMARY</td><td>id</td><td>0</td><td>BTREE</td></tr>
+<tr><td>xodim_id</td><td>xodim_id</td><td>1</td><td>BTREE</td></tr>
+<tr><td>idx_buyurt_sana_holat</td><td>buyurtma_sana</td><td>1</td><td>BTREE</td></tr>
+<tr><td>idx_buyurt_sana_holat</td><td>holat</td><td>1</td><td>BTREE</td></tr>
+<tr><td>idx_buyurt_xodim_kat</td><td>xodim_id</td><td>1</td><td>BTREE</td></tr>
+<tr><td>idx_buyurt_xodim_kat</td><td>kategoriya</td><td>1</td><td>BTREE</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — SHOW INDEX FROM maqolalar</span>
+<table>
+<thead><tr><th>Key_name</th><th>Column_name</th><th>Non_unique</th><th>Index_type</th></tr></thead>
+<tbody>
+<tr><td>PRIMARY</td><td>id</td><td>0</td><td>BTREE</td></tr>
+<tr><td>idx_maqola_matn</td><td>sarlavha</td><td>1</td><td>FULLTEXT</td></tr>
+<tr><td>idx_maqola_matn</td><td>matn</td><td>1</td><td>FULLTEXT</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — Jadval hajmi va indekslar hajmi</span>
+<table>
+<thead><tr><th>jadval</th><th>data_KB</th><th>index_KB</th><th>jami_KB</th><th>qatorlar</th></tr></thead>
+<tbody>
+<tr><td>buyurtmalar</td><td>16.0</td><td>48.0</td><td>64.0</td><td>20</td></tr>
+<tr><td>maqolalar</td><td>16.0</td><td>32.0</td><td>48.0</td><td>5</td></tr>
+<tr><td>xodimlar</td><td>16.0</td><td>80.0</td><td>96.0</td><td>10</td></tr>
+</tbody>
+</table>
+
 </div>
 
 <div class="luxury-divider"></div>
@@ -5474,6 +5575,23 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">WHERE</span> b.kategoriya = <span class="sql-string">'Elektronika'</span>;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija — EXPLAIN 4: Composite INDEX (bolim + maosh)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>xodimlar</td><td><strong style="color:green;">range</strong></td><td>idx_xodimlar_bolim,idx_xodimlar_bolim_maosh</td><td>idx_xodimlar_bolim_maosh</td><td>2</td><td>Using index condition</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN 5: JOIN so'rovda INDEX</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>b</td><td><strong style="color:green;">ref</strong></td><td>xodim_id,idx_buyurt_xodim_kat</td><td>idx_buyurt_xodim_kat</td><td>5</td><td>Using where</td></tr>
+<tr><td>1</td><td>SIMPLE</td><td>x</td><td><strong style="color:green;">eq_ref</strong></td><td>PRIMARY</td><td>PRIMARY</td><td>1</td><td>NULL</td></tr>
+</tbody>
+</table>
+
 <div class="card-flat" style="margin-top: 25px;">
 <h3>📊 EXPLAIN type qiymatlari (yaxshidan yomonga)</h3>
 <div class="perf-bar"><span class="perf-bar-label"><code>system / const</code></span><div class="perf-bar-track"><div class="perf-bar-fill fill-fast" style="width:100%">Eng tez — 1 ta qator</div></div></div>
@@ -5522,6 +5640,51 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">WHERE</span> holat = <span class="sql-string">'yetkazildi'</span>;</code></pre>
 </div>
 
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE INDEX idx_buyurt_shahar_kat_holat</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+
+<span class="result-label">📋 Natija — EXPLAIN: shahar (chap prefiks ishlaydi)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>buyurtmalar</td><td><strong style="color:green;">ref</strong></td><td>idx_buyurt_shahar_kat_holat</td><td>idx_buyurt_shahar_kat_holat</td><td>10</td><td>Using index condition</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: shahar + kategoriya (ishlaydi)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>buyurtmalar</td><td><strong style="color:green;">ref</strong></td><td>idx_buyurt_shahar_kat_holat</td><td>idx_buyurt_shahar_kat_holat</td><td>4</td><td>Using index condition</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: shahar + kategoriya + holat (to'liq ishlaydi)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>buyurtmalar</td><td><strong style="color:green;">ref</strong></td><td>idx_buyurt_shahar_kat_holat</td><td>idx_buyurt_shahar_kat_holat</td><td>2</td><td>Using index condition</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: faqat kategoriya (INDEX ishlamaydi!)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>buyurtmalar</td><td><strong style="color:red;">ALL</strong></td><td>NULL</td><td>NULL</td><td>20</td><td>Using where</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: faqat holat (INDEX ishlamaydi!)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>buyurtmalar</td><td><strong style="color:red;">ALL</strong></td><td>NULL</td><td>NULL</td><td>20</td><td>Using where</td></tr>
+</tbody>
+</table>
+
 <div class="tip-box">
 <p><strong>💡 Amaliy maslahat:</strong> Composite indeks yaratishda ustunlarni <strong>selektivlik bo'yicha</strong> (yuqoridan pastga) tartiblang. Eng ko'p unikal qiymatli ustun birinchi bo'lsin.</p>
 </div>
@@ -5544,6 +5707,15 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">ORDER BY</span> relevantlik <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
 
+<span class="result-label">📋 Natija — FULLTEXT qidirish: 'dasturlash Python'</span>
+<table>
+<thead><tr><th>sarlavha</th><th>muallif</th><th>kategoriya</th><th>relevantlik</th></tr></thead>
+<tbody>
+<tr><td>Python dasturlash asoslari</td><td>Dilnoza Rahimova</td><td>Texnologiya</td><td>1.5271453857</td></tr>
+<tr><td>MySQL indekslar bo'yicha qo'llanma</td><td>Alisher Karimov</td><td>Texnologiya</td><td>0.0906190574</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — FULLTEXT INDEX</div></div>
 <pre><code><span class="sql-comment">-- 2. BOOLEAN MODE — aniq qidirish</span>
@@ -5557,6 +5729,14 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-comment">-- * : so'z boshi bo'yicha qidirish</span></code></pre>
 </div>
 
+<span class="result-label">📋 Natija — BOOLEAN MODE: '+marketing -moliya'</span>
+<table>
+<thead><tr><th>sarlavha</th><th>muallif</th></tr></thead>
+<tbody>
+<tr><td>Raqamli marketing strategiyalari</td><td>Nodira Yusupova</td></tr>
+</tbody>
+</table>
+
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — FULLTEXT INDEX</div></div>
 <pre><code><span class="sql-comment">-- 3. Xodimlar izohidan qidirish</span>
@@ -5569,6 +5749,19 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">WHERE</span> <span class="sql-function">MATCH</span>(izoh) <span class="sql-function">AGAINST</span>(<span class="sql-string">'sertifikat tajriba'</span>)
 <span class="sql-keyword">ORDER BY</span> ball <span class="sql-keyword">DESC</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — Xodimlar izohidan qidirish: 'sertifikat tajriba'</span>
+<table>
+<thead><tr><th>xodim</th><th>lavozim</th><th>izoh_qisqa</th><th>ball</th></tr></thead>
+<tbody>
+<tr><td>Gulnora Azimova</td><td>Bosh hisobchi</td><td>ACCA sertifikati va 10 yillik buxgalteriya tajribasi</td><td>1.43</td></tr>
+<tr><td>Bobur Toshmatov</td><td>DevOps muhandis</td><td>AWS bulut xizmatlari va Docker konteynerlash bo'yicha se...</td><td>0.36</td></tr>
+<tr><td>Alisher Karimov</td><td>Senior dasturchi</td><td>Python va Java dasturlash bo'yicha katta tajribaga ega m...</td><td>0.18</td></tr>
+<tr><td>Nodira Yusupova</td><td>Marketing menejer</td><td>Raqamli marketing strategiyasi va SMM bo'yicha tajribali...</td><td>0.18</td></tr>
+<tr><td>Kamola Umarova</td><td>Sotuv boshlig'i</td><td>B2B sotuv strategiyasi va mijozlar bilan munosabatlarni ...</td><td>0.18</td></tr>
+<tr><td>Jasur Ergashev</td><td>Sotuv menejeri</td><td>Korporativ mijozlar bilan ishlash bo'yicha mutaxassis</td><td>0.00</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — FULLTEXT INDEX</div></div>
@@ -5586,6 +5779,25 @@ umumiy <span class="sql-keyword">AS</span> (
     <span class="sql-string">'dastur*'</span> <span class="sql-keyword">IN BOOLEAN MODE</span>
 );</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — BOOLEAN MODE: '+texnologiya +bulut -marketing'</span>
+<table>
+<thead><tr><th>sarlavha</th><th>muallif</th></tr></thead>
+<tbody>
+<tr><td>Bulut texnologiyalari va DevOps</td><td>Bobur Toshmatov</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — BOOLEAN MODE: 'dastur*' (so'z boshi)</span>
+<table>
+<thead><tr><th>sarlavha</th><th>muallif</th></tr></thead>
+<tbody>
+<tr><td>Python dasturlash asoslari</td><td>Dilnoza Rahimova</td></tr>
+<tr><td>MySQL indekslar bo'yicha qo'llanma</td><td>Alisher Karimov</td></tr>
+<tr><td>Bulut texnologiyalari va DevOps</td><td>Bobur Toshmatov</td></tr>
+</tbody>
+</table>
+
 </div>
 
 <div class="luxury-divider"></div>
@@ -5607,6 +5819,19 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">GROUP BY</span> kategoriya;
 <span class="sql-comment">-- Extra: Using index (Covering Index!)</span></code></pre>
 </div>
+
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE INDEX idx_buyurt_covering</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+
+<span class="result-label">📋 Natija — EXPLAIN: Covering Index (Using index!)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>buyurtmalar</td><td><strong style="color:green;">ref</strong></td><td>idx_buyurt_xodim_kat,idx_buyurt_covering</td><td>idx_buyurt_covering</td><td>7</td><td><strong style="color:green;">Using index</strong></td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — INDEX optimallash</div></div>
@@ -5636,6 +5861,54 @@ umumiy <span class="sql-keyword">AS</span> (
 <span class="sql-keyword">EXPLAIN SELECT</span> * <span class="sql-keyword">FROM</span> xodimlar
 <span class="sql-keyword">WHERE</span> telefon = <span class="sql-string">'+998901234567'</span>;  <span class="sql-comment">-- satr</span></code></pre>
 </div>
+
+<span class="result-label">📋 Natija — EXPLAIN: YEAR(ishga_kirgan) = 2020 (INDEX ishlamaydi)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>xodimlar</td><td><strong style="color:red;">ALL</strong></td><td>NULL</td><td>NULL</td><td>10</td><td>Using where</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: BETWEEN diapazon (to'g'ri usul)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>xodimlar</td><td><strong style="color:red;">ALL</strong></td><td>NULL</td><td>NULL</td><td>10</td><td>Using where</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: LIKE '%ov' (INDEX ishlamaydi)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>xodimlar</td><td><strong style="color:red;">ALL</strong></td><td>NULL</td><td>NULL</td><td>10</td><td>Using where</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: LIKE 'Kar%' (INDEX ishlaydi)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>xodimlar</td><td><strong style="color:red;">ALL</strong></td><td>NULL</td><td>NULL</td><td>10</td><td>Using where</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: telefon = 998901234567 (tip konversiya, INDEX ishlamaydi)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>xodimlar</td><td><strong style="color:red;">ALL</strong></td><td>idx_xodimlar_telefon</td><td>NULL</td><td>10</td><td>Using where</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXPLAIN: telefon = '+998901234567' (to'g'ri tip, INDEX ishlaydi)</span>
+<table>
+<thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>possible_keys</th><th>key</th><th>rows</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SIMPLE</td><td>xodimlar</td><td><strong style="color:green;">const</strong></td><td>idx_xodimlar_telefon</td><td>idx_xodimlar_telefon</td><td>1</td><td>NULL</td></tr>
+</tbody>
+</table>
 
 <div class="mac-window">
 <div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — INDEX optimallash</div></div>
@@ -7558,6 +7831,14 @@ mkdir static</code></pre>
 (<span class="sql-string">'Gulnora'</span>,  <span class="sql-string">'Azimova'</span>,   <span class="sql-string">'gulnora@kompaniya.uz'</span>,  <span class="sql-string">'+998977778899'</span>, <span class="sql-string">'Moliya'</span>,    <span class="sql-string">'Bosh hisobchi'</span>,     <span class="sql-number">11000000</span>, <span class="sql-string">'2019-09-01'</span>),
 (<span class="sql-string">'Kamola'</span>,   <span class="sql-string">'Umarova'</span>,   <span class="sql-string">'kamola@kompaniya.uz'</span>,   <span class="sql-string">'+998903334455'</span>, <span class="sql-string">'Sotuv'</span>,     <span class="sql-string">'Sotuv boshlig\'i'</span>,  <span class="sql-number">13000000</span>, <span class="sql-string">'2019-08-22'</span>),
 (<span class="sql-string">'Jasur'</span>,    <span class="sql-string">'Ergashev'</span>,  <span class="sql-string">'jasur@kompaniya.uz'</span>,    <span class="sql-string">'+998911122233'</span>, <span class="sql-string">'Sotuv'</span>,     <span class="sql-string">'Sotuv menejeri'</span>,    <span class="sql-number">8000000</span>,  <span class="sql-string">'2022-01-15'</span>);</code></pre>
+</div>
+
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE xodimlar_db</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 5 rows affected (0.01 sec) — <code>INSERT INTO</code></span>
+<span class="rok-line"><span class="rok-icon">📋</span>Records: 5 &nbsp; Duplicates: 0 &nbsp; Warnings: 0</span>
 </div>
 </div>
 
