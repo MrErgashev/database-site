@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ma'lumotlar bazasini boshqarish — 15 ta amaliy mashg'ulot</title>
+<title>Ma'lumotlar bazasi — 15 ta amaliy mashg'ulot</title>
 <!-- Word eksport kutubxonalari -->
 <script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
@@ -426,7 +426,7 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 
 <!-- Sidebar -->
 <nav class="sidebar" id="sidebar">
-    <div class="logo">📘 Ma'lumotlar bazasini boshqarish<small>15 ta amaliy mashg'ulot</small></div>
+    <div class="logo">📘 Ma'lumotlar bazasi<small>15 ta amaliy mashg'ulot</small></div>
 
     <!-- Search -->
     <div class="sidebar-search">
@@ -441,21 +441,21 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     </div>
 
     <a href="#" onclick="showSection('cover',event)" class="active" data-section="cover"><span class="num">⭐</span>Bosh sahifa<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t1',event)" data-section="t1"><span class="num">1</span>MySQL o'rnatish<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t2',event)" data-section="t2"><span class="num">2</span>ER diagramma<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t3',event)" data-section="t3"><span class="num">3</span>DDL — Jadvallar<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t4',event)" data-section="t4"><span class="num">4</span>SELECT, AND, OR, NOT<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t5',event)" data-section="t5"><span class="num">5</span>WHERE, ORDER BY<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t6',event)" data-section="t6"><span class="num">6</span>GROUP BY, HAVING<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t7',event)" data-section="t7"><span class="num">7</span>UNION, INTERSECT<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t8',event)" data-section="t8"><span class="num">8</span>JOIN operatorlari<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t1',event)" data-section="t1"><span class="num">1</span>MB dasturlarini o'rnatish<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t2',event)" data-section="t2"><span class="num">2</span>MB loyihalash, ER diagramma<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t3',event)" data-section="t3"><span class="num">3</span>SQL — Jadvallar<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t4',event)" data-section="t4"><span class="num">4</span>AND, OR, NOR amallar<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t5',event)" data-section="t5"><span class="num">5</span>WHERE, saralash<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t6',event)" data-section="t6"><span class="num">6</span>GROUP BY, ORDER BY, HAVING<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t7',event)" data-section="t7"><span class="num">7</span>UNION, INTERSECT, MINUS<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t8',event)" data-section="t8"><span class="num">8</span>JOIN bilan ishlash<span class="check-badge">✓</span></a>
     <a href="#" onclick="showSection('t9',event)" data-section="t9"><span class="num">9</span>Standart funksiyalar<span class="check-badge">✓</span></a>
     <a href="#" onclick="showSection('t10',event)" data-section="t10"><span class="num">10</span>Agregat funksiyalar<span class="check-badge">✓</span></a>
     <a href="#" onclick="showSection('t11',event)" data-section="t11"><span class="num">11</span>Murakkab so'rovlar<span class="check-badge">✓</span></a>
     <a href="#" onclick="showSection('t12',event)" data-section="t12"><span class="num">12</span>INDEX yaratish<span class="check-badge">✓</span></a>
     <a href="#" onclick="showSection('t13',event)" data-section="t13"><span class="num">13</span>VIEW yaratish<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t14',event)" data-section="t14"><span class="num">14</span>FUNCTION, PROCEDURE, TRIGGER<span class="check-badge">✓</span></a>
-    <a href="#" onclick="showSection('t15',event)" data-section="t15"><span class="num">15</span>Web interfeys (Flask)<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t14',event)" data-section="t14"><span class="num">14</span>Funksiya, protsedura, trigger<span class="check-badge">✓</span></a>
+    <a href="#" onclick="showSection('t15',event)" data-section="t15"><span class="num">15</span>Oddiy interfeys yaratish<span class="check-badge">✓</span></a>
     <a href="#" onclick="showSection('backpage',event)" data-section="backpage" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:8px;padding-top:12px"><span class="num">📄</span>Orqa muqova</a>
 
     <!-- Dark Mode Toggle -->
@@ -479,9 +479,9 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 <div class="cover" style="padding:40px 20px">
     <!-- Kitob muqovasi rasmi -->
     <div style="text-align:center;margin-bottom:30px">
-        <img src="cover.png" alt="Ma'lumotlar bazasini boshqarish — M.U.Ergashev" style="max-width:420px;width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.15),0 8px 20px rgba(0,0,0,0.1);transition:transform 0.3s ease" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+        <img src="cover.png" alt="Ma'lumotlar bazasi — M.U.Ergashev" style="max-width:420px;width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.15),0 8px 20px rgba(0,0,0,0.1);transition:transform 0.3s ease" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
     </div>
-    <h1 style="font-size:2.2em;border:none;margin-bottom:5px">Ma'lumotlar bazasini boshqarish</h1>
+    <h1 style="font-size:2.2em;border:none;margin-bottom:5px">Ma'lumotlar bazasi</h1>
     <p class="sub">Amaliy mashg'ulotlar to'plami — 15 ta dars</p>
     <div class="gold-line"></div>
     <div class="stats">
@@ -500,21 +500,21 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 <table>
 <thead><tr><th>#</th><th>Mavzu</th><th>Asosiy tushunchalar</th></tr></thead>
 <tbody>
-<tr><td><strong>1</strong></td><td>MySQL o'rnatish va sozlash</td><td>MySQL Server, Workbench, root, database yaratish</td></tr>
-<tr><td><strong>2</strong></td><td>MB loyihalash, ER diagramma</td><td>Mohiyat, aloqa (1:1, 1:N, M:N), Primary/Foreign Key</td></tr>
-<tr><td><strong>3</strong></td><td>DDL — Jadvallar bilan ishlash</td><td>CREATE, ALTER, DROP, RENAME, TRUNCATE, ma'lumot turlari</td></tr>
-<tr><td><strong>4</strong></td><td>SELECT va mantiqiy operatorlar</td><td>SELECT, WHERE, AND, OR, NOT, BETWEEN, IN, LIKE</td></tr>
-<tr><td><strong>5</strong></td><td>Ma'lumotlarni saralash, WHERE</td><td>ORDER BY, LIMIT, OFFSET, GROUP BY, HAVING</td></tr>
-<tr><td><strong>6</strong></td><td>GROUP BY, ORDER BY, HAVING</td><td>Agregat funksiyalar, WITH ROLLUP, GROUP_CONCAT</td></tr>
-<tr><td><strong>7</strong></td><td>UNION, INTERSECT, EXCEPT</td><td>To'plam operatorlari, UNION ALL, alternativlar</td></tr>
-<tr><td><strong>8</strong></td><td>JOIN operatorlari</td><td>INNER, LEFT, RIGHT, FULL, CROSS, SELF JOIN</td></tr>
-<tr><td><strong>9</strong></td><td>Standart funksiyalar</td><td>String, son, sana, CASE, IF, COALESCE</td></tr>
-<tr><td><strong>10</strong></td><td>Agregat funksiyalar</td><td>COUNT, SUM, AVG, MIN, MAX, STD, VARIANCE</td></tr>
-<tr><td><strong>11</strong></td><td>Murakkab so'rovlar</td><td>Subquery, CTE, Window functions, Recursive</td></tr>
-<tr><td><strong>12</strong></td><td>INDEX yaratish</td><td>B-Tree, UNIQUE, COMPOSITE, FULLTEXT, EXPLAIN</td></tr>
-<tr><td><strong>13</strong></td><td>VIEW yaratish</td><td>Virtual jadval, Updatable VIEW, WITH CHECK OPTION</td></tr>
-<tr><td><strong>14</strong></td><td>FUNCTION, PROCEDURE, TRIGGER</td><td>DELIMITER, RETURN, IN/OUT, BEFORE/AFTER, SIGNAL</td></tr>
-<tr><td><strong>15</strong></td><td>Web interfeys (Python + Flask)</td><td>CRUD, Jinja2, HTML formalar, mysql-connector</td></tr>
+<tr><td><strong>1</strong></td><td>MB dasturlarini o'rnatish va sozlash</td><td>MySQL Server, Oracle Server, Microsoft SQL Server</td></tr>
+<tr><td><strong>2</strong></td><td>MB loyihalash, mohiyat–aloqa diagrammasi</td><td>Mohiyat, aloqa (1:1, 1:N, M:N), Relyatsion MB, Primary/Foreign Key</td></tr>
+<tr><td><strong>3</strong></td><td>SQL tilida jadvallar yaratish, o'zgartirish va o'chirish</td><td>CREATE, ALTER, DROP, RENAME, TRUNCATE, ma'lumot turlari</td></tr>
+<tr><td><strong>4</strong></td><td>Ma'lumotlarni tanlash. AND, OR, NOR</td><td>SELECT, WHERE, AND, OR, NOR, BETWEEN, IN, LIKE</td></tr>
+<tr><td><strong>5</strong></td><td>Ma'lumotlarni saralash. WHERE</td><td>ORDER BY, LIMIT, OFFSET, WHERE</td></tr>
+<tr><td><strong>6</strong></td><td>GROUP BY, ORDER BY va HAVING bilan so'rovlar</td><td>Agregat funksiyalar, WITH ROLLUP, GROUP_CONCAT</td></tr>
+<tr><td><strong>7</strong></td><td>UNION, INTERSECT va MINUS buyruqlari</td><td>To'plam operatorlari, UNION ALL, MINUS</td></tr>
+<tr><td><strong>8</strong></td><td>Jadvallarni birlashtirish, «JOIN»lar</td><td>INNER, LEFT, RIGHT, FULL, CROSS, SELF JOIN</td></tr>
+<tr><td><strong>9</strong></td><td>Standart funksiyalar bilan so'rovlar</td><td>String, son, sana, CASE, IF, COALESCE</td></tr>
+<tr><td><strong>10</strong></td><td>Agregat funksiyalardan foydalanish</td><td>COUNT, SUM, AVG, MIN, MAX, STD, VARIANCE</td></tr>
+<tr><td><strong>11</strong></td><td>Murakkab so'rovlar yaratish</td><td>Subquery, CTE, Window functions, Recursive</td></tr>
+<tr><td><strong>12</strong></td><td>SQL tilida INDEX yaratish</td><td>B-Tree, UNIQUE, COMPOSITE, FULLTEXT, EXPLAIN</td></tr>
+<tr><td><strong>13</strong></td><td>Tasavvur, VIEW yaratish va foydalanish</td><td>Virtual jadval, Updatable VIEW, WITH CHECK OPTION</td></tr>
+<tr><td><strong>14</strong></td><td>SQLda funksiyalar, protseduralar va triggerlar</td><td>DELIMITER, RETURN, IN/OUT, BEFORE/AFTER, SIGNAL</td></tr>
+<tr><td><strong>15</strong></td><td>Oddiy interfeys yaratish</td><td>Dasturlash tillari, MB, CRUD, HTML formalar</td></tr>
 </tbody>
 </table>
 </div>
@@ -526,13 +526,13 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 <div class="container">
 
 <h1>1-amaliy mashg'ulot</h1>
-<p class="subtitle">MySQL o'rnatish va sozlash</p>
+<p class="subtitle">Ma'lumotlar bazasi dasturlarini o'rnatish va sozlash (MySQL server, Oracle Server, Microsoft SQL Server)</p>
 <div class="gold-line"></div>
-<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
-<h3><span class="icon">🗄</span>Ma'lumotlar bazasini boshqarish tizimi (MBBT) nima?</h3>
+<h3><span class="icon">🗄</span>Ma'lumotlar bazasi tizimi (MBBT) nima?</h3>
 <p>MBBT (Database Management System — DBMS) — ma'lumotlarni tashkil etish, saqlash, boshqarish va ulardan foydalanish imkonini beruvchi dasturiy ta'minot majmuasidir. U ma'lumotlarni yaratish, o'qish, yangilash va o'chirish (CRUD) amallarini bajaradi.</p>
 <div class="concept-grid">
 <div class="concept-card"><span class="big-icon">🐬</span><h4>MySQL</h4><p>Bepul, ochiq kodli, eng mashhur relyatsion MBBT</p></div>
@@ -679,9 +679,9 @@ mysql -u root -p
 <div class="container">
 
 <h1>2-amaliy mashg'ulot</h1>
-<p class="subtitle">Ma'lumotlar bazasini loyihalash va ER diagramma</p>
+<p class="subtitle">Ma'lumotlar bazasini loyihalash, mohiyat–aloqa diagrammasini qurish. Relyatsion ma'lumotlar bazasini loyihalash</p>
 <div class="gold-line"></div>
-<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich-O'rta</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich-O'rta</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -830,9 +830,9 @@ mysql -u root -p
 <div class="container">
 
 <h1>3-amaliy mashg'ulot</h1>
-<p class="subtitle">SQL DDL — Jadvallar yaratish, o'zgartirish va o'chirish</p>
+<p class="subtitle">SQL tilida jadvallar yaratish, o'zgartirish va o'chirish</p>
 <div class="gold-line"></div>
-<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich-O'rta</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> Boshlang'ich-O'rta</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -940,9 +940,9 @@ mysql -u root -p
 <div class="container">
 
 <h1>4-amaliy mashg'ulot</h1>
-<p class="subtitle">SELECT va mantiqiy operatorlar (AND, OR, NOT)</p>
+<p class="subtitle">Ma'lumotlarni tanlash va ular ustida amallar. AND, OR, NOR mantiqiy standart so'zlardan foydalanish</p>
 <div class="gold-line"></div>
-<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1030,7 +1030,7 @@ mysql -u root -p
 <h1>5-amaliy mashg'ulot</h1>
 <p class="subtitle">Ma'lumotlarni saralash. WHERE standart so'zidan foydalanish</p>
 <div class="gold-line"></div>
-<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1101,9 +1101,9 @@ mysql -u root -p
 <div class="container">
 
 <h1>6-amaliy mashg'ulot</h1>
-<p class="subtitle">GROUP BY, ORDER BY va HAVING standart so'zlardan foydalanish</p>
+<p class="subtitle">GROUP BY, ORDER BY va HAVING standart so'zlardan foydalanib so'rovlar yaratish</p>
 <div class="gold-line"></div>
-<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta-Yuqori</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta-Yuqori</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1165,9 +1165,9 @@ mysql -u root -p
 <div class="container">
 
 <h1>7-amaliy mashg'ulot</h1>
-<p class="subtitle">UNION, INTERSECT va EXCEPT operatorlari</p>
+<p class="subtitle">UNION, INTERSECT va MINUS standart buyruqlardan foydalanish</p>
 <div class="gold-line"></div>
-<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta-Yuqori</div>
+<div class="meta-info"><strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp; <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp; <strong>🎯 Daraja:</strong> O'rta-Yuqori</div>
 
 <h2><span class="icon">📖</span>Nazariy qism</h2>
 <div class="card">
@@ -1249,11 +1249,11 @@ mysql -u root -p
 <div class="section-block" id="t8">
 <div class="container">
 <h1>8-amaliy mashg'ulot</h1>
-<p class="subtitle">Bir nechta jadvallarni birlashtirish — JOIN operatorlari</p>
+<p class="subtitle">Bir nechta jadvallarni birlashtirish, «JOIN»lar bilan ishlash</p>
 <div class="gold-line"></div>
 
 <div class="meta-info">
-    <strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp;
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
     <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp;
     <strong>🎯 Daraja:</strong> O'rta
 </div>
@@ -1982,7 +1982,7 @@ mysql -u root -p
 <div class="gold-line"></div>
 
 <div class="meta-info">
-    <strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp;
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
     <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp;
     <strong>🎯 Daraja:</strong> O'rta-yuqori
 </div>
@@ -2703,7 +2703,7 @@ mysql -u root -p
 <div class="gold-line"></div>
 
 <div class="meta-info">
-    <strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp;
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
     <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp;
     <strong>🎯 Daraja:</strong> O'rta-yuqori
 </div>
@@ -3426,7 +3426,7 @@ mysql -u root -p
 <div class="gold-line"></div>
 
 <div class="meta-info">
-    <strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp;
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
     <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp;
     <strong>🎯 Daraja:</strong> Yuqori
 </div>
@@ -4188,7 +4188,7 @@ umumiy <span class="sql-keyword">AS</span> (
 <div class="gold-line"></div>
 
 <div class="meta-info">
-    <strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp;
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
     <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp;
     <strong>🎯 Daraja:</strong> Yuqori
 </div>
@@ -4878,11 +4878,11 @@ umumiy <span class="sql-keyword">AS</span> (
 <div class="section-block" id="t13">
 <div class="container">
 <h1>13-amaliy mashg'ulot</h1>
-<p class="subtitle">VIEW yaratish va undan foydalanish</p>
+<p class="subtitle">Tasavvur, VIEW yaratish va undan foydalanish</p>
 <div class="gold-line"></div>
 
 <div class="meta-info">
-    <strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp;
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
     <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp;
     <strong>🎯 Daraja:</strong> O'rta-yuqori
 </div>
@@ -5574,11 +5574,11 @@ umumiy <span class="sql-keyword">AS</span> (
 <div class="section-block" id="t14">
 <div class="container">
 <h1>14-amaliy mashg'ulot</h1>
-<p class="subtitle">Funksiyalar, protseduralar va triggerlar yaratish</p>
+<p class="subtitle">SQLda funksiyalar, protseduralar va triggerlar yaratish</p>
 <div class="gold-line"></div>
 
 <div class="meta-info">
-    <strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp;
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
     <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp;
     <strong>🎯 Daraja:</strong> Yuqori
 </div>
@@ -6346,7 +6346,7 @@ umumiy <span class="sql-keyword">AS</span> (
 <div class="gold-line"></div>
 
 <div class="meta-info">
-    <strong>📘 Fan:</strong> Ma'lumotlar bazasini boshqarish &nbsp;|&nbsp;
+    <strong>📘 Fan:</strong> Ma'lumotlar bazasi &nbsp;|&nbsp;
     <strong>⏱ Davomiyligi:</strong> 2 soat &nbsp;|&nbsp;
     <strong>🎯 Daraja:</strong> Yuqori &nbsp;|&nbsp;
     <strong>🛠 Texnologiyalar:</strong> Python · Flask · MySQL · HTML/CSS
@@ -7213,7 +7213,7 @@ python app.py
         <img src="back.png" alt="Orqa muqova" style="max-width:500px;width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.12),0 8px 20px rgba(0,0,0,0.08)">
         <div style="margin-top:30px;font-family:'Playfair Display',Georgia,serif">
             <p style="font-size:1.3em;color:var(--text);font-weight:600;margin-bottom:5px">M.U. Ergashev</p>
-            <p style="font-size:0.95em;color:var(--text-muted)">Ma'lumotlar bazasini boshqarish — Amaliy mashg'ulotlar to'plami</p>
+            <p style="font-size:0.95em;color:var(--text-muted)">Ma'lumotlar bazasi — Amaliy mashg'ulotlar to'plami</p>
             <div class="gold-line" style="margin-top:20px"></div>
         </div>
     </div>
