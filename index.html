@@ -7,6 +7,8 @@
 <!-- Word eksport kutubxonalari -->
 <script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<!-- StPageFlip — interaktiv kitob varaqlanishi -->
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -440,6 +442,146 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     /* Animatsiyalarni o'chirish */
     *{animation:none!important;transition:none!important;transform:none!important}
 }
+
+/* ================================================================
+   INTERACTIVE FLIPBOOK — Kitobni varaqlab o'qish rejimi
+   ================================================================ */
+
+/* Eski UI elementlarni yashirish */
+body.flipbook-active .sidebar,
+body.flipbook-active .menu-toggle,
+body.flipbook-active .reading-progress,
+body.flipbook-active .sidebar-overlay,
+body.flipbook-active .back-to-top{display:none!important}
+body.flipbook-active{overflow:hidden;background:#0d1117}
+body.flipbook-active .main{display:none!important}
+
+/* Kitob ilova qobig'i */
+.book-app{position:fixed;inset:0;display:flex;flex-direction:column;background:linear-gradient(160deg,#0d1117 0%,#161b22 40%,#1a1f2b 100%);z-index:10000;font-family:'Inter',sans-serif}
+.book-app::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,0.3) 100%);pointer-events:none;z-index:0}
+
+/* Yuqori panel */
+.book-topbar{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,175,55,0.15);flex-shrink:0}
+.book-logo{display:flex;align-items:center;gap:10px}
+.book-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,#d4af37,#e8cc6a);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1em}
+.book-logo-text{font-family:'Playfair Display',serif;color:#d4af37;font-size:1.05em;font-weight:700}
+.book-logo-sub{color:rgba(255,255,255,0.4);font-size:0.7em;font-weight:300}
+.book-controls{display:flex;align-items:center;gap:6px}
+.book-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#b0b0b0;padding:7px 16px;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.78em;transition:all 0.2s ease;white-space:nowrap}
+.book-btn:hover{background:rgba(212,175,55,0.15);border-color:rgba(212,175,55,0.3);color:#d4af37}
+.book-btn-nav{background:rgba(212,175,55,0.1);border-color:rgba(212,175,55,0.2);color:#d4af37;font-weight:600;font-size:1.1em;padding:6px 14px;min-width:38px;text-align:center}
+.book-btn-nav:hover{background:rgba(212,175,55,0.25)}
+.page-indicator{color:rgba(255,255,255,0.5);font-size:0.78em;min-width:70px;text-align:center;padding:0 4px}
+
+/* Kitob ko'rinish maydoni */
+.book-viewport{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;padding:15px 40px;overflow:hidden}
+
+/* Sahifa uslublari */
+.book-page{background:#fff;overflow:hidden;position:relative}
+.book-page.hard-cover{background:linear-gradient(145deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)}
+.book-page .page-inner{width:100%;height:100%;overflow-y:auto;overflow-x:hidden;padding:30px 35px;box-sizing:border-box}
+.book-page.hard-cover .page-inner{display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden}
+.book-page .page-inner::-webkit-scrollbar{width:3px}
+.book-page .page-inner::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.25);border-radius:3px}
+.book-page .page-inner::-webkit-scrollbar-track{background:transparent}
+
+/* Sahifa raqami pastki qism */
+.page-footer{position:absolute;bottom:0;left:0;right:0;padding:8px 20px;display:flex;justify-content:space-between;font-size:0.7em;color:#999;background:linear-gradient(transparent,rgba(255,255,255,0.95));pointer-events:none;font-family:'Inter',sans-serif}
+.hard-cover .page-footer{display:none}
+
+/* Kontent uslublarini kitob sahifasiga moslashtirish */
+.book-page .container{max-width:100%!important;padding:10px 0!important;border-radius:0!important;box-shadow:none!important;margin:0!important;background:transparent!important}
+.book-page .cover{padding:15px 10px!important;box-shadow:none!important;border-radius:0!important;background:transparent!important}
+.book-page .cover h1{font-size:1.5em!important;border:none}
+.book-page .cover .sub{font-size:0.85em!important}
+.book-page .cover .stats{gap:10px!important}
+.book-page .cover .stat{padding:10px 14px!important;box-shadow:2px 2px 5px rgba(0,0,0,0.05)!important}
+.book-page .cover .stat .num2{font-size:1.3em!important}
+.book-page .cover img{max-width:250px!important}
+.book-page .print-btn-wrap{display:none!important}
+.book-page h1{font-size:1.6em!important}
+.book-page h2{font-size:1.2em!important;margin-top:25px!important;margin-bottom:15px!important}
+.book-page h3{font-size:1em!important;margin-bottom:10px!important}
+.book-page .card,.book-page .card-flat{padding:15px!important;margin:15px 0!important;border-radius:12px!important}
+.book-page .meta-info{padding:12px!important;margin-bottom:20px!important;font-size:0.75em!important;border-radius:10px!important}
+.book-page pre{padding:12px 15px!important;font-size:0.72em!important;line-height:1.5!important;border-radius:10px!important;margin:10px 0!important}
+.book-page table{font-size:0.78em!important;border-radius:8px!important}
+.book-page thead th{padding:8px 10px!important;font-size:0.75em!important}
+.book-page tbody td{padding:6px 10px!important;font-size:0.78em!important}
+.book-page .concept-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+.book-page .concept-card{padding:12px!important;border-radius:10px!important}
+.book-page p{font-size:0.85em!important;margin:8px 0!important}
+.book-page li{font-size:0.85em!important;margin-bottom:4px!important}
+.book-page .luxury-divider{margin:20px 0!important}
+.book-page .theory-box,.book-page .warning-box,.book-page .tip-box,.book-page .info-box{padding:15px!important;margin:12px 0!important;border-radius:10px!important}
+.book-page .flow-diagram{padding:12px!important;gap:5px!important}
+.book-page .flow-step{padding:6px 10px!important;font-size:0.7em!important}
+.book-page code{font-size:0.8em!important;padding:1px 5px!important}
+.book-page .mac-window{margin:12px 0!important}
+.book-page .mac-titlebar{padding:6px 12px!important}
+.book-page .arch-diagram{padding:15px!important;margin:15px 0!important}
+.book-page .folder-tree{padding:12px 15px!important;font-size:0.75em!important;margin:10px 0!important}
+.book-page .screenshot-box{padding:12px!important;margin:12px 0!important}
+.book-page .gold-line{margin:15px auto 20px auto!important}
+
+/* Dark mode kitob uchun */
+body.dark-mode .book-page:not(.hard-cover){background:#1e1e2e;color:#e0e0e0}
+body.dark-mode .book-page .page-footer{color:#666;background:linear-gradient(transparent,rgba(30,30,46,0.95))}
+
+/* Mundarija panel */
+.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:20000;display:none;align-items:center;justify-content:center}
+.toc-overlay.visible{display:flex}
+.toc-panel{background:linear-gradient(135deg,#1a1f2b,#161b22);border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:30px;max-width:480px;width:90%;max-height:75vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.toc-panel::-webkit-scrollbar{width:4px}
+.toc-panel::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.3);border-radius:4px}
+.toc-panel-title{text-align:center;font-family:'Playfair Display',serif;color:#d4af37;font-size:1.3em;margin-bottom:8px}
+.toc-panel-sub{text-align:center;color:rgba(255,255,255,0.4);font-size:0.78em;margin-bottom:20px}
+.toc-item{display:flex;align-items:center;padding:10px 14px;color:#b0b0b0;cursor:pointer;border-radius:10px;transition:all 0.2s;font-size:0.82em;gap:12px;margin-bottom:2px}
+.toc-item:hover{background:rgba(212,175,55,0.1);color:#d4af37}
+.toc-item.active{background:rgba(212,175,55,0.15);color:#d4af37}
+.toc-num{width:28px;height:28px;background:linear-gradient(135deg,#d4af37,#e8cc6a);color:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.72em;flex-shrink:0}
+.toc-close-wrap{text-align:center;margin-top:20px;padding-top:15px;border-top:1px solid rgba(255,255,255,0.06)}
+.toc-close-btn{background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.3);color:#d4af37;padding:10px 40px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.85em;transition:all 0.2s}
+.toc-close-btn:hover{background:rgba(212,175,55,0.25)}
+
+/* Pastki panel */
+.book-bottombar{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:8px 24px;background:rgba(0,0,0,0.4);border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0;gap:4px;flex-wrap:wrap}
+.page-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.1);cursor:pointer;transition:all 0.3s ease;border:none;padding:0}
+.page-dot:hover{background:rgba(212,175,55,0.4);transform:scale(1.3)}
+.page-dot.active{background:#d4af37;transform:scale(1.3);box-shadow:0 0 8px rgba(212,175,55,0.5)}
+
+/* Yuklash holati */
+.book-loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0d1117;z-index:99999;flex-direction:column;gap:20px}
+.book-loading-spinner{width:40px;height:40px;border:3px solid rgba(212,175,55,0.2);border-top-color:#d4af37;border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.book-loading-text{color:#d4af37;font-family:'Playfair Display',serif;font-size:1.1em}
+
+/* Mobil moslashuvchanlik */
+@media(max-width:768px){
+    .book-topbar{padding:8px 12px;flex-wrap:wrap;gap:6px}
+    .book-logo-text{font-size:0.9em}
+    .book-logo-sub{display:none}
+    .book-controls{gap:4px}
+    .book-btn{padding:5px 10px;font-size:0.72em}
+    .book-btn .btn-label{display:none}
+    .book-viewport{padding:8px}
+    .book-page .page-inner{padding:15px 12px!important}
+    .book-page h1{font-size:1.3em!important}
+    .book-page h2{font-size:1.05em!important}
+    .book-page pre{font-size:0.65em!important}
+    .book-bottombar{padding:6px 12px}
+    .page-dot{width:6px;height:6px}
+}
+@media(max-width:480px){
+    .book-logo{display:none}
+    .book-controls{width:100%;justify-content:center}
+}
+
+/* StPageFlip kutubxonasi uchun qo'shimcha uslublar */
+.stf__parent{position:relative}
+.stf__wrapper{position:relative}
+.stf__block{position:absolute;width:100%;height:100%}
+
 </style>
 </head>
 <body>
@@ -7776,206 +7918,163 @@ python app.py
 
 </div><!-- end main -->
 
+
 <script>
-/* ===== SECTION NAVIGATION ===== */
-function showSection(id, e) {
-    if (e) e.preventDefault();
-    document.querySelectorAll('.section-block').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.querySelectorAll('.sidebar a[data-section]').forEach(a => a.classList.remove('active'));
-    const link = document.querySelector('.sidebar a[data-section="'+id+'"]');
-    if (link) link.classList.add('active');
-    closeSidebar();
-    window.scrollTo({top: 0, behavior: 'smooth'});
-    // Mark lesson as visited
-    if (id !== 'cover') markVisited(id);
-}
+/* ================================================================
+   INTERACTIVE FLIPBOOK — Ma'lumotlar bazasi kitobni varaqlab o'qish
+   M.U. Ergashev — 2024
+   ================================================================ */
+(function() {
+'use strict';
 
-/* ===== SIDEBAR TOGGLE ===== */
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const toggle = document.getElementById('menuToggle');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('visible');
-    toggle.classList.toggle('is-open');
-    if (toggle.classList.contains('is-open')) {
-        toggle.textContent = '✕';
-    } else {
-        toggle.textContent = '☰';
+/* ===== KONFIGURATSIYA ===== */
+var SECTION_IDS = ['cover','t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13','t14','t15','backpage'];
+var SECTION_NAMES = {
+    'cover': 'Bosh sahifa',
+    't1': "1. MB dasturlarini o'rnatish",
+    't2': '2. MB loyihalash, ER diagramma',
+    't3': '3. SQL — Jadvallar',
+    't4': '4. AND, OR, NOR amallar',
+    't5': '5. WHERE, saralash',
+    't6': '6. GROUP BY, ORDER BY, HAVING',
+    't7': '7. UNION, INTERSECT, MINUS',
+    't8': '8. JOIN bilan ishlash',
+    't9': '9. Standart funksiyalar',
+    't10': '10. Agregat funksiyalar',
+    't11': "11. Murakkab so'rovlar",
+    't12': '12. INDEX yaratish',
+    't13': '13. VIEW yaratish',
+    't14': '14. Funksiya, protsedura, trigger',
+    't15': '15. Oddiy interfeys yaratish',
+    'backpage': 'Orqa muqova'
+};
+
+var pageFlipInstance = null;
+var soundEnabled = true;
+var audioCtx = null;
+
+/* ===== OVOZ EFFEKTI — Varaq ovozi ===== */
+function getAudioCtx() {
+    if (!audioCtx) {
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        if (Ctx) audioCtx = new Ctx();
     }
-}
-function closeSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const toggle = document.getElementById('menuToggle');
-    sidebar.classList.remove('open');
-    overlay.classList.remove('visible');
-    toggle.classList.remove('is-open');
-    toggle.textContent = '☰';
+    return audioCtx;
 }
 
-/* ===== SIDEBAR SEARCH ===== */
-function filterSidebar(query) {
-    const links = document.querySelectorAll('.sidebar a[data-section]');
-    const q = query.toLowerCase().trim();
-    links.forEach(a => {
-        if (!q || a.textContent.toLowerCase().includes(q)) {
-            a.classList.remove('hidden-by-search');
-        } else {
-            a.classList.add('hidden-by-search');
-        }
-    });
-}
-
-/* ===== LESSON PROGRESS TRACKING ===== */
-function getVisited() {
+function playFlipSound() {
+    if (!soundEnabled) return;
     try {
-        return JSON.parse(localStorage.getItem('mbb_visited') || '[]');
-    } catch(e) { return []; }
-}
-function markVisited(id) {
-    const visited = getVisited();
-    if (!visited.includes(id)) {
-        visited.push(id);
-        localStorage.setItem('mbb_visited', JSON.stringify(visited));
-    }
-    updateProgress();
-}
-function updateProgress() {
-    const visited = getVisited();
-    const total = 15;
-    const count = visited.filter(v => v.startsWith('t')).length;
-    const fill = document.getElementById('progressFill');
-    const text = document.getElementById('progressText');
-    if (fill) fill.style.width = (count / total * 100) + '%';
-    if (text) text.textContent = count + ' / ' + total + " dars o'tilgan";
-    // Update checkmarks
-    document.querySelectorAll('.sidebar a[data-section]').forEach(a => {
-        const sec = a.getAttribute('data-section');
-        if (visited.includes(sec)) {
-            a.classList.add('completed');
+        var ctx = getAudioCtx();
+        if (!ctx) return;
+        if (ctx.state === 'suspended') ctx.resume();
+
+        var duration = 0.28;
+        var now = ctx.currentTime;
+        var sr = ctx.sampleRate;
+        var len = Math.floor(sr * duration);
+        var buf = ctx.createBuffer(1, len, sr);
+        var d = buf.getChannelData(0);
+
+        /* Qog'oz shovqini — tez hujum, eksponensial pasayish */
+        for (var i = 0; i < len; i++) {
+            var t = i / sr;
+            var attack = 1 - Math.exp(-t * 300);          /* tez ko'tarilish */
+            var decay = Math.exp(-t * 16);                  /* sekin pasayish */
+            var env = attack * decay;
+            d[i] = (Math.random() * 2 - 1) * env * 0.6;
         }
-    });
+
+        var src = ctx.createBufferSource();
+        src.buffer = buf;
+
+        /* Yuqori chastotali filtr — qog'oz hislatiga yaqin */
+        var hp = ctx.createBiquadFilter();
+        hp.type = 'highpass';
+        hp.frequency.value = 900;
+
+        /* Bantli filtr */
+        var bp = ctx.createBiquadFilter();
+        bp.type = 'bandpass';
+        bp.frequency.value = 3800;
+        bp.Q.value = 0.6;
+
+        var gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+        src.connect(hp);
+        hp.connect(bp);
+        bp.connect(gain);
+        gain.connect(ctx.destination);
+
+        src.start(now);
+        src.stop(now + duration);
+    } catch(e) { /* Ovoz qo'llab-quvvatlanmasa, xatolikni yutib yuborish */ }
 }
 
-/* ===== DARK MODE ===== */
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    localStorage.setItem('mbb_dark_mode', isDark ? '1' : '0');
-    document.getElementById('darkModeIcon').textContent = isDark ? '☀️' : '🌙';
-    document.getElementById('darkModeText').textContent = isDark ? 'Kunduzgi rejim' : 'Tungi rejim';
-}
+/* ===== QORONG'I REJIM ===== */
 function initDarkMode() {
     if (localStorage.getItem('mbb_dark_mode') === '1') {
         document.body.classList.add('dark-mode');
-        document.getElementById('darkModeIcon').textContent = '☀️';
-        document.getElementById('darkModeText').textContent = 'Kunduzgi rejim';
+    }
+}
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    var isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('mbb_dark_mode', isDark ? '1' : '0');
+    var btn = document.getElementById('bookDarkMode');
+    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+}
+
+/* ===== PROGRESS SAQLASH ===== */
+function getVisited() {
+    try { return JSON.parse(localStorage.getItem('mbb_visited') || '[]'); }
+    catch(e) { return []; }
+}
+function markVisited(id) {
+    var v = getVisited();
+    if (v.indexOf(id) === -1) {
+        v.push(id);
+        localStorage.setItem('mbb_visited', JSON.stringify(v));
     }
 }
 
-/* ===== READING PROGRESS BAR ===== */
-function updateReadingProgress() {
-    const bar = document.getElementById('readingProgress');
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (docHeight > 0) {
-        bar.style.width = Math.min((scrollTop / docHeight) * 100, 100) + '%';
-    }
-}
-
-/* ===== BACK TO TOP ===== */
-function updateBackToTop() {
-    const btn = document.getElementById('backToTop');
-    if (window.pageYOffset > 400) {
-        btn.classList.add('visible');
-    } else {
-        btn.classList.remove('visible');
-    }
-}
-
-/* ===== COPY TO CLIPBOARD ===== */
-function initCopyButtons() {
-    document.querySelectorAll('pre').forEach(pre => {
-        const btn = document.createElement('button');
+/* ===== NUSXA OLISH TUGMASI ===== */
+function initCopyButtons(root) {
+    root.querySelectorAll('pre').forEach(function(pre) {
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
         btn.className = 'copy-btn';
         btn.textContent = 'Nusxa';
         btn.onclick = function(e) {
             e.stopPropagation();
-            const code = pre.textContent.replace(btn.textContent, '').trim();
-            navigator.clipboard.writeText(code).then(() => {
+            var code = pre.textContent.replace('Nusxa', '').replace('Nusxalandi!', '').trim();
+            navigator.clipboard.writeText(code).then(function() {
                 btn.textContent = 'Nusxalandi!';
                 btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = 'Nusxa';
-                    btn.classList.remove('copied');
-                }, 2000);
-            }).catch(() => {
-                // Fallback for older browsers
-                const ta = document.createElement('textarea');
+                setTimeout(function() { btn.textContent = 'Nusxa'; btn.classList.remove('copied'); }, 2000);
+            }).catch(function() {
+                var ta = document.createElement('textarea');
                 ta.value = code;
-                ta.style.position = 'fixed';
-                ta.style.opacity = '0';
+                ta.style.cssText = 'position:fixed;opacity:0';
                 document.body.appendChild(ta);
                 ta.select();
                 document.execCommand('copy');
                 document.body.removeChild(ta);
                 btn.textContent = 'Nusxalandi!';
                 btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = 'Nusxa';
-                    btn.classList.remove('copied');
-                }, 2000);
+                setTimeout(function() { btn.textContent = 'Nusxa'; btn.classList.remove('copied'); }, 2000);
             });
         };
-        // If file-badge exists, position copy button on left
-        const badge = pre.querySelector('.file-badge');
-        if (badge) {
-            btn.style.right = 'auto';
-            btn.style.left = '12px';
-        }
+        var badge = pre.querySelector('.file-badge');
+        if (badge) { btn.style.right = 'auto'; btn.style.left = '12px'; }
         pre.appendChild(btn);
     });
 }
 
-/* ===== KEYBOARD NAVIGATION ===== */
-const sections = ['cover','t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13','t14','t15'];
-function getCurrentSection() {
-    const active = document.querySelector('.section-block.active');
-    return active ? active.id : 'cover';
-}
-function navigateSection(dir) {
-    const current = getCurrentSection();
-    const idx = sections.indexOf(current);
-    const next = idx + dir;
-    if (next >= 0 && next < sections.length) {
-        showSection(sections[next]);
-    }
-}
-document.addEventListener('keydown', function(e) {
-    // Don't navigate if user is typing in search
-    if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
-    if (e.key === 'ArrowLeft') navigateSection(-1);
-    if (e.key === 'ArrowRight') navigateSection(1);
-    if (e.key === 'Escape') closeSidebar();
-});
-
-/* ===== SCROLL EVENTS ===== */
-let scrollTicking = false;
-window.addEventListener('scroll', function() {
-    if (!scrollTicking) {
-        requestAnimationFrame(function() {
-            updateReadingProgress();
-            updateBackToTop();
-            scrollTicking = false;
-        });
-        scrollTicking = true;
-    }
-});
-
-/* ===== 3D FLUENT EMOJI REPLACEMENT ===== */
-const EMOJI_MAP = {
+/* ===== 3D FLUENT EMOJI ALMASHTIRISH ===== */
+var EMOJI_MAP = {
     '\u{1F4D8}': 'Open%20book/3D/open_book_3d.png',
     '\u{1F4CB}': 'Clipboard/3D/clipboard_3d.png',
     '\u2B50': 'Star/3D/star_3d.png',
@@ -8023,109 +8122,41 @@ const EMOJI_MAP = {
     '\u{1F536}': 'Large%20orange%20diamond/3D/large_orange_diamond_3d.png',
     '\u{1F537}': 'Large%20blue%20diamond/3D/large_blue_diamond_3d.png'
 };
-const FLUENT_BASE = 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/';
+var FLUENT_BASE = 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/';
 
-function replaceEmojisWithFluent() {
-    const walker = document.createTreeWalker(document.querySelector('.main'), NodeFilter.SHOW_TEXT, null);
-    const replacements = [];
+function replaceEmojisInElement(root) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var replacements = [];
     while (walker.nextNode()) {
-        const node = walker.currentNode;
-        let text = node.textContent;
-        let hasEmoji = false;
-        for (const emoji in EMOJI_MAP) {
-            if (text.includes(emoji)) { hasEmoji = true; break; }
+        var node = walker.currentNode;
+        var hasEmoji = false;
+        for (var emoji in EMOJI_MAP) {
+            if (node.textContent.indexOf(emoji) !== -1) { hasEmoji = true; break; }
         }
         if (hasEmoji) replacements.push(node);
     }
-    replacements.forEach(node => {
-        const span = document.createElement('span');
-        let html = node.textContent;
-        for (const [emoji, path] of Object.entries(EMOJI_MAP)) {
-            if (html.includes(emoji)) {
-                const imgTag = '<img class="icon-3d" src="' + FLUENT_BASE + path + '" alt="' + emoji + '" loading="lazy">';
+    replacements.forEach(function(node) {
+        var span = document.createElement('span');
+        var html = node.textContent;
+        for (var emoji in EMOJI_MAP) {
+            if (html.indexOf(emoji) !== -1) {
+                var imgTag = '<img class="icon-3d" src="' + FLUENT_BASE + EMOJI_MAP[emoji] + '" alt="' + emoji + '" loading="lazy">';
                 html = html.split(emoji).join(imgTag);
             }
         }
         span.innerHTML = html;
-        node.parentNode.replaceChild(span, node);
+        if (node.parentNode) node.parentNode.replaceChild(span, node);
     });
-    /* Sidebar emojilarini ham almashtirish */
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar) {
-        const sWalker = document.createTreeWalker(sidebar, NodeFilter.SHOW_TEXT, null);
-        const sReplacements = [];
-        while (sWalker.nextNode()) {
-            const n = sWalker.currentNode;
-            let hasE = false;
-            for (const e in EMOJI_MAP) { if (n.textContent.includes(e)) { hasE = true; break; } }
-            if (hasE) sReplacements.push(n);
-        }
-        sReplacements.forEach(node => {
-            const span = document.createElement('span');
-            let html = node.textContent;
-            for (const [emoji, path] of Object.entries(EMOJI_MAP)) {
-                if (html.includes(emoji)) {
-                    const imgTag = '<img class="icon-3d" src="' + FLUENT_BASE + path + '" alt="' + emoji + '" loading="lazy">';
-                    html = html.split(emoji).join(imgTag);
-                }
-            }
-            span.innerHTML = html;
-            node.parentNode.replaceChild(span, node);
-        });
-    }
 }
 
-/* ===== WORD EXPORT ===== */
+/* ===== WORD EKSPORT (saqlab qolish) ===== */
 function exportToWord() {
-    const sections = document.querySelectorAll('.section-block');
-    let content = '';
-    sections.forEach(s => {
-        if (s.id === 'backpage') return;
-        content += s.innerHTML;
-    });
-    /* MSO-mos CSS */
-    const msoCSS = `
-        <style>
-            @page { size:A4; margin:2cm 2cm 1.5cm 3cm; }
-            body { font-family:'Segoe UI',Arial,sans-serif; font-size:11pt; line-height:1.6; color:#1a1a1a; }
-            h1 { font-family:Georgia,serif; font-size:22pt; color:#1a1a1a; text-align:center; margin-bottom:10px; }
-            h2 { font-family:Georgia,serif; font-size:16pt; color:#1a1a1a; margin-top:20px; border-bottom:2px solid #d4af37; padding-bottom:5px; }
-            h3 { font-size:13pt; color:#333; margin-top:15px; }
-            p, li { font-size:11pt; line-height:1.6; }
-            table { border-collapse:collapse; width:100%; margin:10px 0; }
-            td, th { border:1px solid #999; padding:6px 10px; font-size:10pt; }
-            th { background:#f5f5f5; font-weight:bold; }
-            pre { background:#f5f5f5; border:1px solid #ccc; padding:10px; font-family:'Courier New',monospace; font-size:9pt; line-height:1.4; white-space:pre-wrap; word-wrap:break-word; }
-            code { font-family:'Courier New',monospace; font-size:9pt; background:#f0f0f0; padding:1px 4px; }
-            pre code { background:transparent; }
-            .card, .card-flat { border:1px solid #ddd; border-left:4px solid #d4af37; padding:15px; margin:10px 0; border-radius:4px; }
-            .theory-box { background:#fffbe6; border:1px solid #d4af37; border-left:4px solid #d4af37; padding:15px; margin:10px 0; }
-            .warning-box { background:#fff5f5; border:1px solid #e74c3c; border-left:4px solid #e74c3c; padding:15px; margin:10px 0; }
-            .tip-box { background:#f0fff0; border:1px solid #27ae60; border-left:4px solid #27ae60; padding:15px; margin:10px 0; }
-            .info-box { background:#f0f5ff; border:1px solid #3498db; border-left:4px solid #3498db; padding:15px; margin:10px 0; }
-            .meta-info { text-align:center; background:#f8f8f8; padding:12px; border:1px solid #ddd; margin-bottom:20px; font-size:10pt; }
-            .gold-line { height:2px; background:#d4af37; width:100px; margin:10px auto 20px auto; }
-            .cover { text-align:center; padding:40px 20px; }
-            .stats { text-align:center; margin:20px 0; }
-            .stat { display:inline-block; margin:0 15px; text-align:center; }
-            .num2 { font-size:24pt; color:#d4af37; font-weight:bold; }
-            .label { font-size:9pt; color:#888; }
-            .subtitle { text-align:center; color:#555; margin-bottom:15px; }
-            .container { padding:10px 0; }
-            .print-btn-wrap { display:none; }
-            .copy-btn { display:none; }
-            .file-badge { display:none; }
-            .icon-3d { width:20px; height:20px; vertical-align:middle; }
-            img { max-width:100%; }
-            .sql-keyword { color:#c71585; font-weight:bold; }
-            .sql-string { color:#b8860b; }
-            .sql-comment { color:#666; }
-            .sql-function { color:#0066cc; }
-        </style>
-    `;
-    const fullHTML = '<!DOCTYPE html><html><head><meta charset="utf-8">' + msoCSS + '</head><body>' + content + '</body></html>';
-    /* CSS var() ni to'g'ridan-to'g'ri rangga almashtirish */
-    let processed = fullHTML;
+    var sections = document.querySelectorAll('.book-page .page-inner');
+    var content = '';
+    sections.forEach(function(s) { content += s.innerHTML; });
+    var msoCSS = '<style>@page{size:A4;margin:2cm 2cm 1.5cm 3cm}body{font-family:"Segoe UI",Arial,sans-serif;font-size:11pt;line-height:1.6;color:#1a1a1a}h1{font-family:Georgia,serif;font-size:22pt;color:#1a1a1a;text-align:center;margin-bottom:10px}h2{font-family:Georgia,serif;font-size:16pt;color:#1a1a1a;margin-top:20px;border-bottom:2px solid #d4af37;padding-bottom:5px}h3{font-size:13pt;color:#333;margin-top:15px}p,li{font-size:11pt;line-height:1.6}table{border-collapse:collapse;width:100%;margin:10px 0}td,th{border:1px solid #999;padding:6px 10px;font-size:10pt}th{background:#f5f5f5;font-weight:bold}pre{background:#f5f5f5;border:1px solid #ccc;padding:10px;font-family:"Courier New",monospace;font-size:9pt;line-height:1.4;white-space:pre-wrap;word-wrap:break-word}code{font-family:"Courier New",monospace;font-size:9pt;background:#f0f0f0;padding:1px 4px}.copy-btn{display:none}.file-badge{display:none}.print-btn-wrap{display:none}img{max-width:100%}</style>';
+    var fullHTML = '<!DOCTYPE html><html><head><meta charset="utf-8">' + msoCSS + '</head><body>' + content + '</body></html>';
+    var processed = fullHTML;
     processed = processed.replace(/var\(--gold\)/g, '#d4af37');
     processed = processed.replace(/var\(--gold-light\)/g, '#e8cc6a');
     processed = processed.replace(/var\(--gold-dark\)/g, '#b8960e');
@@ -8137,26 +8168,310 @@ function exportToWord() {
     processed = processed.replace(/var\(--code-bg\)/g, '#f5f5f5');
     processed = processed.replace(/var\(--code-text\)/g, '#1a1a1a');
     processed = processed.replace(/var\(--border-color\)/g, '#e8e8e8');
-    /* box-shadow olib tashlash */
     processed = processed.replace(/box-shadow:[^;"]+/g, '');
-    /* linear-gradient ni oddiy rangga almashtirish */
     processed = processed.replace(/background:\s*linear-gradient\([^)]+\)/g, 'background:#f8f8f8');
-    /* animation olib tashlash */
     processed = processed.replace(/animation:[^;"]+/g, '');
     processed = processed.replace(/transition:[^;"]+/g, '');
-
-    const converted = htmlDocx.asBlob(processed);
-    saveAs(converted, 'Malumotlar_bazasi_15_amaliy_mashgulot.docx');
+    if (typeof htmlDocx !== 'undefined' && typeof saveAs !== 'undefined') {
+        var converted = htmlDocx.asBlob(processed);
+        saveAs(converted, 'Malumotlar_bazasi_15_amaliy_mashgulot.docx');
+    }
 }
 
-/* ===== INIT ===== */
+/* ===== MUNDARIJA PANELI ===== */
+function createTocOverlay() {
+    var overlay = document.createElement('div');
+    overlay.className = 'toc-overlay';
+    overlay.id = 'tocOverlay';
+    overlay.onclick = function(e) { if (e.target === overlay) closeToc(); };
+
+    var panel = document.createElement('div');
+    panel.className = 'toc-panel';
+    panel.innerHTML = '<div class="toc-panel-title">Mundarija</div><div class="toc-panel-sub">Sahifani tanlang</div>';
+
+    SECTION_IDS.forEach(function(id, idx) {
+        var item = document.createElement('div');
+        item.className = 'toc-item';
+        item.setAttribute('data-page', idx);
+
+        var num = document.createElement('span');
+        num.className = 'toc-num';
+        num.textContent = id === 'cover' ? '★' : id === 'backpage' ? '◆' : id.replace('t', '');
+
+        var text = document.createElement('span');
+        text.textContent = SECTION_NAMES[id];
+
+        item.appendChild(num);
+        item.appendChild(text);
+        item.onclick = function() {
+            if (pageFlipInstance) pageFlipInstance.flip(idx);
+            closeToc();
+        };
+        panel.appendChild(item);
+    });
+
+    var closeWrap = document.createElement('div');
+    closeWrap.className = 'toc-close-wrap';
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'toc-close-btn';
+    closeBtn.textContent = 'Yopish';
+    closeBtn.onclick = closeToc;
+    closeWrap.appendChild(closeBtn);
+    panel.appendChild(closeWrap);
+
+    overlay.appendChild(panel);
+    document.body.appendChild(overlay);
+}
+
+function openToc() {
+    var overlay = document.getElementById('tocOverlay');
+    if (overlay) {
+        var currentPage = pageFlipInstance ? pageFlipInstance.getCurrentPageIndex() : 0;
+        overlay.querySelectorAll('.toc-item').forEach(function(item) {
+            var pg = parseInt(item.getAttribute('data-page'));
+            item.classList.toggle('active', pg === currentPage);
+        });
+        overlay.classList.add('visible');
+    }
+}
+function closeToc() {
+    var overlay = document.getElementById('tocOverlay');
+    if (overlay) overlay.classList.remove('visible');
+}
+
+/* ===== UI YANGILASH ===== */
+function updateUI(pageIndex) {
+    var indicator = document.getElementById('bookPageInfo');
+    if (indicator) {
+        indicator.textContent = (pageIndex + 1) + ' / ' + SECTION_IDS.length;
+    }
+    document.querySelectorAll('.page-dot').forEach(function(dot) {
+        var pg = parseInt(dot.getAttribute('data-page'));
+        dot.classList.toggle('active', pg === pageIndex);
+    });
+    if (pageIndex < SECTION_IDS.length) {
+        markVisited(SECTION_IDS[pageIndex]);
+    }
+}
+
+/* ===== FLIPBOOK QURISH ===== */
+function buildFlipbook() {
+    /* Flipbook rejimini faollashtirish */
+    document.body.classList.add('flipbook-active');
+
+    var isDark = document.body.classList.contains('dark-mode');
+
+    /* Kitob ilovasi konteyneri */
+    var app = document.createElement('div');
+    app.className = 'book-app';
+    app.id = 'bookApp';
+
+    /* ---- YUQORI PANEL ---- */
+    var topbar = document.createElement('div');
+    topbar.className = 'book-topbar';
+    topbar.innerHTML =
+        '<div class="book-logo">' +
+            '<div class="book-logo-icon">📘</div>' +
+            '<div>' +
+                '<div class="book-logo-text">Ma\'lumotlar bazasi</div>' +
+                '<div class="book-logo-sub">Interaktiv kitob — M.U.Ergashev</div>' +
+            '</div>' +
+        '</div>' +
+        '<div class="book-controls">' +
+            '<button class="book-btn" id="bookToc" title="Mundarija">📋 <span class="btn-label">Mundarija</span></button>' +
+            '<button class="book-btn" id="bookWord" title="Word yuklab olish">📥 <span class="btn-label">Word</span></button>' +
+            '<button class="book-btn" id="bookSound" title="Ovoz">' + (soundEnabled ? '🔊' : '🔇') + '</button>' +
+            '<button class="book-btn book-btn-nav" id="bookPrev" title="Oldingi sahifa">‹</button>' +
+            '<span class="page-indicator" id="bookPageInfo">1 / ' + SECTION_IDS.length + '</span>' +
+            '<button class="book-btn book-btn-nav" id="bookNext" title="Keyingi sahifa">›</button>' +
+            '<button class="book-btn" id="bookDarkMode" title="Tungi rejim">' + (isDark ? '☀️' : '🌙') + '</button>' +
+        '</div>';
+
+    /* ---- KITOB KO'RINISH MAYDONI ---- */
+    var viewport = document.createElement('div');
+    viewport.className = 'book-viewport';
+
+    var flipContainer = document.createElement('div');
+    flipContainer.id = 'flipbook-container';
+    viewport.appendChild(flipContainer);
+
+    /* ---- PASTKI PANEL — sahifa nuqtalari ---- */
+    var bottombar = document.createElement('div');
+    bottombar.className = 'book-bottombar';
+    bottombar.id = 'bookBottombar';
+
+    SECTION_IDS.forEach(function(id, idx) {
+        var dot = document.createElement('button');
+        dot.className = 'page-dot' + (idx === 0 ? ' active' : '');
+        dot.setAttribute('data-page', idx);
+        dot.title = SECTION_NAMES[id];
+        dot.onclick = function() {
+            if (pageFlipInstance) pageFlipInstance.flip(idx);
+        };
+        bottombar.appendChild(dot);
+    });
+
+    /* Yig'ish */
+    app.appendChild(topbar);
+    app.appendChild(viewport);
+    app.appendChild(bottombar);
+    document.body.appendChild(app);
+
+    /* ---- SAHIFALARNI YARATISH ---- */
+    var pages = [];
+    SECTION_IDS.forEach(function(id, idx) {
+        var section = document.getElementById(id);
+        if (!section) return;
+
+        var page = document.createElement('div');
+        page.className = 'book-page';
+
+        /* Muqova sahifalari uchun qattiq (hard) rejim */
+        if (id === 'cover') {
+            page.classList.add('hard-cover');
+            page.setAttribute('data-density', 'hard');
+        }
+        if (id === 'backpage') {
+            page.classList.add('hard-cover');
+            page.setAttribute('data-density', 'hard');
+        }
+
+        /* Ichki aylantiriladigan konteyner */
+        var inner = document.createElement('div');
+        inner.className = 'page-inner';
+
+        /* Seksiya kontentini ko'chirish */
+        section.style.display = 'block';
+        section.style.animation = 'none';
+        section.classList.add('active');
+
+        while (section.firstChild) {
+            inner.appendChild(section.firstChild);
+        }
+
+        page.appendChild(inner);
+
+        /* Sahifa raqami */
+        if (id !== 'cover' && id !== 'backpage') {
+            var footer = document.createElement('div');
+            footer.className = 'page-footer';
+            footer.innerHTML = '<span>' + SECTION_NAMES[id] + '</span><span>' + (idx + 1) + '</span>';
+            page.appendChild(footer);
+        }
+
+        pages.push(page);
+        flipContainer.appendChild(page);
+    });
+
+    /* ---- StPageFlip ISHGA TUSHIRISH ---- */
+    var vpRect = viewport.getBoundingClientRect();
+    var availH = vpRect.height - 30;
+    var availW = vpRect.width - 80;
+    /* A4 nisbati: 1 : 1.414 */
+    var pageW = Math.min(Math.floor(availH / 1.414), Math.floor(availW / 2));
+    pageW = Math.max(pageW, 280);
+    var pageH = Math.floor(pageW * 1.414);
+
+    pageFlipInstance = new St.PageFlip(flipContainer, {
+        width: pageW,
+        height: pageH,
+        size: 'stretch',
+        minWidth: 280,
+        minHeight: 396,
+        maxWidth: Math.max(pageW, 550),
+        maxHeight: Math.max(pageH, 778),
+        drawShadow: true,
+        flippingTime: 800,
+        usePortrait: window.innerWidth < 900,
+        startZIndex: 0,
+        autoSize: true,
+        maxShadowOpacity: 0.5,
+        showCover: true,
+        mobileScrollSupport: true,
+        clickEventForward: false,
+        useMouseEvents: true,
+        swipeDistance: 30,
+        showPageCorners: true,
+        disableFlipByClick: false
+    });
+
+    pageFlipInstance.loadFromHTML(document.querySelectorAll('.book-page'));
+
+    /* ---- HODISALAR ---- */
+    pageFlipInstance.on('flip', function(e) {
+        playFlipSound();
+        updateUI(e.data);
+    });
+
+    /* Boshqaruv tugmalari */
+    document.getElementById('bookPrev').onclick = function() {
+        if (pageFlipInstance) pageFlipInstance.flipPrev();
+    };
+    document.getElementById('bookNext').onclick = function() {
+        if (pageFlipInstance) pageFlipInstance.flipNext();
+    };
+    document.getElementById('bookToc').onclick = openToc;
+    document.getElementById('bookDarkMode').onclick = toggleDarkMode;
+    document.getElementById('bookSound').onclick = function() {
+        soundEnabled = !soundEnabled;
+        this.textContent = soundEnabled ? '🔊' : '🔇';
+    };
+    document.getElementById('bookWord').onclick = exportToWord;
+
+    /* Klaviatura navigatsiyasi */
+    document.addEventListener('keydown', function(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key === 'ArrowLeft') { if (pageFlipInstance) pageFlipInstance.flipPrev(); }
+        if (e.key === 'ArrowRight') { if (pageFlipInstance) pageFlipInstance.flipNext(); }
+        if (e.key === 'Escape') closeToc();
+    });
+
+    /* Oyna o'lchami o'zgarganda */
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            if (pageFlipInstance) {
+                var isPortrait = window.innerWidth < 900;
+                /* StPageFlip ichki ravishda autoSize bilan o'lchamni moslashtiradi */
+            }
+        }, 300);
+    });
+
+    /* Post-protsessing: nusxa tugmalari va emoji almashtirish */
+    pages.forEach(function(page) {
+        initCopyButtons(page);
+        replaceEmojisInElement(page);
+    });
+
+    /* Mundarija panelini yaratish */
+    createTocOverlay();
+
+    /* Boshlang'ich UI */
+    updateUI(0);
+}
+
+/* ===== ISHGA TUSHIRISH ===== */
 document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
-    updateProgress();
-    initCopyButtons();
-    updateReadingProgress();
-    replaceEmojisWithFluent();
+
+    /* Shriftlar yuklangandan keyin flipbookni qurish */
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function() {
+            setTimeout(buildFlipbook, 50);
+        });
+    } else {
+        setTimeout(buildFlipbook, 200);
+    }
 });
+
+})();
+
+/* Eski HTML onclick atributlari uchun stub funksiyalar */
+function toggleSidebar() {}
+function closeSidebar() {}
+function showSection() {}
+function filterSidebar() {}
 </script>
 </body>
 </html>
