@@ -222,6 +222,8 @@ thead th{background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 100%);color:var(--
 tbody td{padding:12px 16px;border-bottom:1px solid var(--border-color);font-size:0.9em;transition:all var(--transition-fast)}
 tbody tr:nth-child(even){background:rgba(0,0,0,0.02)}
 tbody tr:hover{background:rgba(212,175,55,0.08);transform:scale(1.002)}
+.toc-row{cursor:pointer;transition:all var(--transition-fast)}
+.toc-row:hover{background:rgba(212,175,55,0.15)!important;transform:scale(1.005)}
 tbody tr:last-child td{border-bottom:none}
 .highlight-row{background:rgba(212,175,55,0.15)!important;font-weight:600}
 body.dark-mode tbody td{border-bottom-color:rgba(255,255,255,0.06)}
@@ -656,7 +658,7 @@ body.admin-mode .admin-badge{display:block}
     <p class="sub">Amaliy mashg'ulotlar to'plami — 15 ta dars</p>
     <div class="gold-line"></div>
     <div class="stats">
-        <div class="stat"><div class="num2">15</div><div class="label">Amaliy mashg'ulot</div></div>
+        <div class="stat" onclick="document.getElementById('mundarija').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="num2">15</div><div class="label">Amaliy mashg'ulot</div></div>
         <div class="stat"><div class="num2">30</div><div class="label">Soat</div></div>
         <div class="stat"><div class="num2">120+</div><div class="label">SQL misollar</div></div>
         <div class="stat"><div class="num2">100+</div><div class="label">Topshiriqlar</div></div>
@@ -667,25 +669,25 @@ body.admin-mode .admin-badge{display:block}
     </div>
 </div>
 <div class="container" style="margin-top:30px">
-<h2><span class="icon">📋</span>Mundarija</h2>
+<h2 id="mundarija"><span class="icon">📋</span>Mundarija</h2>
 <table>
 <thead><tr><th>#</th><th>Mavzu</th><th>Asosiy tushunchalar</th></tr></thead>
 <tbody>
-<tr><td><strong>1</strong></td><td>MB dasturlarini o'rnatish va sozlash</td><td>MySQL Server, Oracle Server, Microsoft SQL Server</td></tr>
-<tr><td><strong>2</strong></td><td>MB loyihalash, mohiyat–aloqa diagrammasi</td><td>Mohiyat, aloqa (1:1, 1:N, M:N), Relyatsion MB, Primary/Foreign Key</td></tr>
-<tr><td><strong>3</strong></td><td>SQL tilida jadvallar yaratish, o'zgartirish va o'chirish</td><td>CREATE, ALTER, DROP, RENAME, TRUNCATE, ma'lumot turlari</td></tr>
-<tr><td><strong>4</strong></td><td>Ma'lumotlarni tanlash. AND, OR, NOR</td><td>SELECT, WHERE, AND, OR, NOR, BETWEEN, IN, LIKE</td></tr>
-<tr><td><strong>5</strong></td><td>Ma'lumotlarni saralash. WHERE</td><td>ORDER BY, LIMIT, OFFSET, WHERE</td></tr>
-<tr><td><strong>6</strong></td><td>GROUP BY, ORDER BY va HAVING bilan so'rovlar</td><td>Agregat funksiyalar, WITH ROLLUP, GROUP_CONCAT</td></tr>
-<tr><td><strong>7</strong></td><td>UNION, INTERSECT va MINUS buyruqlari</td><td>To'plam operatorlari, UNION ALL, MINUS</td></tr>
-<tr><td><strong>8</strong></td><td>Jadvallarni birlashtirish, «JOIN»lar</td><td>INNER, LEFT, RIGHT, FULL, CROSS, SELF JOIN</td></tr>
-<tr><td><strong>9</strong></td><td>Standart funksiyalar bilan so'rovlar</td><td>String, son, sana, CASE, IF, COALESCE</td></tr>
-<tr><td><strong>10</strong></td><td>Agregat funksiyalardan foydalanish</td><td>COUNT, SUM, AVG, MIN, MAX, STD, VARIANCE</td></tr>
-<tr><td><strong>11</strong></td><td>Murakkab so'rovlar yaratish</td><td>Subquery, CTE, Window functions, Recursive</td></tr>
-<tr><td><strong>12</strong></td><td>SQL tilida INDEX yaratish</td><td>B-Tree, UNIQUE, COMPOSITE, FULLTEXT, EXPLAIN</td></tr>
-<tr><td><strong>13</strong></td><td>Tasavvur, VIEW yaratish va foydalanish</td><td>Virtual jadval, Updatable VIEW, WITH CHECK OPTION</td></tr>
-<tr><td><strong>14</strong></td><td>SQLda funksiyalar, protseduralar va triggerlar</td><td>DELIMITER, RETURN, IN/OUT, BEFORE/AFTER, SIGNAL</td></tr>
-<tr><td><strong>15</strong></td><td>Oddiy interfeys yaratish</td><td>Dasturlash tillari, MB, CRUD, HTML formalar</td></tr>
+<tr class="toc-row" onclick="showSection('t1',event)"><td><strong>1</strong></td><td>MB dasturlarini o'rnatish va sozlash</td><td>MySQL Server, Oracle Server, Microsoft SQL Server</td></tr>
+<tr class="toc-row" onclick="showSection('t2',event)"><td><strong>2</strong></td><td>MB loyihalash, mohiyat–aloqa diagrammasi</td><td>Mohiyat, aloqa (1:1, 1:N, M:N), Relyatsion MB, Primary/Foreign Key</td></tr>
+<tr class="toc-row" onclick="showSection('t3',event)"><td><strong>3</strong></td><td>SQL tilida jadvallar yaratish, o'zgartirish va o'chirish</td><td>CREATE, ALTER, DROP, RENAME, TRUNCATE, ma'lumot turlari</td></tr>
+<tr class="toc-row" onclick="showSection('t4',event)"><td><strong>4</strong></td><td>Ma'lumotlarni tanlash. AND, OR, NOR</td><td>SELECT, WHERE, AND, OR, NOR, BETWEEN, IN, LIKE</td></tr>
+<tr class="toc-row" onclick="showSection('t5',event)"><td><strong>5</strong></td><td>Ma'lumotlarni saralash. WHERE</td><td>ORDER BY, LIMIT, OFFSET, WHERE</td></tr>
+<tr class="toc-row" onclick="showSection('t6',event)"><td><strong>6</strong></td><td>GROUP BY, ORDER BY va HAVING bilan so'rovlar</td><td>Agregat funksiyalar, WITH ROLLUP, GROUP_CONCAT</td></tr>
+<tr class="toc-row" onclick="showSection('t7',event)"><td><strong>7</strong></td><td>UNION, INTERSECT va MINUS buyruqlari</td><td>To'plam operatorlari, UNION ALL, MINUS</td></tr>
+<tr class="toc-row" onclick="showSection('t8',event)"><td><strong>8</strong></td><td>Jadvallarni birlashtirish, «JOIN»lar</td><td>INNER, LEFT, RIGHT, FULL, CROSS, SELF JOIN</td></tr>
+<tr class="toc-row" onclick="showSection('t9',event)"><td><strong>9</strong></td><td>Standart funksiyalar bilan so'rovlar</td><td>String, son, sana, CASE, IF, COALESCE</td></tr>
+<tr class="toc-row" onclick="showSection('t10',event)"><td><strong>10</strong></td><td>Agregat funksiyalardan foydalanish</td><td>COUNT, SUM, AVG, MIN, MAX, STD, VARIANCE</td></tr>
+<tr class="toc-row" onclick="showSection('t11',event)"><td><strong>11</strong></td><td>Murakkab so'rovlar yaratish</td><td>Subquery, CTE, Window functions, Recursive</td></tr>
+<tr class="toc-row" onclick="showSection('t12',event)"><td><strong>12</strong></td><td>SQL tilida INDEX yaratish</td><td>B-Tree, UNIQUE, COMPOSITE, FULLTEXT, EXPLAIN</td></tr>
+<tr class="toc-row" onclick="showSection('t13',event)"><td><strong>13</strong></td><td>Tasavvur, VIEW yaratish va foydalanish</td><td>Virtual jadval, Updatable VIEW, WITH CHECK OPTION</td></tr>
+<tr class="toc-row" onclick="showSection('t14',event)"><td><strong>14</strong></td><td>SQLda funksiyalar, protseduralar va triggerlar</td><td>DELIMITER, RETURN, IN/OUT, BEFORE/AFTER, SIGNAL</td></tr>
+<tr class="toc-row" onclick="showSection('t15',event)"><td><strong>15</strong></td><td>Oddiy interfeys yaratish</td><td>Dasturlash tillari, MB, CRUD, HTML formalar</td></tr>
 </tbody>
 </table>
 </div>
