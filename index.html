@@ -65,6 +65,18 @@ h2 .icon-3d{width:30px;height:30px}
 .sidebar .icon-3d{width:18px;height:18px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2))}
 @media print{.icon-3d{filter:none!important;width:20px;height:20px}}
 
+/* ===== MACOS STYLE WINDOW ===== */
+.mac-window{border-radius:12px;overflow:hidden;margin:20px 0;box-shadow:0 10px 40px rgba(0,0,0,0.25),0 0 0 1px rgba(255,255,255,0.05);background:#1e1e2e}
+.mac-titlebar{display:flex;align-items:center;padding:10px 16px;background:linear-gradient(180deg,#3a3a4a,#2d2d3d);border-bottom:1px solid rgba(0,0,0,0.3);gap:8px}
+.mac-dots{display:flex;gap:7px}
+.mac-dot{width:12px;height:12px;border-radius:50%}
+.mac-dot.red{background:#ff5f57;box-shadow:inset 0 -1px 1px rgba(0,0,0,0.15)}
+.mac-dot.yellow{background:#febc2e;box-shadow:inset 0 -1px 1px rgba(0,0,0,0.15)}
+.mac-dot.green{background:#28c840;box-shadow:inset 0 -1px 1px rgba(0,0,0,0.15)}
+.mac-title{flex:1;text-align:center;color:#888;font-size:0.8em;font-family:'Inter',-apple-system,sans-serif;font-weight:500;margin-right:52px}
+.mac-window pre{margin:0!important;border-radius:0 0 12px 12px!important;border:none!important;box-shadow:none!important}
+body.dark-mode .mac-titlebar{background:linear-gradient(180deg,#2a2a3a,#1e1e2e)}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -411,6 +423,12 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     #backpage{page-break-before:always;display:block!important}
     #backpage img{max-width:100%!important;width:100%!important;box-shadow:none!important;border-radius:0!important}
 
+    /* MacOS window — print */
+    .mac-window{box-shadow:none!important;border:1px solid #ccc}
+    .mac-titlebar{background:#f0f0f0!important;border-bottom:1px solid #ddd}
+    .mac-dot.red,.mac-dot.yellow,.mac-dot.green{background:#ccc!important}
+    .mac-title{color:#333!important}
+
     /* Animatsiyalarni o'chirish */
     *{animation:none!important;transition:none!important;transform:none!important}
 }
@@ -585,6 +603,8 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 
 <div class="card">
 <h3><span class="step-number">2</span>MySQL xizmatini tekshirish</h3>
+<div class="mac-window">
+<div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">Terminal — MySQL xizmatini tekshirish</div></div>
 <pre><code><span class="sql-comment">-- CMD dan tekshirish</span>
 sc query MySQL80
 
@@ -594,6 +614,7 @@ sc query MySQL80
 <span class="sql-comment">-- MySQL ga ulanish</span>
 mysql -u root -p
 <span class="sql-comment">-- Parolni kiriting</span></code></pre>
+</div>
 </div>
 
 <div class="card">
@@ -606,6 +627,8 @@ mysql -u root -p
 
 <div class="card">
 <h3><span class="step-number">4</span>Birinchi ma'lumotlar bazasi</h3>
+<div class="mac-window">
+<div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Ma'lumotlar bazasi yaratish</div></div>
 <pre><code><span class="sql-comment">-- Ma'lumotlar bazasi yaratish</span>
 <span class="sql-keyword">CREATE DATABASE</span> university_db;
 <span class="sql-keyword">USE</span> university_db;
@@ -629,9 +652,12 @@ mysql -u root -p
 <span class="sql-comment">-- Ma'lumotlarni ko'rish</span>
 <span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students;</code></pre>
 </div>
+</div>
 
 <div class="card">
 <h3><span class="step-number">5</span>Foydalanuvchi yaratish va huquqlar</h3>
+<div class="mac-window">
+<div class="mac-titlebar"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><div class="mac-title">MySQL Workbench — Foydalanuvchi va huquqlar</div></div>
 <pre><code><span class="sql-comment">-- Yangi foydalanuvchi yaratish</span>
 <span class="sql-keyword">CREATE USER</span> <span class="sql-string">'talaba'</span>@<span class="sql-string">'localhost'</span>
 <span class="sql-keyword">IDENTIFIED BY</span> <span class="sql-string">'Talaba@123'</span>;
@@ -646,6 +672,7 @@ mysql -u root -p
 
 <span class="sql-comment">-- Jadvallar ro'yxati</span>
 <span class="sql-keyword">SHOW TABLES</span>;</code></pre>
+</div>
 </div>
 
 <div class="luxury-divider"></div>
