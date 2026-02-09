@@ -344,64 +344,104 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     .container{padding:16px 12px}
 }
 
-/* ===== PRINT — KITOBCHA (A4, 3-2-2-1.5 cm) ===== */
+/* ===== PRINT — KITOBCHA (A4, optimized pagination) ===== */
 @media print{
     /* A4 sahifa sozlamalari */
     @page{size:A4 portrait;margin:2cm 2cm 1.5cm 3cm}
     @page:first{margin-top:0}
 
-    /* UI elementlarni yashirish */
-    .sidebar,.menu-toggle,.reading-progress,.back-to-top,
-    .copy-btn,.sidebar-overlay,.file-badge,.dark-mode-toggle,
-    .sidebar-search,.sidebar-progress,.check-badge,
-    .print-btn-wrap{display:none!important}
-
-    /* Layout — to'liq kenglik */
-    .main{margin-left:0!important;padding:0!important}
-
-    /* BARCHA sectionlarni ko'rsatish */
-    .section-block{display:block!important;page-break-before:auto}
-    .section-block+.section-block{page-break-before:always}
-
-    /* Kontent ichida uzilishni oldini olish */
-    .container,.card,.card-flat,.theory-box,.warning-box,
-    .tip-box,.info-box,.meta-info{
-        page-break-inside:avoid;
-        box-shadow:none!important;
-        border:1px solid #ddd;
-        border-radius:4px;
-        padding:15px;
-        margin:10px 0
-    }
-    pre{
-        page-break-inside:avoid;
-        box-shadow:none!important;
-        font-size:8pt;
-        line-height:1.5;
-        border:1px solid #ccc;
-        padding:10px;
-        border-radius:4px
-    }
-    table{page-break-inside:avoid;width:100%;border-collapse:collapse}
-    tr{page-break-inside:avoid}
-    td,th{border:1px solid #999;padding:6px 8px;font-size:9pt}
-    h2,h3{page-break-after:avoid}
-    img{max-width:100%;page-break-inside:avoid}
-
-    /* Kitobcha tipografiyasi */
+    /* Global print color preservation */
     body{
         background:#fff!important;
         color:#1a1a1a!important;
         font-family:'Inter','Segoe UI',Arial,sans-serif;
         font-size:10pt;
-        line-height:1.6
+        line-height:1.6;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
     }
+
+    /* UI elementlarni yashirish */
+    .sidebar,.menu-toggle,.reading-progress,.back-to-top,
+    .copy-btn,.sidebar-overlay,.file-badge,.dark-mode-toggle,
+    .sidebar-search,.sidebar-progress,.check-badge,
+    .print-btn-wrap,.admin-toolbar,.admin-badge,
+    .admin-insert-marker,.admin-delete-component,
+    .admin-modal-overlay{display:none!important}
+
+    /* Layout — to'liq kenglik */
+    .main{margin-left:0!important;margin-right:0!important;padding:0!important}
+
+    /* Animatsiyalarni o'chirish */
+    *{animation:none!important;transition:none!important}
+    *:hover{transform:none!important}
+
+    /* ---- SECTION PAGINATION ---- */
+    /* Show all sections for print */
+    .section-block{display:block!important;break-before:auto}
+    .section-block+.section-block{break-before:page}
+
+    /* Container — MUST allow breaking (lessons are too long for avoid) */
+    .container{
+        box-shadow:none!important;
+        padding:15px 0;
+        background:#fff!important;
+        border-radius:0;
+        border:none;
+        break-inside:auto
+    }
+
+    /* ---- SMALL ELEMENTS — avoid breaking inside ---- */
+    .theory-box,.warning-box,.tip-box,.info-box,.meta-info{
+        break-inside:avoid;
+        box-shadow:none!important;
+        border-radius:12px;
+        padding:15px 18px;
+        margin:10px 0
+    }
+    .card,.card-flat{
+        break-inside:auto;
+        box-shadow:none!important;
+        border:1px solid #e0e0e0;
+        border-radius:12px;
+        padding:20px 22px;
+        margin:12px 0
+    }
+
+    /* ---- CODE BLOCKS — allow breaking for long blocks ---- */
+    pre{
+        break-inside:auto;
+        box-shadow:none!important;
+        font-size:8pt;
+        line-height:1.5;
+        border:1px solid #ccc;
+        padding:10px;
+        border-radius:8px;
+        overflow:visible!important;
+        white-space:pre-wrap;
+        word-wrap:break-word
+    }
+
+    /* ---- TABLES — allow breaking, keep rows intact ---- */
+    table{
+        break-inside:auto;
+        width:100%;
+        border-collapse:collapse;
+        overflow:visible!important;
+        border-radius:0!important
+    }
+    thead{display:table-header-group}
+    tr{break-inside:avoid}
+    td,th{border:1px solid #999;padding:6px 8px;font-size:9pt}
+
+    /* ---- HEADINGS — keep with next content ---- */
     h1{
         font-family:'Playfair Display',Georgia,serif;
         font-size:22pt;
         color:#1a1a1a!important;
         text-align:center;
-        margin-bottom:10px
+        margin-bottom:10px;
+        break-after:avoid
     }
     h2{
         font-family:'Playfair Display',Georgia,serif;
@@ -409,59 +449,220 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
         color:#1a1a1a!important;
         margin-top:20px;
         border-bottom:2px solid #d4af37;
-        padding-bottom:5px
+        padding-bottom:5px;
+        break-after:avoid
     }
-    h2::before{background:#d4af37!important}
-    h3{font-size:12pt;color:#333!important;margin-top:15px}
+    h2::before{background:#d4af37!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    h3{font-size:12pt;color:#333!important;margin-top:15px;break-after:avoid}
     p,li{font-size:10pt;line-height:1.6;orphans:3;widows:3}
 
-    /* Ranglar — CSS variablelarsiz */
-    .cover{box-shadow:none!important;background:#fff!important;border:none;padding:40px 20px}
-    .container{box-shadow:none!important;padding:10px 0;background:#fff!important;border-radius:0;border:none}
-    .gold-line{background:#d4af37!important;height:2px}
+    /* ---- IMAGES ---- */
+    img{max-width:100%;break-inside:avoid}
 
-    /* Code — print friendly */
+    /* ---- FLEX GRIDS → linearize for print ---- */
+    .concept-grid,.func-grid,.join-diagram,.flow-diagram{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px
+    }
+    .concept-grid>.concept-card,
+    .func-grid>.func-card{
+        flex:1 1 100%;
+        max-width:100%;
+        min-width:0;
+        break-inside:avoid;
+        box-shadow:none!important;
+        border:1px solid #e0e0e0;
+        border-radius:12px
+    }
+    .join-visual{
+        flex:1 1 100%;
+        max-width:100%;
+        min-width:0;
+        break-inside:avoid
+    }
+    .join-visual svg{max-width:200px}
+
+    /* ---- COVER — premium look preserved ---- */
+    .cover{
+        box-shadow:none!important;
+        background:#fff!important;
+        border:none;
+        padding:40px 20px;
+        text-align:center
+    }
+    #cover .cover{padding:10px 20px!important;margin:0!important;border:none!important}
+    #cover .cover img{
+        max-width:100%!important;
+        width:100%!important;
+        border-radius:8px!important;
+        box-shadow:none!important
+    }
+    .gold-line{
+        background:#d4af37!important;
+        height:2px;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
+    .cover .stats{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+    .cover .stat{
+        box-shadow:none!important;
+        border:1px solid #e0e0e0;
+        border-radius:12px;
+        padding:12px 18px
+    }
+
+    /* ---- BACK PAGE — last page ---- */
+    #backpage{break-before:page;display:block!important}
+    #backpage .cover{padding:10px 20px!important}
+    #backpage img{
+        max-width:100%!important;
+        width:100%!important;
+        box-shadow:none!important;
+        border-radius:8px!important
+    }
+
+    /* ---- CODE — print friendly but keep dark for mac-window ---- */
     pre{background:#f8f8f8!important;color:#1a1a1a!important}
     code{background:#f0f0f0!important;color:#333!important;font-size:8.5pt}
     pre code{background:transparent!important}
 
-    /* Info boxlar — solid ranglar */
-    .theory-box{background:#fffbe6!important;border-left:4px solid #d4af37!important}
-    .warning-box{background:#fff5f5!important;border-left:4px solid #e74c3c!important}
-    .tip-box{background:#f0fff0!important;border-left:4px solid #27ae60!important}
-    .result-ok{background:#f0fff0!important;border-left:4px solid #28c840!important;font-family:'Courier New',monospace;font-size:9pt;padding:8px 12px;margin:8px 0}
-    .info-box{background:#f0f5ff!important;border-left:4px solid #3498db!important}
+    /* ---- INFO BOXES — solid colors with premium look ---- */
+    .theory-box{
+        background:#fffbe6!important;
+        border:1px solid rgba(212,175,55,0.3);
+        border-left:4px solid #d4af37!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
+    .warning-box{
+        background:#fff5f5!important;
+        border:1px solid rgba(231,76,60,0.3);
+        border-left:4px solid #e74c3c!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
+    .tip-box{
+        background:#f0fff0!important;
+        border:1px solid rgba(39,174,96,0.3);
+        border-left:4px solid #27ae60!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
+    .info-box{
+        background:#f0f5ff!important;
+        border:1px solid rgba(52,152,219,0.3);
+        border-left:4px solid #3498db!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
+    .result-ok{
+        background:#f0fff0!important;
+        border-left:4px solid #28c840!important;
+        font-family:'Courier New',monospace;
+        font-size:9pt;
+        padding:8px 12px;
+        margin:8px 0;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
 
-    /* Syntax highlighting */
+    /* ---- SYNTAX HIGHLIGHTING ---- */
     .sql-keyword{color:#c71585!important;font-weight:bold}
     .sql-string{color:#b8860b!important}
     .sql-comment{color:#666!important}
     .sql-function{color:#0066cc!important}
 
-    /* Cover rasm — 1-sahifa */
-    #cover .cover img{max-width:100%!important;width:100%!important;border-radius:0!important;box-shadow:none!important}
-    #cover .cover{padding:0!important;margin:0!important;border:none!important}
-
-    /* Back page — oxirgi sahifa */
-    #backpage{page-break-before:always;display:block!important}
-    #backpage img{max-width:100%!important;width:100%!important;box-shadow:none!important;border-radius:0!important}
-
-    /* MacOS window — print (saytdagidek ranglar saqlanadi) */
-    .mac-window{border:1px solid #333;border-radius:12px;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .mac-titlebar{background:#2d2d3d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    /* ---- MacOS WINDOW — preserve dark theme look ---- */
+    .mac-window{
+        border:1px solid #333;
+        border-radius:12px;
+        overflow:visible!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+        break-inside:auto
+    }
+    .mac-titlebar{
+        background:#2d2d3d!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
     .mac-dot.red{background:#ff5f57!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .mac-dot.yellow{background:#febc2e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .mac-dot.green{background:#28c840!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .mac-title{color:#888!important}
-    .mac-window pre{background:#1e1e2e!important;color:#f8f8f2!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window pre{
+        background:#1e1e2e!important;
+        color:#f8f8f2!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+        border:none;
+        border-radius:0 0 12px 12px;
+        overflow:visible!important
+    }
     .mac-window code{background:transparent!important;color:#f8f8f2!important}
     .mac-window .sql-keyword{color:#ff79c6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .mac-window .sql-string{color:#f1fa8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .mac-window .sql-comment{color:#6272a4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .mac-window .sql-number{color:#bd93f9!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .sql-function{color:#50fa7b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .sql-operator{color:#ffb86c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
-    /* Animatsiyalarni o'chirish */
-    *{animation:none!important;transition:none!important;transform:none!important}
+    /* ---- PREMIUM TABLE HEADER — preserve gold on dark ---- */
+    thead th{
+        background:#1a1a1a!important;
+        color:#d4af37!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+        border-bottom:2px solid #d4af37
+    }
+
+    /* ---- MISC ELEMENTS ---- */
+    .step-number{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
+    .result-label{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
+    .luxury-divider{
+        background:#d4af37!important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+        break-after:auto
+    }
+    .screenshot-box{
+        box-shadow:none!important;
+        border:1px solid #e0e0e0;
+        border-radius:12px;
+        break-inside:avoid
+    }
+    .meta-info{
+        box-shadow:none!important;
+        border:1px solid #e0e0e0;
+        border-radius:12px;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact
+    }
+
+    /* ---- PYTHON / HTML / CSS syntax in mac-window ---- */
+    .mac-window .py-keyword{color:#ff79c6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .py-string{color:#f1fa8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .py-func{color:#50fa7b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .py-comment{color:#6272a4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .py-class{color:#8be9fd!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .py-number{color:#bd93f9!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .py-decorator{color:#ffb86c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .py-self{color:#ff79c6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .py-builtin{color:#8be9fd!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .html-tag{color:#ff79c6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .html-attr{color:#50fa7b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .html-val{color:#f1fa8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .css-prop{color:#8be9fd!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .css-val{color:#f1fa8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .jinja{color:#ffb86c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 
 /* ===== ADMIN PANEL STYLES ===== */
@@ -595,10 +796,7 @@ body.admin-mode .admin-badge{display:block}
 .admin-modal textarea{resize:vertical;min-height:60px}
 .admin-modal-actions{display:flex;gap:10px;margin-top:6px}
 .admin-modal-actions button{flex:1}
-@media print{
-    .admin-toolbar,.admin-badge,.admin-insert-marker,.admin-delete-component,.admin-modal-overlay{display:none!important}
-    body.admin-mode .main{margin-right:0!important}
-}
+/* admin print rules consolidated into main @media print block above */
 @media(max-width:900px){
     .admin-toolbar{width:300px;right:-310px}
     body.admin-mode .main{margin-right:0}
