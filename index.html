@@ -423,11 +423,19 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     #backpage{page-break-before:always;display:block!important}
     #backpage img{max-width:100%!important;width:100%!important;box-shadow:none!important;border-radius:0!important}
 
-    /* MacOS window — print */
-    .mac-window{box-shadow:none!important;border:1px solid #ccc}
-    .mac-titlebar{background:#f0f0f0!important;border-bottom:1px solid #ddd}
-    .mac-dot.red,.mac-dot.yellow,.mac-dot.green{background:#ccc!important}
-    .mac-title{color:#333!important}
+    /* MacOS window — print (saytdagidek ranglar saqlanadi) */
+    .mac-window{border:1px solid #333;border-radius:12px;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-titlebar{background:#2d2d3d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-dot.red{background:#ff5f57!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-dot.yellow{background:#febc2e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-dot.green{background:#28c840!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-title{color:#888!important}
+    .mac-window pre{background:#1e1e2e!important;color:#f8f8f2!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window code{background:transparent!important;color:#f8f8f2!important}
+    .mac-window .sql-keyword{color:#ff79c6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .sql-string{color:#f1fa8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .sql-comment{color:#6272a4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .mac-window .sql-number{color:#bd93f9!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
     /* Animatsiyalarni o'chirish */
     *{animation:none!important;transition:none!important;transform:none!important}
