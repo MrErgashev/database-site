@@ -400,15 +400,13 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
         margin:10px 0
     }
     .card,.card-flat{
-        break-inside:avoid;
+        break-inside:auto;
         box-shadow:none!important;
         border:1px solid #e0e0e0;
         border-radius:12px;
         padding:20px 22px;
         margin:12px 0
     }
-    /* If a card is very tall, allow Chrome to break inside it */
-    .card,.card-flat{break-inside:auto}
 
     /* ---- CODE BLOCKS — allow breaking for long blocks ---- */
     pre{
@@ -533,7 +531,6 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     /* ---- INFO BOXES — solid colors with premium look ---- */
     .theory-box{
         background:#fffbe6!important;
-        border-left:4px solid #d4af37!important;
         border:1px solid rgba(212,175,55,0.3);
         border-left:4px solid #d4af37!important;
         -webkit-print-color-adjust:exact;
