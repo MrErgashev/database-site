@@ -235,6 +235,10 @@ p{margin:12px 0}
 
 .step-number{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border-radius:50%;font-weight:700;font-size:0.95em;margin-right:12px;box-shadow:3px 3px 6px var(--shadow-neu-dark)}
 .result-label{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;padding:5px 16px;border-radius:20px;font-size:0.85em;font-weight:600;margin:15px 0 10px 0}
+.result-ok{background:linear-gradient(135deg,rgba(40,200,64,0.08),rgba(40,200,64,0.03));border-radius:var(--radius-sm);padding:14px 20px;margin:15px 0 10px 0;border:1px solid rgba(40,200,64,0.2);border-left:4px solid #28c840;font-family:'JetBrains Mono','Courier New',monospace;font-size:0.82em;line-height:1.8;color:var(--text)}
+.result-ok .rok-line{display:block;padding:2px 0}
+.result-ok .rok-line .rok-icon{margin-right:6px}
+body.dark-mode .result-ok{background:linear-gradient(135deg,rgba(40,200,64,0.1),rgba(40,200,64,0.04));border-color:rgba(40,200,64,0.25)}
 
 .concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:25px 0}
 .concept-card{background:var(--bg-card);border-radius:18px;padding:22px;text-align:center;box-shadow:5px 5px 10px var(--shadow-neu-dark),-5px -5px 10px var(--shadow-neu-light);border-top:4px solid var(--gold);transition:all var(--transition-fast)}
@@ -407,6 +411,7 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
     .theory-box{background:#fffbe6!important;border-left:4px solid #d4af37!important}
     .warning-box{background:#fff5f5!important;border-left:4px solid #e74c3c!important}
     .tip-box{background:#f0fff0!important;border-left:4px solid #27ae60!important}
+    .result-ok{background:#f0fff0!important;border-left:4px solid #28c840!important;font-family:'Courier New',monospace;font-size:9pt;padding:8px 12px;margin:8px 0}
     .info-box{background:#f0f5ff!important;border-left:4px solid #3498db!important}
 
     /* Syntax highlighting */
@@ -623,6 +628,11 @@ sc query MySQL80
 mysql -u root -p
 <span class="sql-comment">-- Parolni kiriting</span></code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>SERVICE_NAME: MySQL80 — STATE: 4 RUNNING</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Welcome to the MySQL monitor. Server version: 8.0.36</span>
+<span class="rok-line">mysql></span>
+</div>
 </div>
 
 <div class="card">
@@ -660,6 +670,22 @@ mysql -u root -p
 <span class="sql-comment">-- Ma'lumotlarni ko'rish</span>
 <span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students;</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 3 rows affected (0.01 sec) — <code>INSERT INTO</code></span>
+<span class="rok-line">Records: 3 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<span class="result-label">📋 Natija — SELECT * FROM students</span>
+<table>
+<thead><tr><th>id</th><th>fname</th><th>lname</th><th>age</th><th>faculty</th><th>gpa</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Alisher</td><td>Karimov</td><td>20</td><td>Informatika</td><td>4.50</td></tr>
+<tr><td>2</td><td>Malika</td><td>Rahimova</td><td>21</td><td>Iqtisodiyot</td><td>3.80</td></tr>
+<tr><td>3</td><td>Jasur</td><td>Toshmatov</td><td>19</td><td>Informatika</td><td>4.20</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="card">
@@ -681,6 +707,29 @@ mysql -u root -p
 <span class="sql-comment">-- Jadvallar ro'yxati</span>
 <span class="sql-keyword">SHOW TABLES</span>;</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE USER</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>GRANT ALL PRIVILEGES</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>FLUSH PRIVILEGES</code></span>
+</div>
+<span class="result-label">📋 Natija — SHOW DATABASES</span>
+<table>
+<thead><tr><th>Database</th></tr></thead>
+<tbody>
+<tr><td>information_schema</td></tr>
+<tr><td>mysql</td></tr>
+<tr><td>performance_schema</td></tr>
+<tr><td>sys</td></tr>
+<tr><td>university_db</td></tr>
+</tbody>
+</table>
+<span class="result-label">📋 Natija — SHOW TABLES</span>
+<table>
+<thead><tr><th>Tables_in_university_db</th></tr></thead>
+<tbody>
+<tr><td>students</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -821,6 +870,16 @@ mysql -u root -p
     <span class="sql-keyword">FOREIGN KEY</span> (fan_id) <span class="sql-keyword">REFERENCES</span> fanlar(id)
 );</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE fakultetlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE yonalishlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE guruhlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE talabalar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE fanlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE baholar</code></span>
+</div>
 </div>
 
 <div class="card">
@@ -849,6 +908,24 @@ mysql -u root -p
 <span class="sql-keyword">INNER JOIN</span> yonalishlar y <span class="sql-keyword">ON</span> g.yonalish_id = y.id
 <span class="sql-keyword">INNER JOIN</span> fakultetlar f <span class="sql-keyword">ON</span> y.fakultet_id = f.id;</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 2 rows affected (0.01 sec) — <code>INSERT INTO fakultetlar</code></span>
+<span class="rok-line">Records: 2 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 2 rows affected (0.01 sec) — <code>INSERT INTO yonalishlar</code></span>
+<span class="rok-line">Records: 2 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 2 rows affected (0.01 sec) — <code>INSERT INTO guruhlar</code></span>
+<span class="rok-line">Records: 2 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 2 rows affected (0.01 sec) — <code>INSERT INTO talabalar</code></span>
+<span class="rok-line">Records: 2 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
+<span class="result-label">📋 Natija — SELECT ... JOIN</span>
+<table>
+<thead><tr><th>ism</th><th>familiya</th><th>guruh</th><th>yonalish</th><th>fakultet</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>Karimov</td><td>DI-21</td><td>Dasturiy injiniring</td><td>Informatika</td></tr>
+<tr><td>Malika</td><td>Tursunova</td><td>MA-22</td><td>Moliya va audit</td><td>Iqtisodiyot</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -931,6 +1008,26 @@ mysql -u root -p
 
 <span class="sql-keyword">DESCRIBE</span> xodimlar;</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.04 sec) — <code>CREATE TABLE xodimlar</code></span>
+</div>
+<span class="result-label">📋 Natija — DESCRIBE xodimlar</span>
+<table>
+<thead><tr><th>Field</th><th>Type</th><th>Null</th><th>Key</th><th>Default</th><th>Extra</th></tr></thead>
+<tbody>
+<tr><td>id</td><td>int</td><td>NO</td><td>PRI</td><td>NULL</td><td>auto_increment</td></tr>
+<tr><td>ism</td><td>varchar(50)</td><td>NO</td><td></td><td>NULL</td><td></td></tr>
+<tr><td>familiya</td><td>varchar(50)</td><td>NO</td><td></td><td>NULL</td><td></td></tr>
+<tr><td>email</td><td>varchar(100)</td><td>YES</td><td>UNI</td><td>NULL</td><td></td></tr>
+<tr><td>maosh</td><td>decimal(12,2)</td><td>YES</td><td></td><td>0.00</td><td></td></tr>
+<tr><td>yosh</td><td>int</td><td>YES</td><td></td><td>NULL</td><td></td></tr>
+<tr><td>bolim</td><td>varchar(50)</td><td>YES</td><td></td><td>NULL</td><td></td></tr>
+<tr><td>ishga_kirgan</td><td>date</td><td>YES</td><td></td><td>curdate()</td><td>DEFAULT_GENERATED</td></tr>
+<tr><td>holat</td><td>enum('faol','nofaol')</td><td>YES</td><td></td><td>faol</td><td></td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="card">
@@ -957,6 +1054,17 @@ mysql -u root -p
 <span class="sql-keyword">RENAME TABLE</span> xodimlar <span class="sql-keyword">TO</span> employees;
 <span class="sql-keyword">RENAME TABLE</span> employees <span class="sql-keyword">TO</span> xodimlar;</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.05 sec) — <code>ADD COLUMN telefon</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.04 sec) — <code>ADD COLUMN manzil</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>MODIFY COLUMN email</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.04 sec) — <code>CHANGE COLUMN yosh → tug_yili</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>DROP COLUMN manzil</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>ADD INDEX idx_bolim</code></span>
+<span class="rok-line">Records: 0 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>RENAME TABLE xodimlar → employees</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>RENAME TABLE employees → xodimlar</code></span>
+</div>
 </div>
 
 <div class="card">
@@ -976,6 +1084,12 @@ mysql -u root -p
 <span class="sql-comment">-- DROP va TRUNCATE farqi:</span>
 <span class="sql-comment">-- TRUNCATE: tez, AUTO_INCREMENT ni qaytaradi, ROLLBACK mumkin emas</span>
 <span class="sql-comment">-- DELETE: sekin, WHERE bilan, ROLLBACK mumkin</span></code></pre>
+</div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE test_jadval</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>INSERT INTO test_jadval</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>TRUNCATE TABLE test_jadval</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.01 sec) — <code>DROP TABLE IF EXISTS test_jadval</code></span>
 </div>
 </div>
 
@@ -1046,6 +1160,13 @@ mysql -u root -p
 (<span class="sql-number">4</span>, <span class="sql-string">'HP Pavilion'</span>, <span class="sql-string">'Noutbuklar'</span>, <span class="sql-string">'HP'</span>, <span class="sql-number">8500000</span>, <span class="sql-number">15</span>, <span class="sql-number">15</span>, <span class="sql-string">'2024-03-05'</span>),
 (<span class="sql-number">5</span>, <span class="sql-string">'Xiaomi 14'</span>, <span class="sql-string">'Telefonlar'</span>, <span class="sql-string">'Xiaomi'</span>, <span class="sql-number">6500000</span>, <span class="sql-number">50</span>, <span class="sql-number">0</span>, <span class="sql-string">'2024-02-10'</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE mahsulotlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 5 rows affected (0.01 sec) — <code>INSERT INTO mahsulotlar</code></span>
+<span class="rok-line">Records: 5 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
 </div>
 
 <div class="card">
@@ -1074,6 +1195,76 @@ mysql -u root -p
 <span class="sql-keyword">WHERE</span> (kategoriya = <span class="sql-string">'Telefonlar'</span> <span class="sql-keyword">AND</span> narx &lt; <span class="sql-number">10000000</span>)
    <span class="sql-keyword">OR</span> (kategoriya = <span class="sql-string">'Noutbuklar'</span> <span class="sql-keyword">AND</span> chegirma > <span class="sql-number">0</span>);</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — WHERE AND (Apple telefonlari)</span>
+<table>
+<thead><tr><th>id</th><th>nomi</th><th>kategoriya</th><th>ishlab_chiqaruvchi</th><th>narx</th><th>soni</th><th>chegirma</th><th>qoshilgan</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>iPhone 15 Pro</td><td>Telefonlar</td><td>Apple</td><td>15000000</td><td>20</td><td>5</td><td>2024-01-15</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — WHERE OR (Telefonlar yoki Noutbuklar)</span>
+<table>
+<thead><tr><th>id</th><th>nomi</th><th>kategoriya</th><th>ishlab_chiqaruvchi</th><th>narx</th><th>soni</th><th>chegirma</th><th>qoshilgan</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>iPhone 15 Pro</td><td>Telefonlar</td><td>Apple</td><td>15000000</td><td>20</td><td>5</td><td>2024-01-15</td></tr>
+<tr><td>2</td><td>Samsung S24</td><td>Telefonlar</td><td>Samsung</td><td>12000000</td><td>35</td><td>10</td><td>2024-02-01</td></tr>
+<tr><td>3</td><td>MacBook Pro</td><td>Noutbuklar</td><td>Apple</td><td>25000000</td><td>10</td><td>0</td><td>2024-01-20</td></tr>
+<tr><td>4</td><td>HP Pavilion</td><td>Noutbuklar</td><td>HP</td><td>8500000</td><td>15</td><td>15</td><td>2024-03-05</td></tr>
+<tr><td>5</td><td>Xiaomi 14</td><td>Telefonlar</td><td>Xiaomi</td><td>6500000</td><td>50</td><td>0</td><td>2024-02-10</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — WHERE NOT (Apple emas)</span>
+<table>
+<thead><tr><th>id</th><th>nomi</th><th>kategoriya</th><th>ishlab_chiqaruvchi</th><th>narx</th><th>soni</th><th>chegirma</th><th>qoshilgan</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>Samsung S24</td><td>Telefonlar</td><td>Samsung</td><td>12000000</td><td>35</td><td>10</td><td>2024-02-01</td></tr>
+<tr><td>4</td><td>HP Pavilion</td><td>Noutbuklar</td><td>HP</td><td>8500000</td><td>15</td><td>15</td><td>2024-03-05</td></tr>
+<tr><td>5</td><td>Xiaomi 14</td><td>Telefonlar</td><td>Xiaomi</td><td>6500000</td><td>50</td><td>0</td><td>2024-02-10</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — BETWEEN 5000000 AND 15000000</span>
+<table>
+<thead><tr><th>id</th><th>nomi</th><th>kategoriya</th><th>ishlab_chiqaruvchi</th><th>narx</th><th>soni</th><th>chegirma</th><th>qoshilgan</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>iPhone 15 Pro</td><td>Telefonlar</td><td>Apple</td><td>15000000</td><td>20</td><td>5</td><td>2024-01-15</td></tr>
+<tr><td>2</td><td>Samsung S24</td><td>Telefonlar</td><td>Samsung</td><td>12000000</td><td>35</td><td>10</td><td>2024-02-01</td></tr>
+<tr><td>4</td><td>HP Pavilion</td><td>Noutbuklar</td><td>HP</td><td>8500000</td><td>15</td><td>15</td><td>2024-03-05</td></tr>
+<tr><td>5</td><td>Xiaomi 14</td><td>Telefonlar</td><td>Xiaomi</td><td>6500000</td><td>50</td><td>0</td><td>2024-02-10</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — IN ('Apple','Samsung')</span>
+<table>
+<thead><tr><th>id</th><th>nomi</th><th>kategoriya</th><th>ishlab_chiqaruvchi</th><th>narx</th><th>soni</th><th>chegirma</th><th>qoshilgan</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>iPhone 15 Pro</td><td>Telefonlar</td><td>Apple</td><td>15000000</td><td>20</td><td>5</td><td>2024-01-15</td></tr>
+<tr><td>2</td><td>Samsung S24</td><td>Telefonlar</td><td>Samsung</td><td>12000000</td><td>35</td><td>10</td><td>2024-02-01</td></tr>
+<tr><td>3</td><td>MacBook Pro</td><td>Noutbuklar</td><td>Apple</td><td>25000000</td><td>10</td><td>0</td><td>2024-01-20</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — LIKE '%Pro%'</span>
+<table>
+<thead><tr><th>id</th><th>nomi</th><th>kategoriya</th><th>ishlab_chiqaruvchi</th><th>narx</th><th>soni</th><th>chegirma</th><th>qoshilgan</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>iPhone 15 Pro</td><td>Telefonlar</td><td>Apple</td><td>15000000</td><td>20</td><td>5</td><td>2024-01-15</td></tr>
+<tr><td>3</td><td>MacBook Pro</td><td>Noutbuklar</td><td>Apple</td><td>25000000</td><td>10</td><td>0</td><td>2024-01-20</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — Murakkab kombinatsiya</span>
+<table>
+<thead><tr><th>id</th><th>nomi</th><th>kategoriya</th><th>ishlab_chiqaruvchi</th><th>narx</th><th>soni</th><th>chegirma</th><th>qoshilgan</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>Samsung S24</td><td>Telefonlar</td><td>Samsung</td><td>12000000</td><td>35</td><td>10</td><td>2024-02-01</td></tr>
+<tr><td>4</td><td>HP Pavilion</td><td>Noutbuklar</td><td>HP</td><td>8500000</td><td>15</td><td>15</td><td>2024-03-05</td></tr>
+<tr><td>5</td><td>Xiaomi 14</td><td>Telefonlar</td><td>Xiaomi</td><td>6500000</td><td>50</td><td>0</td><td>2024-02-10</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -1127,6 +1318,13 @@ mysql -u root -p
 (<span class="sql-number">4</span>,<span class="sql-string">'Nodira'</span>,<span class="sql-string">'Azimova'</span>,<span class="sql-string">'HQ-23'</span>,<span class="sql-string">'Huquq'</span>,<span class="sql-number">88.5</span>,<span class="sql-number">600000</span>,<span class="sql-string">'A'</span>,<span class="sql-string">'2004-07-10'</span>),
 (<span class="sql-number">5</span>,<span class="sql-string">'Sardor'</span>,<span class="sql-string">'Ergashev'</span>,<span class="sql-string">'DI-22'</span>,<span class="sql-string">'Informatika'</span>,<span class="sql-number">95.0</span>,<span class="sql-number">800000</span>,<span class="sql-string">'E'</span>,<span class="sql-string">'2003-03-25'</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE talabalar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 5 rows affected (0.01 sec) — <code>INSERT INTO talabalar</code></span>
+<span class="rok-line">Records: 5 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
 </div>
 
 <div class="card">
@@ -1153,6 +1351,69 @@ mysql -u root -p
 <span class="sql-keyword">FROM</span> talabalar <span class="sql-keyword">GROUP BY</span> fakultet
 <span class="sql-keyword">HAVING</span> <span class="sql-function">AVG</span>(ball) > <span class="sql-number">85</span>;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — WHERE ball >= 85</span>
+<table>
+<thead><tr><th>id</th><th>ism</th><th>familiya</th><th>guruh_nomi</th><th>fakultet</th><th>ball</th><th>stipendiya</th><th>jinsi</th><th>tug_sana</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Alisher</td><td>Karimov</td><td>DI-21</td><td>Informatika</td><td>85.5</td><td>500000</td><td>E</td><td>2003-05-15</td></tr>
+<tr><td>2</td><td>Malika</td><td>Rahimova</td><td>IQ-22</td><td>Iqtisodiyot</td><td>92.0</td><td>700000</td><td>A</td><td>2004-01-20</td></tr>
+<tr><td>4</td><td>Nodira</td><td>Azimova</td><td>HQ-23</td><td>Huquq</td><td>88.5</td><td>600000</td><td>A</td><td>2004-07-10</td></tr>
+<tr><td>5</td><td>Sardor</td><td>Ergashev</td><td>DI-22</td><td>Informatika</td><td>95.0</td><td>800000</td><td>E</td><td>2003-03-25</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — ORDER BY ball DESC</span>
+<table>
+<thead><tr><th>id</th><th>ism</th><th>familiya</th><th>guruh_nomi</th><th>fakultet</th><th>ball</th><th>stipendiya</th><th>jinsi</th><th>tug_sana</th></tr></thead>
+<tbody>
+<tr><td>5</td><td>Sardor</td><td>Ergashev</td><td>DI-22</td><td>Informatika</td><td>95.0</td><td>800000</td><td>E</td><td>2003-03-25</td></tr>
+<tr><td>2</td><td>Malika</td><td>Rahimova</td><td>IQ-22</td><td>Iqtisodiyot</td><td>92.0</td><td>700000</td><td>A</td><td>2004-01-20</td></tr>
+<tr><td>4</td><td>Nodira</td><td>Azimova</td><td>HQ-23</td><td>Huquq</td><td>88.5</td><td>600000</td><td>A</td><td>2004-07-10</td></tr>
+<tr><td>1</td><td>Alisher</td><td>Karimov</td><td>DI-21</td><td>Informatika</td><td>85.5</td><td>500000</td><td>E</td><td>2003-05-15</td></tr>
+<tr><td>3</td><td>Jasur</td><td>Toshmatov</td><td>DI-21</td><td>Informatika</td><td>78.0</td><td>400000</td><td>E</td><td>2003-11-03</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — ORDER BY ball DESC LIMIT 3</span>
+<table>
+<thead><tr><th>id</th><th>ism</th><th>familiya</th><th>guruh_nomi</th><th>fakultet</th><th>ball</th><th>stipendiya</th><th>jinsi</th><th>tug_sana</th></tr></thead>
+<tbody>
+<tr><td>5</td><td>Sardor</td><td>Ergashev</td><td>DI-22</td><td>Informatika</td><td>95.0</td><td>800000</td><td>E</td><td>2003-03-25</td></tr>
+<tr><td>2</td><td>Malika</td><td>Rahimova</td><td>IQ-22</td><td>Iqtisodiyot</td><td>92.0</td><td>700000</td><td>A</td><td>2004-01-20</td></tr>
+<tr><td>4</td><td>Nodira</td><td>Azimova</td><td>HQ-23</td><td>Huquq</td><td>88.5</td><td>600000</td><td>A</td><td>2004-07-10</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — LIMIT 3 OFFSET 2</span>
+<table>
+<thead><tr><th>id</th><th>ism</th><th>familiya</th><th>guruh_nomi</th><th>fakultet</th><th>ball</th><th>stipendiya</th><th>jinsi</th><th>tug_sana</th></tr></thead>
+<tbody>
+<tr><td>3</td><td>Jasur</td><td>Toshmatov</td><td>DI-21</td><td>Informatika</td><td>78.0</td><td>400000</td><td>E</td><td>2003-11-03</td></tr>
+<tr><td>4</td><td>Nodira</td><td>Azimova</td><td>HQ-23</td><td>Huquq</td><td>88.5</td><td>600000</td><td>A</td><td>2004-07-10</td></tr>
+<tr><td>5</td><td>Sardor</td><td>Ergashev</td><td>DI-22</td><td>Informatika</td><td>95.0</td><td>800000</td><td>E</td><td>2003-03-25</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — GROUP BY fakultet</span>
+<table>
+<thead><tr><th>fakultet</th><th>soni</th><th>ort_ball</th></tr></thead>
+<tbody>
+<tr><td>Huquq</td><td>1</td><td>88.50</td></tr>
+<tr><td>Informatika</td><td>3</td><td>86.17</td></tr>
+<tr><td>Iqtisodiyot</td><td>1</td><td>92.00</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — HAVING AVG(ball) > 85</span>
+<table>
+<thead><tr><th>fakultet</th><th>ort_ball</th></tr></thead>
+<tbody>
+<tr><td>Huquq</td><td>88.50</td></tr>
+<tr><td>Informatika</td><td>86.17</td></tr>
+<tr><td>Iqtisodiyot</td><td>92.00</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -1198,6 +1459,14 @@ mysql -u root -p
 (<span class="sql-string">'Jasur'</span>,<span class="sql-string">'IT'</span>,<span class="sql-number">9000000</span>,<span class="sql-string">'E'</span>),(<span class="sql-string">'Nodira'</span>,<span class="sql-string">'Moliya'</span>,<span class="sql-number">11000000</span>,<span class="sql-string">'A'</span>),
 (<span class="sql-string">'Sardor'</span>,<span class="sql-string">'Sotuv'</span>,<span class="sql-number">7500000</span>,<span class="sql-string">'E'</span>),(<span class="sql-string">'Gulnora'</span>,<span class="sql-string">'Moliya'</span>,<span class="sql-number">10000000</span>,<span class="sql-string">'A'</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.03 sec) — <code>CREATE TABLE xodimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE sotuvlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 6 rows affected (0.01 sec) — <code>INSERT INTO xodimlar</code></span>
+<span class="rok-line">Records: 6 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
 </div>
 
 <div class="card">
@@ -1223,6 +1492,47 @@ mysql -u root -p
 <span class="sql-keyword">SELECT</span> bolim, <span class="sql-function">GROUP_CONCAT</span>(ism <span class="sql-keyword">ORDER BY</span> ism <span class="sql-keyword">SEPARATOR</span> <span class="sql-string">', '</span>) <span class="sql-keyword">AS</span> xodimlar
 <span class="sql-keyword">FROM</span> xodimlar <span class="sql-keyword">GROUP BY</span> bolim;</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — GROUP BY bolim (statistika)</span>
+<table>
+<thead><tr><th>bolim</th><th>soni</th><th>ort_maosh</th><th>jami</th></tr></thead>
+<tbody>
+<tr><td>IT</td><td>2</td><td>10500000.00</td><td>21000000.00</td></tr>
+<tr><td>Moliya</td><td>2</td><td>10500000.00</td><td>21000000.00</td></tr>
+<tr><td>Sotuv</td><td>2</td><td>7750000.00</td><td>15500000.00</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — HAVING COUNT(*) >= 2</span>
+<table>
+<thead><tr><th>bolim</th><th>soni</th></tr></thead>
+<tbody>
+<tr><td>IT</td><td>2</td></tr>
+<tr><td>Moliya</td><td>2</td></tr>
+<tr><td>Sotuv</td><td>2</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — WITH ROLLUP</span>
+<table>
+<thead><tr><th>bolim</th><th>soni</th><th>jami</th></tr></thead>
+<tbody>
+<tr><td>IT</td><td>2</td><td>21000000.00</td></tr>
+<tr><td>Moliya</td><td>2</td><td>21000000.00</td></tr>
+<tr><td>Sotuv</td><td>2</td><td>15500000.00</td></tr>
+<tr><td>JAMI</td><td>6</td><td>57500000.00</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — GROUP_CONCAT</span>
+<table>
+<thead><tr><th>bolim</th><th>xodimlar</th></tr></thead>
+<tbody>
+<tr><td>IT</td><td>Alisher, Jasur</td></tr>
+<tr><td>Moliya</td><td>Gulnora, Nodira</td></tr>
+<tr><td>Sotuv</td><td>Malika, Sardor</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -1277,6 +1587,16 @@ mysql -u root -p
 (<span class="sql-number">1</span>,<span class="sql-string">'Sardor'</span>,<span class="sql-string">'IT'</span>,<span class="sql-number">7000000</span>),(<span class="sql-number">2</span>,<span class="sql-string">'Gulnora'</span>,<span class="sql-string">'Sotuv'</span>,<span class="sql-number">6500000</span>),
 (<span class="sql-number">3</span>,<span class="sql-string">'Alisher'</span>,<span class="sql-string">'IT'</span>,<span class="sql-number">12000000</span>),(<span class="sql-number">4</span>,<span class="sql-string">'Kamola'</span>,<span class="sql-string">'Logistika'</span>,<span class="sql-number">8000000</span>);</code></pre>
 </div>
+<div class="result-ok">
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 1 row affected (0.01 sec) — <code>CREATE DATABASE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Database changed — <code>USE</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE toshkent_xodimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 0 rows affected (0.02 sec) — <code>CREATE TABLE samarqand_xodimlar</code></span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 4 rows affected (0.01 sec) — <code>INSERT INTO toshkent_xodimlar</code></span>
+<span class="rok-line">Records: 4 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+<span class="rok-line"><span class="rok-icon">✅</span>Query OK, 4 rows affected (0.01 sec) — <code>INSERT INTO samarqand_xodimlar</code></span>
+<span class="rok-line">Records: 4 &nbsp;Duplicates: 0 &nbsp;Warnings: 0</span>
+</div>
 </div>
 
 <div class="card">
@@ -1315,6 +1635,53 @@ mysql -u root -p
     <span class="sql-keyword">SELECT</span> ism, bolim <span class="sql-keyword">FROM</span> samarqand_xodimlar
 );</code></pre>
 </div>
+
+<span class="result-label">📋 Natija — UNION (takrorlarsiz)</span>
+<table>
+<thead><tr><th>ism</th><th>bolim</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>IT</td></tr>
+<tr><td>Malika</td><td>Sotuv</td></tr>
+<tr><td>Jasur</td><td>Moliya</td></tr>
+<tr><td>Nodira</td><td>IT</td></tr>
+<tr><td>Sardor</td><td>IT</td></tr>
+<tr><td>Gulnora</td><td>Sotuv</td></tr>
+<tr><td>Kamola</td><td>Logistika</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — UNION ALL (takrorlar bilan)</span>
+<table>
+<thead><tr><th>ism</th><th>bolim</th><th>filial</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>IT</td><td>Toshkent</td></tr>
+<tr><td>Malika</td><td>Sotuv</td><td>Toshkent</td></tr>
+<tr><td>Jasur</td><td>Moliya</td><td>Toshkent</td></tr>
+<tr><td>Nodira</td><td>IT</td><td>Toshkent</td></tr>
+<tr><td>Sardor</td><td>IT</td><td>Samarqand</td></tr>
+<tr><td>Gulnora</td><td>Sotuv</td><td>Samarqand</td></tr>
+<tr><td>Alisher</td><td>IT</td><td>Samarqand</td></tr>
+<tr><td>Kamola</td><td>Logistika</td><td>Samarqand</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — INTERSECT (ikkala filialda ham bor)</span>
+<table>
+<thead><tr><th>ism</th><th>bolim</th></tr></thead>
+<tbody>
+<tr><td>Alisher</td><td>IT</td></tr>
+</tbody>
+</table>
+
+<span class="result-label">📋 Natija — EXCEPT (faqat Toshkentda)</span>
+<table>
+<thead><tr><th>ism</th><th>bolim</th></tr></thead>
+<tbody>
+<tr><td>Malika</td><td>Sotuv</td></tr>
+<tr><td>Jasur</td><td>Moliya</td></tr>
+<tr><td>Nodira</td><td>IT</td></tr>
+</tbody>
+</table>
 </div>
 
 <div class="luxury-divider"></div>
@@ -8103,6 +8470,7 @@ function exportToWord() {
             .warning-box { background:#fff5f5; border:1px solid #e74c3c; border-left:4px solid #e74c3c; padding:15px; margin:10px 0; }
             .tip-box { background:#f0fff0; border:1px solid #27ae60; border-left:4px solid #27ae60; padding:15px; margin:10px 0; }
             .info-box { background:#f0f5ff; border:1px solid #3498db; border-left:4px solid #3498db; padding:15px; margin:10px 0; }
+            .result-ok { background:#f0fff0; border:1px solid #28c840; border-left:4px solid #28c840; padding:10px; margin:8px 0; font-family:'Courier New',monospace; font-size:9pt; }
             .meta-info { text-align:center; background:#f8f8f8; padding:12px; border:1px solid #ddd; margin-bottom:20px; font-size:10pt; }
             .gold-line { height:2px; background:#d4af37; width:100px; margin:10px auto 20px auto; }
             .cover { text-align:center; padding:40px 20px; }
