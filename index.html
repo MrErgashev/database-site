@@ -303,6 +303,15 @@ body.dark-mode .result-ok{background:linear-gradient(135deg,rgba(40,200,64,0.1),
 .concept-grid>.concept-card{flex:0 1 calc(25% - 18px);min-width:180px}
 .concept-card{background:var(--bg-card);border-radius:18px;padding:22px;text-align:center;box-shadow:5px 5px 10px var(--shadow-neu-dark),-5px -5px 10px var(--shadow-neu-light);border-top:4px solid var(--gold);transition:all var(--transition-fast)}
 .concept-card:hover{transform:translateY(-3px);box-shadow:8px 8px 16px var(--shadow-neu-dark),-8px -8px 16px var(--shadow-neu-light)}
+.join-diagram{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin:25px 0}
+.join-visual{flex:1 1 calc(25% - 18px);min-width:140px;max-width:220px;text-align:center}
+.join-visual svg{width:100%;max-width:180px;height:auto}
+.join-name{font-family:'Playfair Display',serif;font-weight:600;color:var(--gold);margin-bottom:6px;font-size:0.95em}
+.func-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin:25px 0}
+.func-grid>.func-card{flex:1 1 calc(33.333% - 18px);min-width:160px;max-width:calc(33.333% - 18px);background:var(--bg-card);border-radius:18px;padding:22px;text-align:center;box-shadow:5px 5px 10px var(--shadow-neu-dark),-5px -5px 10px var(--shadow-neu-light);border-top:4px solid var(--gold);transition:all var(--transition-fast)}
+.func-card:hover{transform:translateY(-3px);box-shadow:8px 8px 16px var(--shadow-neu-dark),-8px -8px 16px var(--shadow-neu-light)}
+.func-card h4{font-family:'Playfair Display',serif;font-size:1em;color:var(--gold);margin-bottom:8px}
+.func-card p{font-size:0.88em;color:var(--text-secondary);line-height:1.5}
 .concept-card h4{font-family:'Playfair Display',serif;font-size:1em;color:var(--gold);margin-bottom:8px}
 .concept-card p{font-size:0.82em;color:var(--text-secondary);margin:0;overflow-wrap:break-word;word-break:break-word}
 .concept-card .big-icon{font-size:2.2em;display:block;margin-bottom:12px}
@@ -429,7 +438,9 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 @media(max-width:380px){
     h1{font-size:1.4em}
     pre{font-size:0.72em;padding:10px 12px}
-    .concept-grid>.concept-card{flex:0 1 100%}
+    .concept-grid>.concept-card{flex:1 1 100%;max-width:100%}
+    .func-grid>.func-card{flex:1 1 100%;max-width:100%}
+    .join-visual{max-width:140px;min-width:120px}
     .container{padding:16px 12px}
     .func-grid{grid-template-columns:1fr 1fr;gap:8px}
     .func-card{padding:14px 10px}
@@ -9106,15 +9117,13 @@ python app.py
 
 <!-- ===== BACK PAGE — Orqa muqova ===== -->
 <div class="section-block" id="backpage">
-<div style="display:flex;align-items:center;justify-content:center;min-height:80vh;padding:40px 20px">
-    <div style="text-align:center">
-        <img src="back.png" alt="Orqa muqova" style="max-width:500px;width:100%;max-height:60vh;object-fit:contain;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.12),0 8px 20px rgba(0,0,0,0.08)">
-        <div style="margin-top:30px;font-family:'Playfair Display',Georgia,serif">
-            <p style="font-size:1.3em;color:var(--text);font-weight:600;margin-bottom:5px">M.U. Ergashev</p>
-            <p style="font-size:0.95em;color:var(--text-muted)">Ma'lumotlar bazasi — Amaliy mashg'ulotlar to'plami</p>
-            <div class="gold-line" style="margin-top:20px"></div>
-        </div>
+<div class="cover" style="padding:15px 20px">
+    <h1 style="font-size:2.2em;border:none;margin-bottom:15px">M.U. Ergashev</h1>
+    <div style="text-align:center;margin-bottom:20px">
+        <img src="back.png" alt="Orqa muqova" style="max-width:420px;width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.15),0 8px 20px rgba(0,0,0,0.1);transition:transform 0.3s ease" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
     </div>
+    <p class="sub">Ma'lumotlar bazasi — Amaliy mashg'ulotlar to'plami</p>
+    <div class="gold-line"></div>
 </div>
 </div>
 
