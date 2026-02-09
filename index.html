@@ -229,6 +229,8 @@ tbody tr:hover{background:rgba(212,175,55,0.08);transform:scale(1.002)}
 .toc-row td:nth-child(2){color:var(--gold-dark);font-weight:600;transition:all var(--transition-fast)}
 .toc-row:hover{background:rgba(212,175,55,0.15)!important;transform:scale(1.005);border-left:3px solid var(--gold)}
 .toc-row:hover td:nth-child(2){color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.toc-row td:nth-child(2)::after{content:'';transition:all var(--transition-fast)}
+.toc-row:hover td:nth-child(2)::after{content:' →';color:var(--gold)}
 .toc-row:active{transform:scale(0.998)}
 body.dark-mode .toc-row td:nth-child(2){color:var(--gold-light)}
 tbody tr:last-child td{border-bottom:none}
