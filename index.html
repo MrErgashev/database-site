@@ -97,7 +97,7 @@ body.dark-mode .mac-titlebar{background:linear-gradient(180deg,#2a2a3a,#1e1e2e)}
 /* ===== GLOBAL ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,sans-serif;line-height:1.7;color:var(--text);background:var(--bg);font-feature-settings:'liga' 1,'kern' 1;transition:background var(--transition-normal),color var(--transition-normal)}
+body{font-family:'Inter',-apple-system,sans-serif;line-height:1.7;color:var(--text);background:var(--bg);font-feature-settings:'liga' 1,'kern' 1;transition:background var(--transition-normal),color var(--transition-normal);overflow-wrap:break-word;word-wrap:break-word}
 
 /* ===== READING PROGRESS BAR ===== */
 .reading-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));z-index:9999;transition:width 0.15s linear;border-radius:0 2px 2px 0}
@@ -320,41 +320,78 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}
 @media(max-width:900px){
     .sidebar{transform:translateX(-100%)}
     .sidebar.open{transform:translateX(0)}
-    .main{margin-left:0;padding:10px 15px}
+    .main{margin-left:0;padding:60px 15px 10px 15px}
     .menu-toggle{display:block}
     .container{padding:25px;border-radius:25px}
     h1{font-size:2em}
-    h2{font-size:1.5em}
+    h2{font-size:1.5em;margin-top:40px;margin-bottom:20px}
     pre{padding:15px 18px;font-size:0.82em}
     pre .copy-btn{opacity:1;font-size:0.68em;padding:3px 8px}
     .card,.card-flat{padding:25px}
+    .theory-box,.warning-box,.tip-box,.info-box{padding:20px}
     .cover{padding:50px 25px}
     .cover h1{font-size:2em}
     .back-to-top{bottom:20px;right:20px;width:42px;height:42px}
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    thead,tbody,tr{min-width:100%}
+    .flow-step{padding:8px 12px;font-size:0.75em}
+    .flow-diagram{padding:18px;gap:6px}
+    .concept-grid>.concept-card{flex:0 1 calc(50% - 14px);min-width:0}
+    .func-grid>.func-card{flex:1 1 calc(50% - 14px);min-width:0;max-width:calc(50% - 14px)}
+    .concept-card,.func-card{padding:18px}
+    .join-visual{min-width:100px}
 }
 @media(max-width:600px){
-    .main{padding:10px 10px}
-    .container{padding:20px 16px;border-radius:20px}
+    .main{padding:55px 8px 10px 8px}
+    .container{padding:18px 14px;border-radius:18px}
     h1{font-size:1.6em}
-    h2{font-size:1.3em;padding-left:22px}
+    h2{font-size:1.3em;padding-left:22px;margin-top:32px;margin-bottom:16px}
     h3{font-size:1.15em}
     pre{padding:12px 14px;font-size:0.78em;border-radius:14px}
-    .card,.card-flat{padding:20px;border-radius:20px;margin:20px 0}
-    .cover .stats{gap:15px}
-    .cover .stat{padding:14px 18px}
+    .card,.card-flat{padding:18px;border-radius:18px;margin:16px 0}
+    .theory-box,.warning-box,.tip-box,.info-box{padding:16px;margin:14px 0}
+    .cover{padding:35px 15px}
+    .cover h1{font-size:1.7em}
+    .cover .stats{gap:10px}
+    .cover .stat{padding:12px 14px}
+    .cover .stat .num2{font-size:1.6em}
+    .cover .stat .label{font-size:0.72em}
+    .print-btn-wrap button{padding:12px 24px!important;font-size:0.95em!important}
     .concept-grid>.concept-card{flex:0 1 calc(50% - 12px);min-width:0}
-    .concept-grid{gap:12px}
+    .func-grid>.func-card{flex:1 1 calc(50% - 12px);min-width:0;max-width:calc(50% - 12px)}
+    .concept-grid,.func-grid{gap:12px}
+    .concept-card,.func-card{padding:16px}
+    .join-visual{min-width:80px;max-width:160px}
     table{font-size:0.85em}
     thead th{padding:10px 12px;font-size:0.8em}
     tbody td{padding:8px 12px}
+    .flow-step{padding:7px 10px;font-size:0.72em}
+    .flow-arrow{font-size:1em}
+    .flow-diagram{padding:14px;gap:5px}
+    .meta-info{padding:16px;font-size:0.82em}
+    .arch-diagram{padding:18px}
 }
 @media(max-width:380px){
+    .main{padding:50px 6px 10px 6px}
     h1{font-size:1.4em}
+    h2{font-size:1.15em;margin-top:24px;margin-bottom:14px;padding-left:18px}
     pre{font-size:0.72em;padding:10px 12px}
     .concept-grid>.concept-card{flex:1 1 100%;max-width:100%}
     .func-grid>.func-card{flex:1 1 100%;max-width:100%}
     .join-visual{max-width:140px;min-width:120px}
-    .container{padding:16px 12px}
+    .container{padding:14px 10px;border-radius:14px}
+    .card,.card-flat{padding:14px;border-radius:14px;margin:12px 0}
+    .theory-box,.warning-box,.tip-box,.info-box{padding:12px;margin:10px 0;border-radius:14px}
+    .cover{padding:25px 10px}
+    .cover h1{font-size:1.4em}
+    .cover .stat{padding:10px 12px}
+    .cover .stat .num2{font-size:1.4em}
+    .print-btn-wrap button{padding:10px 18px!important;font-size:0.88em!important}
+    table{font-size:0.78em}
+    thead th{padding:8px 10px;font-size:0.75em}
+    tbody td{padding:6px 8px}
+    .flow-step{padding:5px 8px;font-size:0.68em}
+    .meta-info{padding:12px;font-size:0.78em}
 }
 
 /* ===== PRINT — KITOBCHA (A4, optimized pagination) ===== */
